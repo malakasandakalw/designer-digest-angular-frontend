@@ -1,1 +1,27 @@
-<p>login works!</p>
+<div class="text-muted mb-4 mt-1 text-center">Login your account.</div>
+<div nz-col [nzSpan]="5" class="form-container mx-auto">
+    <form (submit)="submitForm()" [formGroup]="loginForm" class="login-form" nz-form>
+        <nz-form-item>
+            <nz-form-control [nzErrorTip]="'Please enter email!'">
+                <nz-form-label nzRequired>Email</nz-form-label>
+                <nz-input-group [nzPrefixIcon]="'mail'" [nzSize]="'large'">
+                    <input [formControlName]="'email'" nz-input placeholder="Email" type="email" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control [nzErrorTip]="'Please enter password!'">
+                <nz-form-label nzRequired>Password</nz-form-label>
+                <nz-input-group [nzPrefixIcon]="'lock'" [nzSize]="'large'">
+                    <input [formControlName]="'password'" nz-input placeholder="Password" type="password"/>
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <button [nzLoading]="loading" [nzType]="'primary'" class="mt-1" nz-button nzBlock [nzSize]="'large'"
+                    type="submit">Login</button>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</div>

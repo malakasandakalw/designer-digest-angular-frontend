@@ -14,7 +14,7 @@ export class BaseService {
 
   constructor() { }
 
-  protected readonly API_BASE_URL = "/api/";
+  protected readonly API_BASE_URL = "/api";
   // protected readonly AUTH_API_BASE_URL = "/api/secure/users";
 
   protected _post<T>(http: HttpClient, url: string, data?: any, options?: any): Promise<IServerResponse<T>> | any {

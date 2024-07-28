@@ -7,10 +7,10 @@ const routes: Routes = [
     path: "auth",
     loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)
   },
-  // {
-  //   path: "empfd",
-  //   loadChildren: () => import("./secured/secured.module").then(m => m.SecuredModule)
-  // },
+  {
+    path: "empfd",
+    loadChildren: () => import("./secured/secured.module").then(m => m.SecuredModule)
+  },
   // {
   //   path: "**", component: PageNotFoundComponent
   // }
