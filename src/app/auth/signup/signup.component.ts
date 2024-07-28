@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ApiAuthService, userSignupRequestData } from 'src/services/api/api-auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -34,7 +35,8 @@ export class SignupComponent {
   };
 
   constructor(
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly authApiService: ApiAuthService
   ) {
     // this.app.setTitle('Signup')
     this.signupForm = this.formBuilder.group({
@@ -47,9 +49,27 @@ export class SignupComponent {
   }
 
 
-  submitForm(): void {
+  async submitForm(): Promise<void> {
     if (this.signupForm.valid) {
-      console.log('submit', this.signupForm.value);
+      if(this.signupForm.controls.firstName.value && this.signupForm.controls.lastName.value && this.signupForm.controls.email.value && this.signupForm.controls.password.value) {
+        
+        const requestData: userSignupRequestData = {
+          first_name: this.signupForm.controls.firstName.value,
+          last_name: this.signupForm.controls.lastName.value,
+          email: this.signupForm.controls.email.value,
+          password: this.signupForm.controls.password.value,
+        }
+
+        try {
+          const response = await this.authApiService.signup(requestData);
+          console.log(response);
+        } catch (e) {
+          console.log('User signup error', e);
+        }
+
+      } else {
+        return;
+      }
     } else {
       Object.values(this.signupForm.controls).forEach(control => {
         if (control.invalid) {
