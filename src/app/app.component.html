@@ -1,12 +1,4 @@
-<h2 style="text-align: center">Multiple</h2>
-<div style="text-align: center">
-  <form (submit)="$event.preventDefault();onMultipleSubmit()" [formGroup]="form">
-    <div>
-      <input [formControlName]="'files'" type="file" name="images" multiple (change)="selectMultipleImage($event)"/>
-    </div>
-    <br>
-    <div>
-      <button type="submit">Multiple Upload</button>
-    </div>
-  </form>
-</div>
+<a href="/auth/login" nz-button nzType="default">Login</a>
+<a href="/auth/signup" nz-button nzType="primary">Sign Up</a>
+
+<router-outlet></router-outlet>
