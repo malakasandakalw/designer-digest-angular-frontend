@@ -1,20 +1,35 @@
-<div class="text-muted mb-4 mt-1 text-center">Login your account.</div>
+<div class="text-muted mb-4 mt-1 text-center">Convert your account to designer profile.</div>
 <div nz-col [nzSpan]="5" class="form-container mx-auto">
     <form (submit)="submitForm()" class="login-form" nz-form>
+
+        <nz-form-item>
+            <nz-form-control [nzErrorTip]="'Select location!'">
+                <nz-form-label nzRequired>Select your district</nz-form-label>
+                <nz-input-group [nzSize]="'large'">
+
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a district" [(ngModel)]="selectedLocation" (ngModelChange)="validate()" [ngModelOptions]="{standalone: true}">
+                        <nz-option *ngFor="let item of locations" [nzLabel]="item.name"
+                            [nzValue]="item.id"></nz-option>
+                    </nz-select>
+
+                    <span *ngIf="errorObject.locationError.show" nz-typography nzType="danger">You have to select district</span>
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
         <nz-form-item>
             <nz-form-control [nzErrorTip]="'Select categories!'">
                 <nz-form-label nzRequired>Categories</nz-form-label>
                 <nz-input-group [nzSize]="'large'">
                     <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
-                        nzPlaceHolder="Please select" 
-                        [(ngModel)]="selectedCatgeories"
-                        (ngModelChange)="validate()"
+                        nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories" (ngModelChange)="validate()"
                         [ngModelOptions]="{standalone: true}">
                         <nz-option *ngFor="let item of designerCategories" [nzLabel]="item.name"
                             [nzValue]="item.id"></nz-option>
                     </nz-select>
-                    
-                    <span *ngIf="errorObject.categoryError.show" nz-typography nzType="danger">Please select at least one category</span>
+
+                    <span *ngIf="errorObject.categoryError.show" nz-typography nzType="danger">Please select at least
+                        one category</span>
 
                     <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
                         selected</ng-template>

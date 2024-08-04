@@ -38,13 +38,12 @@ export class LoginComponent implements OnInit{
       password: ['', [Validators.required]],
     })
 
-    const currentUser = this.authApiService.currentUser;
+    const currentUser = this.authApiService.getCurrentUser();
 
     if(currentUser && currentUser.user) {
      this.navigateUser(currentUser.user);
     } else {
       this.authApiService.logout()
-      this.router.navigate(['/auth/login'])
     }
 
   }
@@ -53,8 +52,14 @@ export class LoginComponent implements OnInit{
     if(user.role === 'Personal') {
       if(!user.is_verified) {
         this.router.navigate(['/designer-digest/personal/profile'])
-      } else {
+      }
+    }
 
+    if(user.role === 'Designer') {
+      if(!user.is_verified) {
+        this.router.navigate(['/designer-digest/designer/profile'])
+      } else {
+        this.router.navigate(['/designer-digest/designer/dashboard'])
       }
     }
 
@@ -69,9 +74,7 @@ export class LoginComponent implements OnInit{
             this.createMessage(response.status, response.message)
             if(response.status === 'success') {
               localStorage.setItem('currentUser', JSON.stringify(response.body));
-              this.authApiService.currentUser = response.body;
               this.navigateUser(response.body.user)
-              // this.router.navigate('/\')
             }
           }
         } catch (e) {

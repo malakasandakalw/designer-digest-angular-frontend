@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ApiAuthService } from '../api/api-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DesignerRouteGuardService implements CanActivate {
+export class PersonalRouteGuardService implements CanActivate {
 
   constructor(
     private apiAuthService: ApiAuthService
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if(this.apiAuthService.isDesigner()) {
+    if(this.apiAuthService.isPersonal()) {
       return true
     } else {
       this.apiAuthService.logout()
       return false;
     }
   }
-
 }

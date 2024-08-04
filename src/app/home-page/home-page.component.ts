@@ -36,9 +36,7 @@ export class HomePageComponent {
   }
 
   async logOut() {
-    console.log('logout')
     await this.apiAuthService.logout()
-    this.router.navigate(['/'])
   }
 
 }

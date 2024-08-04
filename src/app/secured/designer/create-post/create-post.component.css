@@ -1,0 +1,32 @@
+.uploaded-file-container {
+    max-width: 150px;
+    width: 150px;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 28px;
+    max-width: 28px;
+    height: 28px;
+}
+
+.remove-btn .close-icon{
+    font-size: 14px;
+}
+
+.img-preview, .vid-preview {
+    max-height: 70px;
+    overflow: hidden;
+}
+
+.img-preview img {
+    width: 100%;
+    height: auto;
+}
+
+.vid-preview video {
+    width: 100%;
+    height: auto;
+}

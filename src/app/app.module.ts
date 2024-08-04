@@ -21,6 +21,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { PostsCardsHorizontalComponent } from "./components/posts-cards-horizontal/posts-cards-horizontal.component";
 import { SinglePostCardComponent } from './components/single-post-card/single-post-card.component';
+import { ResponseInterceptorService } from 'src/services/common/response-interceptor.service';
 
 registerLocaleData(en);
 
@@ -48,7 +49,8 @@ registerLocaleData(en);
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

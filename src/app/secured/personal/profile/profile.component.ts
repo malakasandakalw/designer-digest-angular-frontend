@@ -14,7 +14,7 @@ export class ProfileComponent {
   constructor(
     private apiAuthService: ApiAuthService
   ) {
-    this.currentUser = this.apiAuthService.currentUser;
+    this.currentUser = this.apiAuthService.getCurrentUser();
   }
 
 }

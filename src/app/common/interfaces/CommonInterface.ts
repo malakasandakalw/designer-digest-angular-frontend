@@ -22,3 +22,14 @@ export interface Post {
     created_at: '2024-08-04',
     created_by: User
 }
+
+
+export interface DesignerCategory {
+    id: string,
+    name: string
+  }
+  
+  export interface Location {
+    id: string,
+    name: string
+  }

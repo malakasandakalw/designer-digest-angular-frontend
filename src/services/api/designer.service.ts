@@ -15,7 +15,7 @@ export class DesignerService extends BaseService  {
 
   public test() {
     console.log('here')
-    return this._get(this.http, `${this.API_BASE_URL}/designers`)
+    // return this._get(this.http, `${this.API_BASE_URL}/designers`)
   }
 
 }

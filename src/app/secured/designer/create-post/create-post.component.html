@@ -2,35 +2,64 @@
     <nz-form-item>
         <nz-form-control [nzErrorTip]="'Please enter post title!'">
             <nz-form-label nzRequired>Title</nz-form-label>
-            <nz-input-group [nzPrefixIcon]="'mail'" [nzSize]="'large'">
+            <nz-input-group [nzSize]="'large'">
                 <input [formControlName]="'title'" nz-input placeholder="Post title" type="text" />
             </nz-input-group>
         </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
         <nz-form-control [nzErrorTip]="'Select categories!'">
             <nz-form-label nzRequired>Categories</nz-form-label>
-            <nz-input-group [nzPrefixIcon]="'lock'" [nzSize]="'large'">
+            <nz-input-group [nzSize]="'large'">
                 <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
-                    nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories" [ngModelOptions]="{standalone: true}">
+                    nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories"
+                    [ngModelOptions]="{standalone: true}">
                     <nz-option *ngFor="let item of categories" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                 </nz-select>
+
+                <span *ngIf="errorObject.categorie.show" nz-typography nzType="danger">You must select
+                    category/categories</span>
+
                 <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
             </nz-input-group>
         </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
         <nz-form-control [nzErrorTip]="'Select categories!'">
             <nz-form-label nzRequired>Files</nz-form-label>
-            <nz-input-group [nzPrefixIcon]="'lock'" [nzSize]="'large'">
-                <input id="files" type="file" nz-input (change)="onFileChange($event)" multiple />
-            </nz-input-group>
+            <input type="file" (change)="onFileChange($event)" multiple accept="image/*,video/*">
+
+            <span *ngIf="showMultipleFileMessage" nz-typography nzType="warning">Multiple files warning</span>
+            <span *ngIf="errorObject.files.show" nz-typography nzType="danger">You must select at lease one file</span>
+
+            <div class="flex align-items-center gap-x-md">
+                <!-- <div *ngFor="let item of previewFiles; let i = index" class="uploaded-file-container relative">
+
+                    <ng-container *ngIf="item.file.type.startsWith('image'); else videoPreview">
+                        <div class="img-preview">
+                            <img [src]="item.preview" alt="Image preview" width="100">
+                        </div>
+                    </ng-container>
+                    <ng-template #videoPreview>
+                        <div class="vid-preview">
+                            <video [src]="item.preview"></video>
+                        </div>
+                    </ng-template>
+                    <p nz-typography nzEllipsis>{{ item.file.name }}</p>
+
+                    <button nz-button nzType="default" nzShape="circle" (click)="removeFile(i)" class="remove-btn"><span
+                            nz-icon nzType="close-circle" nzTheme="outline" class="close-icon"></span></button>
+                </div> -->
+            </div>
         </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
         <nz-form-control>
             <button [nzLoading]="loading" [nzType]="'primary'" class="mt-1" nz-button nzBlock [nzSize]="'large'"
-                type="submit">Login</button>
+                type="submit">Create Post</button>
         </nz-form-control>
     </nz-form-item>
 </form>

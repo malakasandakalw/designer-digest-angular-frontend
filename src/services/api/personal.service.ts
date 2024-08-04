@@ -13,10 +13,8 @@ export class PersonalService  extends BaseService  {
     super();
   }
 
-  public convertToDesignerProfile(): Promise<IServerResponse<any>> {
-
-    const result = this._post(this.http, `${this.API_BASE_URL}/personal/convert-to-designer`)
-
+  public convertToDesignerProfile(location: string, categories: string[]): Promise<IServerResponse<any>> {
+    const result = this._post(this.http, `${this.API_BASE_URL}/personal/convert-to-designer`, { location, categories: categories })
     return result
   }
 }

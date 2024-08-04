@@ -6,6 +6,7 @@ export interface IServerResponse<T> {
   title?: string;
   message?: string;
   body: T;
+  status: string
 }
 @Injectable({
   providedIn: 'root'

@@ -10,6 +10,8 @@ import { NzInputModule } from "ng-zorro-antd/input";
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { NzButtonModule } from "ng-zorro-antd/button";
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzIconModule,
     NzButtonModule,
-    NzSelectModule
+    NzSelectModule,
+    NzTypographyModule,
+    NzUploadModule
   ]
 })
 export class DesignerModule { }

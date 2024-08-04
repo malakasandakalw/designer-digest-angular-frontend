@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthguardService } from "src/services/common/authguard.service";
 import { DesignerRouteGuardService } from "src/services/common/designer-route-guard.service";
+import { PersonalRouteGuardService } from "src/services/common/personal-route-guard.service";
 import { TokenVerifyService } from "src/services/common/token-verify.service";
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
     },
     {
         path: "personal",
-        canActivate: [TokenVerifyService, AuthguardService],
+        canActivate: [TokenVerifyService, AuthguardService, PersonalRouteGuardService],
         loadChildren: () => import("./personal/personal.module").then(m => m.PersonalModule)
     }
 ];
