@@ -73,8 +73,7 @@ export class SignupComponent implements OnInit {
           first_name: this.signupForm.controls.firstName.value,
           last_name: this.signupForm.controls.lastName.value,
           email: this.signupForm.controls.email.value,
-          password: this.signupForm.controls.password.value,
-          role: this.userType
+          password: this.signupForm.controls.password.value
         }
 
         try {

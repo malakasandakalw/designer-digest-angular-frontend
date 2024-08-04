@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { map } from 'rxjs';
+import { User } from 'src/app/common/interfaces/CommonInterface';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { ApiAuthService } from 'src/services/api/api-auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   loginForm: FormGroup<{
     email: FormControl<string | null>;
     password: FormControl<string | null>;
@@ -21,15 +23,41 @@ export class LoginComponent {
     this.message.create(type, message);
   }
 
+  ngOnInit() {
+
+  }
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly authApiService: ApiAuthService,
     private message: NzMessageService,
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     })
+
+    const currentUser = this.authApiService.currentUser;
+
+    if(currentUser && currentUser.user) {
+     this.navigateUser(currentUser.user);
+    } else {
+      this.authApiService.logout()
+      this.router.navigate(['/auth/login'])
+    }
+
+  }
+
+  navigateUser(user: User) {
+    if(user.role === 'Personal') {
+      if(!user.is_verified) {
+        this.router.navigate(['/designer-digest/personal/profile'])
+      } else {
+
+      }
+    }
+
   }
 
   async submitForm(): Promise<void> {
@@ -42,6 +70,8 @@ export class LoginComponent {
             if(response.status === 'success') {
               localStorage.setItem('currentUser', JSON.stringify(response.body));
               this.authApiService.currentUser = response.body;
+              this.navigateUser(response.body.user)
+              // this.router.navigate('/\')
             }
           }
         } catch (e) {

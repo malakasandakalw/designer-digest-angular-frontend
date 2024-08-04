@@ -15,14 +15,20 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { IconModule } from '@ant-design/icons-angular';
 import { RequestInterceptorService } from 'src/services/common/request-interceptor.service';
-
-
+import { LayoutComponent } from './layout/layout.component';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { HomePageComponent } from './home-page/home-page.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PostsCardsHorizontalComponent } from "./components/posts-cards-horizontal/posts-cards-horizontal.component";
+import { SinglePostCardComponent } from './components/single-post-card/single-post-card.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LayoutComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +40,12 @@ registerLocaleData(en);
     NzButtonModule,
     NzInputModule,
     NzFormModule,
-    IconModule
-  ],
+    IconModule,
+    NzLayoutModule,
+    NzCardModule,
+    PostsCardsHorizontalComponent,
+    SinglePostCardComponent
+],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true }

@@ -1,0 +1,36 @@
+<form (submit)="submitForm()" [formGroup]="createPostForm" class="create-post-form" nz-form>
+    <nz-form-item>
+        <nz-form-control [nzErrorTip]="'Please enter post title!'">
+            <nz-form-label nzRequired>Title</nz-form-label>
+            <nz-input-group [nzPrefixIcon]="'mail'" [nzSize]="'large'">
+                <input [formControlName]="'title'" nz-input placeholder="Post title" type="text" />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control [nzErrorTip]="'Select categories!'">
+            <nz-form-label nzRequired>Categories</nz-form-label>
+            <nz-input-group [nzPrefixIcon]="'lock'" [nzSize]="'large'">
+                <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                    nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories" [ngModelOptions]="{standalone: true}">
+                    <nz-option *ngFor="let item of categories" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                </nz-select>
+                <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control [nzErrorTip]="'Select categories!'">
+            <nz-form-label nzRequired>Files</nz-form-label>
+            <nz-input-group [nzPrefixIcon]="'lock'" [nzSize]="'large'">
+                <input id="files" type="file" nz-input (change)="onFileChange($event)" multiple />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control>
+            <button [nzLoading]="loading" [nzType]="'primary'" class="mt-1" nz-button nzBlock [nzSize]="'large'"
+                type="submit">Login</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>

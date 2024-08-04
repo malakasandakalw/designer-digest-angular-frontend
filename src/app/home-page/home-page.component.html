@@ -1,0 +1,13 @@
+<div *ngIf="!isLoggedIn">
+    <a href="/auth/signup" nz-button nzType="primary">Register normal</a>
+    <a href="/auth/login" nz-button nzType="default">Login</a>
+</div>
+
+<div *ngIf="isLoggedIn">
+    <button nz-button nzType="default">Logout</button>
+</div>
+
+
+<div class="container">
+    <app-posts-cards-horizontal></app-posts-cards-horizontal>
+</div>

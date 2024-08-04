@@ -7,8 +7,7 @@ export interface userSignupRequestData {
   first_name: string,
   last_name: string,
   email: string,
-  password: string,
-  role: string
+  password: string
 }
 
 @Injectable({
@@ -25,7 +24,6 @@ export class ApiAuthService extends BaseService {
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
     }
-    console.log(this.currentUser);
   }
 
   public signup(data: userSignupRequestData): Promise<any> {
@@ -39,6 +37,10 @@ export class ApiAuthService extends BaseService {
   public logout() {
     localStorage.removeItem('currentUser');
     this.currentUser = null;
+  }
+
+  public tokenAuthenticator() {
+    return this._post(this.http, `${this.API_BASE_URL}/users/verify`)
   }
 
   public isAuthenticated(): boolean {
