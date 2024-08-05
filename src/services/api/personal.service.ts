@@ -5,7 +5,7 @@ import { BaseService, IServerResponse } from './base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PersonalService  extends BaseService  {
+export class PersonalService extends BaseService  {
 
   constructor(
     private http: HttpClient

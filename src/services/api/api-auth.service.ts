@@ -50,7 +50,7 @@ export class ApiAuthService extends BaseService {
 
   public logout() {
     localStorage.removeItem('currentUser');
-    this.router.navigate(['/auth/login'])
+    this.router.navigate(['/'])
   }
 
   public tokenAuthenticator() {

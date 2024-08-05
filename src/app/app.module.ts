@@ -22,6 +22,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { PostsCardsHorizontalComponent } from "./components/posts-cards-horizontal/posts-cards-horizontal.component";
 import { SinglePostCardComponent } from './components/single-post-card/single-post-card.component';
 import { ResponseInterceptorService } from 'src/services/common/response-interceptor.service';
+import { FileUploadComponent } from "./components/file-upload/file-upload.component";
 
 registerLocaleData(en);
 
@@ -45,7 +46,8 @@ registerLocaleData(en);
     NzLayoutModule,
     NzCardModule,
     PostsCardsHorizontalComponent,
-    SinglePostCardComponent
+    SinglePostCardComponent,
+    FileUploadComponent
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
