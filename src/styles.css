@@ -1,5 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
 
+.ant-layout {
+    background-color: white;
+}
+
+h1 {
+    color: rgb(32, 33, 36);
+    font-size: 36px;
+    line-height: 44px;
+    font-family: "Signika Negative", sans-serif;
+    font-weight: 700;
+}
+
+p {
+    margin-bottom: 0px !important;
+    color: rgb(32, 33, 36);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+a.ant-btn {
+    line-height: normal;
+    padding-top: 8px !important;
+}
+
+button, .ant-btn {
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    padding: 8px 24px;
+    transition: 0.3s;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    height: auto;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+input, textarea, .ant-input-affix-wrapper {
+    border-radius: 8px;
+    border-color: rgb(218, 220, 224);
+    padding-left: 10px;
+    padding-right: 8px;
+    font-family: Inter, monospace;
+    font-style: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 16px;
+    letter-spacing: 1px;
+    font-size: 13.5px !important;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+label,.ant-form-item-label>label {
+    font-family: Inter, monospace;
+    color: rgb(32, 33, 36);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    height: 18px;
+}
 
 .flex {
     display: flex;
@@ -16,4 +83,92 @@
 
 .relative {
     position: relative;
+}
+
+.inter {
+    font-family: "Inter", sans-serif;
+}
+
+.signika-negative {
+    font-family: "Signika Negative", sans-serif;
+}
+
+h5.card-title {
+    color: rgb(32, 33, 36);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+h3 {
+    color: rgb(32, 33, 36);
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+.ant-card-body {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.hr-card-details {
+    padding: 16px
+}
+
+.mt-def-sm {
+    margin-top: 8px
+}
+
+.font-sm {
+    font-size: 12px;
+}
+
+.font-md {
+    font-size: 14px;
+}
+
+.font-lg {
+    font-size: 16px;
+}
+
+.font-x-lg {
+    font-size: 18px;
+}
+
+.border-none {
+    border: none;
+}
+
+.divider {
+    height: 1px;
+    background-color: rgb(218, 220, 224);
+}
+
+.container-margin-y {
+    margin: 40px 0px
+}
+
+.form-container {
+    border-radius: 8px;
+    border: 1px solid rgb(218, 220, 224);
+}
+
+.form-container-inner {
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
+.form-page-flex {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container-form {
+    width: 500px;
 }
