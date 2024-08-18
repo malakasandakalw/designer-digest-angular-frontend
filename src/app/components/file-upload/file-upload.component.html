@@ -12,3 +12,7 @@
         </div>
     </div>
 </div>
+<small *ngIf="uploading">
+    Uploading
+    <span nz-icon [nzType]="'loading'" class="ms-1"></span>
+</small>

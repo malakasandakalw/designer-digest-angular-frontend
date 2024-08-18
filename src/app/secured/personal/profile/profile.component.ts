@@ -46,8 +46,6 @@ export class ProfileComponent implements OnInit{
   }
 
   async submitForm() {
-    
-    console.log(this.uploadedFiles)
     try{
       this.loading = true
 

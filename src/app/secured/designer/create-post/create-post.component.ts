@@ -4,6 +4,9 @@ import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { CategoryService } from 'src/services/api/category.service';
 import { PostsService } from 'src/services/api/posts.service';
 import { RemovePrefixPipe } from 'src/app/remove-prefix.pipe';
+import { createMessage } from 'src/app/common/utils/messages';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Router } from '@angular/router';
 
 
 export interface category {
@@ -28,6 +31,9 @@ export class CreatePostComponent implements OnInit {
     },
     files: {
       show: false
+    },
+    thumbnail: {
+      show: false
     }
   }
 
@@ -50,7 +56,9 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly categoriesApi: CategoryService,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private message: NzMessageService,
+    private router: Router
   ) {}
 
   onTitleChange(e: any) {
@@ -62,6 +70,12 @@ export class CreatePostComponent implements OnInit {
   onCategory() {
     if(this.selectedCatgeories.length) {
       this.errorObject.categorie.show = false
+    }
+  }
+
+  onSelectThumbnail() {
+    if(this.selectedThumbnail.length) {
+      this.errorObject.thumbnail.show = false
     }
   }
 
@@ -108,6 +122,13 @@ export class CreatePostComponent implements OnInit {
       this.errorObject.files.show = false;
     }
 
+    if(!this.selectedThumbnail || this.selectedThumbnail.trim() === '') {
+      this.errorObject.thumbnail.show = true
+      return false
+    } else {
+      this.errorObject.thumbnail.show = false;
+    }
+
     return true
   }
 
@@ -125,11 +146,16 @@ export class CreatePostComponent implements OnInit {
           files: this.uploadedFiles,
           thumbnail: this.selectedThumbnail
         }
-        
-        console.log(formData)
 
-        // const response = await this.postsService.createPost(formData);
-
+        const response = await this.postsService.createPost(formData);
+        if(response) {
+          createMessage(this.message, response.status, response.message as string)
+          if(response.status === 'success') {
+            setTimeout(() => {
+              this.router.navigate(['/designer-digest/designer/my-store'])
+            }, 1500)
+          }
+        }
       } catch (e) {
         console.log('Create post error', e);
       }
@@ -148,6 +174,13 @@ export class CreatePostComponent implements OnInit {
 
   onUploadError(error: string) {
     console.error('Upload Error:', error);
+  }
+
+  removeFile(file: any) {
+    this.uploadedFiles = this.uploadedFiles.filter((file_) => file_.url !== file.url)
+    if(file.url === this.selectedThumbnail) {
+      this.selectedThumbnail = ''
+    }
   }
 
 }

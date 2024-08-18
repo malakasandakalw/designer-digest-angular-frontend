@@ -1,1 +1,29 @@
 <a href="/designer-digest/designer/create-post" nz-button>New post</a>
+
+<div *ngFor="let item of posts">
+    <p>{{item.post_id}}</p>
+    <br>
+    <p>{{item.title}}</p>
+    <br>
+    <p>{{item.description}}</p>
+    <br>
+    <p>{{item.thumbnail.type}}</p>
+    <br>
+    <p>{{item.thumbnail.media_url}}</p>
+    <br>
+    <p>{{item.created_at}}</p>
+    <br>
+    <p>{{item.created_by}}</p>
+    <br>
+    <p>{{item.upvote_count}}</p>
+
+    <div *ngFor="let cat of item.categories">
+        <small>{{cat.id}}</small>
+        <br>
+        <small>{{cat.name}}</small>
+        <hr>
+    </div>
+
+
+
+</div>

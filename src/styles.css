@@ -202,8 +202,19 @@ p {
 .inner-box {
     max-height: 110px;
     overflow: hidden;
+    position: relative;
 }
 
 .inner-box video {
     width: 100%;
+}
+
+.file-remove-btn {
+    position: absolute;
+    padding: 0;
+    max-width: 12px;
+    width: 16px;
+    max-width: 16px;
+    font-size: 16px;
+    min-width: 19px;
 }
