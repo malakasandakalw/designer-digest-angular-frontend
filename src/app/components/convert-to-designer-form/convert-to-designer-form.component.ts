@@ -116,7 +116,8 @@ export class ConvertToDesignerFormComponent implements OnInit{
           
           if(response.status === 'success') {
             setTimeout(() => {
-              this.router.navigate(['/designer-digest/designer/profile'])
+              this.apiAuthService.logout()
+              // this.router.navigate(['/designer-digest/designer/profile'])
             }, 2000)
           }
         }

@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit{
       if(this.loginForm.controls.email.value && this.loginForm.controls.password.value) {
         try {
           const response = await this.authApiService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
+          console.log(response)
           if(response) {
             this.createMessage(response.status, response.message)
             if(response.status === 'success') {
@@ -77,6 +78,7 @@ export class LoginComponent implements OnInit{
             }
           }
         } catch (e) {
+          this.createMessage('error', 'User login error')
           console.log('User login error', e);
         }
 

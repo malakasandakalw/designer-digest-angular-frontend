@@ -43,7 +43,7 @@ a {
     text-decoration: none !important;
 }
 
-input, textarea, .ant-input-affix-wrapper {
+input, textarea, .ant-input-affix-wrapper, nz-select {
     border-radius: 8px;
     border-color: rgb(218, 220, 224);
     padding-left: 10px;
@@ -51,12 +51,16 @@ input, textarea, .ant-input-affix-wrapper {
     font-family: Inter, monospace;
     font-style: normal;
     font-weight: 600;
-    text-transform: uppercase;
     line-height: 16px;
     letter-spacing: 1px;
     font-size: 13.5px !important;
     padding-top: 8px;
     padding-bottom: 8px;
+}
+
+textarea {
+    min-height: 36px;
+    height: 36px;
 }
 
 label,.ant-form-item-label>label {
@@ -171,4 +175,35 @@ h3 {
 
 .logo-container-form {
     width: 500px;
+}
+
+.secured-page-x-padding-main {
+    padding-left: 96px;
+    padding-right: 96px;
+}
+
+.nav-container {
+    padding-left: 64px;
+    padding-right: 64px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+p {
+   color: #5f6368;
+   line-height: 2rem;
+}
+
+.ant-menu-horizontal {
+    border: none;
+    background-color: transparent;
+}
+
+.inner-box {
+    max-height: 110px;
+    overflow: hidden;
+}
+
+.inner-box video {
+    width: 100%;
 }

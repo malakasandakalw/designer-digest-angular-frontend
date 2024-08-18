@@ -1,65 +1,104 @@
-<form (submit)="submitForm()" [formGroup]="createPostForm" class="create-post-form" nz-form>
-    <nz-form-item>
-        <nz-form-control [nzErrorTip]="'Please enter post title!'">
-            <nz-form-label nzRequired>Title</nz-form-label>
-            <nz-input-group [nzSize]="'large'">
-                <input [formControlName]="'title'" nz-input placeholder="Post title" type="text" />
-            </nz-input-group>
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-control [nzErrorTip]="'Select categories!'">
-            <nz-form-label nzRequired>Categories</nz-form-label>
-            <nz-input-group [nzSize]="'large'">
-                <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
-                    nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories"
-                    [ngModelOptions]="{standalone: true}">
-                    <nz-option *ngFor="let item of categories" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-                </nz-select>
-
-                <span *ngIf="errorObject.categorie.show" nz-typography nzType="danger">You must select
-                    category/categories</span>
-
-                <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
-            </nz-input-group>
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-control [nzErrorTip]="'Select categories!'">
-            <nz-form-label nzRequired>Files</nz-form-label>
-            <input type="file" (change)="onFileChange($event)" multiple accept="image/*,video/*">
-
-            <span *ngIf="showMultipleFileMessage" nz-typography nzType="warning">Multiple files warning</span>
-            <span *ngIf="errorObject.files.show" nz-typography nzType="danger">You must select at lease one file</span>
-
-            <div class="flex align-items-center gap-x-md">
-                <!-- <div *ngFor="let item of previewFiles; let i = index" class="uploaded-file-container relative">
-
-                    <ng-container *ngIf="item.file.type.startsWith('image'); else videoPreview">
-                        <div class="img-preview">
-                            <img [src]="item.preview" alt="Image preview" width="100">
-                        </div>
-                    </ng-container>
-                    <ng-template #videoPreview>
-                        <div class="vid-preview">
-                            <video [src]="item.preview"></video>
-                        </div>
-                    </ng-template>
-                    <p nz-typography nzEllipsis>{{ item.file.name }}</p>
-
-                    <button nz-button nzType="default" nzShape="circle" (click)="removeFile(i)" class="remove-btn"><span
-                            nz-icon nzType="close-circle" nzTheme="outline" class="close-icon"></span></button>
-                </div> -->
+<div class="container-margin-y">
+    <div class="form-page-flex">
+        <div class="logo-container-form">
+            <div class="text-muted text-center">
+                <h1 class="container-margin-y">Create new post.</h1>
             </div>
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-control>
-            <button [nzLoading]="loading" [nzType]="'primary'" class="mt-1" nz-button nzBlock [nzSize]="'large'"
-                type="submit">Create Post</button>
-        </nz-form-control>
-    </nz-form-item>
-</form>
+            <div class="divider"></div>
+            <img src="assets/create-post.png" alt="" class="img-fluid">
+        </div>
+        <div class="form-container w-50">
+            <div class="form-container-inner mx-auto container-margin-y">
+                <form (submit)="submitForm()" class="create-post-form" nz-form>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-form-label nzRequired>Title</nz-form-label>
+                            <nz-input-group [nzSize]="'large'">
+                                <input nz-input placeholder="Post title" type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange($event)" [ngModelOptions]="{standalone: true}"/>
+                                <span *ngIf="errorObject.title.show" nz-typography nzType="danger">You must enter title</span>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-form-label>Description</nz-form-label>
+                            <nz-input-group [nzSize]="'large'">
+                                <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize
+                                    [(ngModel)]="description" [ngModelOptions]="{standalone: true}"
+                                    [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-form-label nzRequired>Categories</nz-form-label>
+                            <nz-input-group [nzSize]="'large'">
+                                <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                                    nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories"
+                                    (ngModelChange)="onCategory()"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <nz-option *ngFor="let item of categories" [nzLabel]="item.name"
+                                        [nzValue]="item.id"></nz-option>
+                                </nz-select>
+        
+                                <span *ngIf="errorObject.categorie.show" nz-typography nzType="danger">You must select
+                                    category/categories</span>
+        
+                                <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
+                                    selected</ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-form-label nzRequired>Media Files</nz-form-label>
+                            <app-file-upload [acceptBoth]="true" [multiple]="true" (progressUpdate)="onProgressUpdate($event)"
+                                (uploadComplete)="onUploadComplete($event);onProgressUpdate(false)"
+                                (uploadError)="onUploadError($event);onProgressUpdate(false)"></app-file-upload>
+        
+                            <span *ngIf="errorObject.files.show" nz-typography nzType="danger">You must upload files</span>
+        
+                            <div nz-row [nzGutter]="16" class="mt-3">
+                                <div *ngFor="let item of uploadedFiles" nz-col class="gutter-row" [nzSpan]="6">
+                                    <div class="inner-box">
+                                        <img *ngIf="item.type === 'image'" nz-image [nzSrc]="'http://127.0.0.1:3000'+item.url"
+                                            alt="" class="img-fluid" />
+                                        <video *ngIf="item.type === 'video'" [src]="'http://127.0.0.1:3000'+item.url" autoplay
+                                            [controls]="false"></video>
+                                    </div>
+                                    <div class="small mt-1">{{item.name}}</div>
+                                </div>
+                            </div>
+        
+                            <div *ngIf="uploadProgress">
+                                Uploading.....
+                            </div>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item *ngIf="uploadedFiles.length">
+                        <nz-form-control>
+                            <nz-form-label nzRequired>Select Thumbnail</nz-form-label>
+                            <nz-input-group [nzSize]="'large'">
+                                <nz-select [(ngModel)]="selectedThumbnail" [ngModelOptions]="{standalone: true}">
+                                    <nz-option *ngFor="let item of uploadedFiles" [nzValue]="item.url"
+                                        [nzLabel]="item.name"></nz-option>
+                                </nz-select>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-control>
+                            <button [nzLoading]="loading" [nzType]="'primary'" class="mt-1" nz-button nzBlock [nzSize]="'large'"
+                                type="submit">Create Post</button>
+                        </nz-form-control>
+                    </nz-form-item>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

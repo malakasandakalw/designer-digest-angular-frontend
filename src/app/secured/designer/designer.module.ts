@@ -12,26 +12,38 @@ import { NzButtonModule } from "ng-zorro-antd/button";
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { MainNavbarComponent } from "../../components/main-navbar/main-navbar.component";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyStoreComponent } from './my-store/my-store.component';
+import { VacanciesComponent } from './vacancies/vacancies.component';
+import { FileUploadComponent } from "../../components/file-upload/file-upload.component";
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 
 @NgModule({
   declarations: [
     DesignerLayoutComponent,
     ProfileComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    DashboardComponent,
+    MyStoreComponent,
+    VacanciesComponent
   ],
   imports: [
     CommonModule,
-    DesignerRoutingModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
+    DesignerRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
     NzIconModule,
     NzButtonModule,
     NzSelectModule,
     NzTypographyModule,
-    NzUploadModule
-  ]
+    NzUploadModule,
+    MainNavbarComponent,
+    FileUploadComponent,
+    NzImageModule
+]
 })
 export class DesignerModule { }

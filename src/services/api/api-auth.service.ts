@@ -25,11 +25,26 @@ export class ApiAuthService extends BaseService {
 
   getCurrentUser(): any {
     const userJson = localStorage.getItem('currentUser');
+    if(userJson === 'undefined' || !userJson) return false
     return userJson ? JSON.parse(userJson) : null;
   }
 
   setCurrentUser(user: any): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  updateCurrentUserSession(user: any): boolean {
+    const currentUser = this.getCurrentUser();
+    if (currentUser) {
+      currentUser.user.first_name = user.first_name,
+      currentUser.user.last_name = user.last_name,
+      currentUser.user.is_verified = user.is_verified,
+      currentUser.user.profile_picture = user.profile_picture,
+      currentUser.user.role = user.role
+      currentUser.user.phone = user.phone
+      this.setCurrentUser(currentUser);
+    }
+    return true
   }
 
   updateUserRole(newRole: string): void {
@@ -58,6 +73,7 @@ export class ApiAuthService extends BaseService {
   }
 
   public isAuthenticated(): boolean {
+    console.log(this.getCurrentUser())
     return !!this.getCurrentUser();
   }
 
@@ -68,7 +84,6 @@ export class ApiAuthService extends BaseService {
 
   public isPersonal(): boolean {
     const user_ = this.getCurrentUser().user
-    console.log('service----------------', user_)
     return user_.role === "Personal"
   }
 

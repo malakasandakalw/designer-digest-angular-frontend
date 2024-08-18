@@ -4,7 +4,9 @@ export interface User {
     last_name: string,
     email: string,
     role?: string,
-    is_verified: boolean
+    is_verified?: boolean,
+    profile_picture: string | null,
+    phone?: string | null
 }
 
 export interface PostCategory {

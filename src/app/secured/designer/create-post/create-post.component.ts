@@ -3,6 +3,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { CategoryService } from 'src/services/api/category.service';
 import { PostsService } from 'src/services/api/posts.service';
+import { RemovePrefixPipe } from 'src/app/remove-prefix.pipe';
+
 
 export interface category {
   id: string,
@@ -18,6 +20,9 @@ export interface category {
 export class CreatePostComponent implements OnInit {
 
   errorObject = {
+    title: {
+      show: false
+    },
     categorie: {
       show: false
     },
@@ -28,14 +33,13 @@ export class CreatePostComponent implements OnInit {
 
   showMultipleFileMessage = false;
 
-  createPostForm: FormGroup<{
-    title: FormControl<string | null>;
-  }>;
-
+  title: string = ''
+  description: string = ''
   categories: category[] = [];
   selectedCatgeories = [];
-  selectedFiles: File[] = [];
-  previewFiles: any[] = []
+  selectedThumbnail: string = ''
+  uploadProgress = false;
+  uploadedFiles: any[] = [];
 
   loading = false;
 
@@ -47,10 +51,18 @@ export class CreatePostComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly categoriesApi: CategoryService,
     private postsService: PostsService
-  ) {
-    this.createPostForm = this.formBuilder.group({
-      title: ['', [Validators.required]]
-    })
+  ) {}
+
+  onTitleChange(e: any) {
+    if(this.title.length) {
+      this.errorObject.title.show = false
+    }
+  }
+
+  onCategory() {
+    if(this.selectedCatgeories.length) {
+      this.errorObject.categorie.show = false
+    }
   }
 
   async getCategories() {
@@ -64,20 +76,6 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  onFileChange(event: any): void {
-    this.selectedFiles = Array.from(event.target.files) as File[];
-
-    if(this.selectedFiles.length > 1) {
-      this.showMultipleFileMessage = true
-    } else {
-      this.showMultipleFileMessage = false
-    }
-
-    this.previewFiles = this.selectedFiles.map(file => ({
-      preview: this.generatePreview(file)
-    }));
-  }
-
   isValidFileType(file: File): boolean {
     const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'video/mp4', 'video/webm', 'video/ogg'];
     return validTypes.includes(file.type);
@@ -87,11 +85,14 @@ export class CreatePostComponent implements OnInit {
     return URL.createObjectURL(file);
   }
 
-  removeFile(index: number): void {
-    this.selectedFiles.splice(index, 1);
-  }
-
   validate() {
+
+    if(!this.title || this.title.trim() === '') {
+      this.errorObject.title.show = true
+      return false
+    } else {
+      this.errorObject.title.show = false
+    }
 
     if(!this.selectedCatgeories || !this.selectedCatgeories.length) {
       this.errorObject.categorie.show = true
@@ -100,7 +101,7 @@ export class CreatePostComponent implements OnInit {
       this.errorObject.categorie.show = false
     }
 
-    if(!this.selectedFiles || !this.selectedFiles.length) {
+    if(!this.uploadedFiles || !this.uploadedFiles.length) {
       this.errorObject.files.show = true
       return false
     } else {
@@ -111,42 +112,42 @@ export class CreatePostComponent implements OnInit {
   }
 
   async submitForm(): Promise<void> {
-    
-    console.log(this.selectedFiles)
 
-    if (this.createPostForm.valid) {
-      if (this.createPostForm.controls.title.value) {
 
-        if(this.validate()) {
-          try {
 
-            const formData = {
-              title: this.createPostForm.controls.title.value,
-              categories: this.selectedCatgeories,
-              files: Array.from(this.selectedFiles) as File[]
-            }
-            
-            console.log(formData)
+    if(this.validate()) {
+      try {
 
-            const response = await this.postsService.createPost(formData);
-  
-          } catch (e) {
-            console.log('Create post error', e);
-          }
+        const formData = {
+          title: this.title,
+          description: this.description,
+          categories: this.selectedCatgeories,
+          files: this.uploadedFiles,
+          thumbnail: this.selectedThumbnail
         }
+        
+        console.log(formData)
 
-      } else {
-        return;
+        // const response = await this.postsService.createPost(formData);
+
+      } catch (e) {
+        console.log('Create post error', e);
       }
-    } else {
-      Object.values(this.createPostForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
     }
   }
 
+  
+  onProgressUpdate(progress: boolean) {
+    this.uploadProgress = progress;
+  }
+
+  onUploadComplete(files: any[]) {
+    this.uploadedFiles = files;
+    this.selectedThumbnail = this.uploadedFiles[0].url
+  }
+
+  onUploadError(error: string) {
+    console.error('Upload Error:', error);
+  }
 
 }

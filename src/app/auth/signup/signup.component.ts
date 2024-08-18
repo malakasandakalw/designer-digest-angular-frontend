@@ -66,6 +66,7 @@ export class SignupComponent implements OnInit {
 
 
   async submitForm(): Promise<void> {
+    this.loading = true
     if (this.signupForm.valid) {
       if (this.signupForm.controls.firstName.value && this.signupForm.controls.lastName.value && this.signupForm.controls.email.value && this.signupForm.controls.password.value) {
 
@@ -80,6 +81,7 @@ export class SignupComponent implements OnInit {
           const response = await this.authApiService.signup(requestData);
           if (response) {
             this.createMessage(response.status, response.message);
+            this.loading = false
             if (response.status === 'success') {
               setTimeout(() => {
                 this.router.navigate(['/auth/login'])
@@ -89,9 +91,11 @@ export class SignupComponent implements OnInit {
           console.log(response);
         } catch (e) {
           console.log('User signup error', e);
+          this.loading = false
         }
 
       } else {
+        this.loading = false
         return;
       }
     } else {

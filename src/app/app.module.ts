@@ -23,6 +23,8 @@ import { PostsCardsHorizontalComponent } from "./components/posts-cards-horizont
 import { SinglePostCardComponent } from './components/single-post-card/single-post-card.component';
 import { ResponseInterceptorService } from 'src/services/common/response-interceptor.service';
 import { FileUploadComponent } from "./components/file-upload/file-upload.component";
+import { MainNavbarComponent } from "./components/main-navbar/main-navbar.component";
+import { RemovePrefixPipe } from './remove-prefix.pipe';
 
 registerLocaleData(en);
 
@@ -30,7 +32,8 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     LayoutComponent,
-    HomePageComponent
+    HomePageComponent,
+    RemovePrefixPipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ registerLocaleData(en);
     NzCardModule,
     PostsCardsHorizontalComponent,
     SinglePostCardComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    MainNavbarComponent
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
