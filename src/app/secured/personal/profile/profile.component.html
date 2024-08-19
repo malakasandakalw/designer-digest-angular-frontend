@@ -2,7 +2,7 @@
 
     <div class="d-flex aling-items-center container-margin-y gap-3">
         <div class="">
-            <nz-avatar *ngIf="currentUser?.profile_picture" nzIcon="user" [nzSrc]="'http://127.0.0.1:3000'+currentUser?.profile_picture!" [nzSize]="150"></nz-avatar>
+            <nz-avatar *ngIf="currentUser?.profile_picture" nzIcon="user" [nzSrc]="'http://127.0.0.1:3000'+currentUser.profile_picture!" [nzSize]="150"></nz-avatar>
             <nz-avatar *ngIf="!currentUser?.profile_picture" nzIcon="user" style="background-color: black;" [nzSize]="150"></nz-avatar>
         </div>
         <div>

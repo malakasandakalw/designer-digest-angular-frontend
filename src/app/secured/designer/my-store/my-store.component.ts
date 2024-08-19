@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostsService } from 'src/services/api/posts.service';
 
 export interface postMedia {
@@ -36,9 +37,19 @@ export interface post {
 export class MyStoreComponent implements OnInit{
 
   posts: post[] = []
+  loading = false
+
+  totalPosts = 0;
+  pageIndex = 1;
+  pageSize = 20;
+
+  selectedCategories: string[] = []
+  orderBy: string = 'recent'
+  searchText: string = ''
 
   constructor(
     private postsService: PostsService,
+    private router: Router
   ) {
 
   }
@@ -53,13 +64,47 @@ export class MyStoreComponent implements OnInit{
 
   async getPostsByDesigner() {
     try {
-      const response = await this.postsService.getPostsByDesigner();
-      if (response) {
-        this.posts = response.body.result;
+      this.loading = true
+      const filterData = {
+        categories: this.selectedCategories,
+        order_by: this.orderBy,
+        search: this.searchText,
+        page_index: this.pageIndex,
+        page_size: this.pageSize
       }
+      const response = await this.postsService.getPostsByDesigner(filterData);
+      if (response) {
+        this.totalPosts = response.body.result.total
+        this.posts = response.body.result.posts;
+      }
+      this.loading = false
     } catch (error) {
       console.log(error)
     }
+  }
+
+  async onPageChange(pageIndex: number) {
+    this.pageIndex = pageIndex
+    await this.getPostsByDesigner();
+  }
+
+  async onFilterCategoryChange(value: string[]) {
+    this.selectedCategories = value
+    await this.getPostsByDesigner()
+  }
+
+  async onOrderByChange(value: string) {
+    this.orderBy = value
+    await this.getPostsByDesigner()
+  }
+
+  async onSearchChange(value: string) {
+    this.searchText = value
+    await this.getPostsByDesigner()
+  }
+
+  navigateToPost(postId: string) {
+    this.router.navigate([`/designer-digest/designer/my-store/${postId}`])
   }
 
 }

@@ -1,4 +1,60 @@
-<a href="/designer-digest/designer/create-post" nz-button>New post</a>
+<div class="secured-page-x-padding-main">
+    <div class="filter-section">
+        <app-main-posts-filter (emitSelectedCategories)="onFilterCategoryChange($event)" (emitOrderBy)="onOrderByChange($event)"
+            (emitOnSearch)="onSearchChange($event)">
+        </app-main-posts-filter>
+        <a href="/designer-digest/designer/create-post" nz-button>New post</a>
+    </div>
+    <div class="posts-section">
+        <div nz-row class="gap-3">
+            <div *ngFor="let item of posts" nz-col nzSpan="6" >
+                <div class="post-card cursor-pointer" (click)="navigateToPost(item.post_id)">
+                        <div class="media-holder relative">
+                            <ng-container *ngIf="item.thumbnail.type === 'image'">
+                                <img [src]="'http://127.0.0.1:3000'+item.thumbnail.media_url" alt="" class="img-fluid">
+                            </ng-container>
+                            <ng-container *ngIf="item.thumbnail.type === 'video'">
+                                <video [src]="'http://127.0.0.1:3000'+item.thumbnail.media_url" [controls]="false" [autoplay]="true" class="post-card-vid"></video>
+                            </ng-container>
+                            <nz-tag nzColor="success" class="upvote-count-tag">
+                                <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+                                <span>{{item.upvote_count}}</span>
+                              </nz-tag>
+                        </div>
+                        <div class="card-details">
+                            <div class="title-des-holder">
+                                <h5 class="post-card-head">{{item.title}}</h5>
+                                <p class="post-card-des" nz-tooltip [nzTooltipTitle]="item.description">{{item.description}}</p>
+                            </div>
+                            <div class="categories-holder mt-2">
+                                <div class="d-flex gap-1 align-items-center flex-wrap">
+                                    <div *ngFor="let cat of item.categories" class="">
+                                        <nz-tag [nzColor]="'#999999'" class="me-0">{{cat.name}}</nz-tag>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="created-at-holder mt-2">
+                                <p class="post-card-des">{{item.created_at | date:'MMMM d, y'}}</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-container *ngIf="loading">
+    <app-loading-spinner></app-loading-spinner>
+</ng-container>
+
+
+
+<nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+
+
+<h2 *ngIf="!posts.length">No posts found</h2>
 
 <div *ngFor="let item of posts">
     <p>{{item.post_id}}</p>

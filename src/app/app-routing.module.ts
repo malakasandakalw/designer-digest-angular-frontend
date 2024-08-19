@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LayoutComponent } from './layout/layout.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { DesignersComponent } from './designers/designers.component';
+import { AllPostsComponent } from './all-posts/all-posts.component';
 
 const routes: Routes = [
   {
@@ -13,6 +16,19 @@ const routes: Routes = [
         path: '',
         component: HomePageComponent
       },
+      {
+        path: 'categories',
+        component: CategoriesComponent
+      },
+      {
+        path: 'designers',
+        component: DesignersComponent
+      },
+      {
+        path: 'all-posts',
+        component: AllPostsComponent
+      }
+      ,
       {
         path: "auth",
         loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)

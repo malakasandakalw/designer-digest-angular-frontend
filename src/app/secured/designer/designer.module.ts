@@ -18,7 +18,12 @@ import { MyStoreComponent } from './my-store/my-store.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { FileUploadComponent } from "../../components/file-upload/file-upload.component";
 import { NzImageModule } from 'ng-zorro-antd/image';
-
+import { LoadingSpinnerComponent } from "../../components/loading-spinner/loading-spinner.component";
+import { MainPostsFilterComponent } from 'src/app/components/main-posts-filter/main-posts-filter.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { SinglePostComponent } from './single-post/single-post.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,8 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     CreatePostComponent,
     DashboardComponent,
     MyStoreComponent,
-    VacanciesComponent
+    VacanciesComponent,
+    SinglePostComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +49,12 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     NzUploadModule,
     MainNavbarComponent,
     FileUploadComponent,
-    NzImageModule
+    NzImageModule,
+    LoadingSpinnerComponent,
+    MainPostsFilterComponent,
+    NzPaginationModule,
+    NzTagModule,
+    NzToolTipModule
 ]
 })
 export class DesignerModule { }

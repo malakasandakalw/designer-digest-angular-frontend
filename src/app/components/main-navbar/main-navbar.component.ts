@@ -33,9 +33,6 @@ export class MainNavbarComponent {
     if(apiAuthService.isAuthenticated()) {
       this.verification()
       this.currentUser = this.apiAuthService.getCurrentUser().user
-      console.log(this.currentUser)
-    } else {
-      this.logOut()
     }
   }
 
@@ -43,8 +40,6 @@ export class MainNavbarComponent {
     const response = await this.apiAuthService.tokenAuthenticator()
     if(response.verified) {
       this.isLoggedIn = true;
-    } else {
-      this.logOut()
     }
   }
 

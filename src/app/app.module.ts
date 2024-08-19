@@ -25,6 +25,9 @@ import { ResponseInterceptorService } from 'src/services/common/response-interce
 import { FileUploadComponent } from "./components/file-upload/file-upload.component";
 import { MainNavbarComponent } from "./components/main-navbar/main-navbar.component";
 import { RemovePrefixPipe } from './remove-prefix.pipe';
+import { CategoriesComponent } from './categories/categories.component';
+import { DesignersComponent } from './designers/designers.component';
+import { AllPostsComponent } from './all-posts/all-posts.component';
 
 registerLocaleData(en);
 
@@ -33,7 +36,10 @@ registerLocaleData(en);
     AppComponent,
     LayoutComponent,
     HomePageComponent,
-    RemovePrefixPipe
+    RemovePrefixPipe,
+    CategoriesComponent,
+    DesignersComponent,
+    AllPostsComponent
   ],
   imports: [
     BrowserModule,

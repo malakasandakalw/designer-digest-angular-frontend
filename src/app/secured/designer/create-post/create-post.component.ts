@@ -7,12 +7,7 @@ import { RemovePrefixPipe } from 'src/app/remove-prefix.pipe';
 import { createMessage } from 'src/app/common/utils/messages';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
-
-
-export interface category {
-  id: string,
-  name: string
-}
+import { postCategory } from '../my-store/my-store.component';
 
 @Component({
   selector: 'app-create-post',
@@ -41,7 +36,7 @@ export class CreatePostComponent implements OnInit {
 
   title: string = ''
   description: string = ''
-  categories: category[] = [];
+  categories: postCategory[] = [];
   selectedCatgeories = [];
   selectedThumbnail: string = ''
   uploadProgress = false;

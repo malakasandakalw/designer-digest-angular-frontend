@@ -6,6 +6,7 @@ import { CreatePostComponent } from "./create-post/create-post.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { MyStoreComponent } from "./my-store/my-store.component";
 import { VacanciesComponent } from "./vacancies/vacancies.component";
+import { SinglePostComponent } from "./single-post/single-post.component";
 
 const routes: Routes = [
     {
@@ -17,6 +18,7 @@ const routes: Routes = [
             { path: "create-post", component: CreatePostComponent },
             { path: "dashboard", component: DashboardComponent },
             { path: "my-store", component: MyStoreComponent },
+            { path: "my-store/:id", component: SinglePostComponent },
             { path: "vacancies", component: VacanciesComponent }
         ]
     }
