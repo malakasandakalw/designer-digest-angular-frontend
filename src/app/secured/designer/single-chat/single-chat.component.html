@@ -1,0 +1,39 @@
+<nz-modal [nzVisible]="true" [nzClosable]="false" [nzMaskClosable]="false" nzTitle="The first Modal">
+    <ng-container *nzModalContent>
+        
+        <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+            <ng-container *ngFor="let item of messages">
+                <nz-list-item>
+                    <ng-container *ngIf="item.type === 'image'">
+                        <img [src]="'http://127.0.0.1:3000'+item.file_url" alt="">
+                    </ng-container>
+                    <ng-container *ngIf="item.type === 'video'">
+                        <video [src]="'http://127.0.0.1:3000'+item.file_url" [autoplay]="false"></video>
+                    </ng-container>
+                    <ng-container *ngIf="item.type === 'text'">
+                        <p>{{item.message}}</p>
+                    </ng-container>
+                </nz-list-item>
+            </ng-container>
+        </nz-list>
+
+    </ng-container>
+    <div *nzModalFooter>
+        <div class="d-flex align-items-center gap-2">
+            <div>
+                <input nz-input placeholder="Enter your message" [(ngModel)]="messageText" type="text" (ngModelChange)="onMessageTextChange()"
+                [ngModelOptions]="{standalone: true}"/>
+            </div>
+            <div class="d-block">
+                <input type="file" name="files" class="" (change)="onSelecttoUpload($event)" [accept]="'image/*, video/*'" multiple hidden #fileInput>
+                <button nz-button nzType="default" [disabled]="uploading || sending || disableButton" type="button" (click)="fileInput.click()"><span nz-icon nzType="paper-clip" nzTheme="outline"></span></button>
+                <small *ngIf="uploading">Uploading<span nz-icon [nzType]="'loading'" class="ms-1"></span></small>
+            </div>
+            <div class="d-block">
+                <button nz-button nzType="primary" [disabled]="uploading || sending || disableButton" type="button" (click)="sendMessage('text', null)">
+                    <span nz-icon nzType="send" nzTheme="outline"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nz-modal>

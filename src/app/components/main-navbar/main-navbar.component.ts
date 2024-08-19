@@ -7,6 +7,7 @@ import { ApiAuthService } from 'src/services/api/api-auth.service';
 import { CommonModule } from '@angular/common';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { SocketService } from 'src/services/socket.service';
 
 @Component({
   selector: 'app-main-navbar',
@@ -28,6 +29,7 @@ export class MainNavbarComponent {
 
   constructor(
     private apiAuthService: ApiAuthService,
+    private socketService: SocketService,
     private router: Router
   ) {
     if(apiAuthService.isAuthenticated()) {

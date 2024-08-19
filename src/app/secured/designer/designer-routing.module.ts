@@ -7,6 +7,8 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { MyStoreComponent } from "./my-store/my-store.component";
 import { VacanciesComponent } from "./vacancies/vacancies.component";
 import { SinglePostComponent } from "./single-post/single-post.component";
+import { ChatsComponent } from "./chats/chats.component";
+import { SingleChatComponent } from "./single-chat/single-chat.component";
 
 const routes: Routes = [
     {
@@ -19,7 +21,9 @@ const routes: Routes = [
             { path: "dashboard", component: DashboardComponent },
             { path: "my-store", component: MyStoreComponent },
             { path: "my-store/:id", component: SinglePostComponent },
-            { path: "vacancies", component: VacanciesComponent }
+            { path: "vacancies", component: VacanciesComponent },
+            { path: "chats", component: ChatsComponent },
+            { path: "chats/:id", component: SingleChatComponent },
         ]
     }
 ];

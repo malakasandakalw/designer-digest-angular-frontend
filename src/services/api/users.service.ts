@@ -5,7 +5,7 @@ import { BaseService, IServerResponse } from './base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService extends BaseService  {
+export class UsersService extends BaseService  {
 
   constructor(
     private http: HttpClient
@@ -13,8 +13,8 @@ export class CategoryService extends BaseService  {
     super();
   }
 
-  public getAllCategories(): Promise<IServerResponse<any>> {
-    return this._get(this.http, `${this.API_BASE_URL}/category/all`)
+  public getAllUsers(): Promise<IServerResponse<any>> {
+    return this._get(this.http, `${this.API_BASE_URL}/users/get-all-users`)
   }
 
 }
