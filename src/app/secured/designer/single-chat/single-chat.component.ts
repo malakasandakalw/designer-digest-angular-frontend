@@ -7,6 +7,8 @@ import { ApiAuthService } from 'src/services/api/api-auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChatsService } from 'src/services/api/chats.service';
+import { UsersService } from 'src/services/api/users.service';
+import { User } from 'src/app/common/interfaces/CommonInterface';
 
 export interface MessageData {
   from_user: string,
@@ -25,6 +27,7 @@ export interface MessageData {
 })
 export class SingleChatComponent implements OnInit{
   loading = false
+  reciever: User | null = null
   files: { name: string, data: string }[] = []
   uploadedFiles: string[] = []
   uploading = false
@@ -45,7 +48,8 @@ export class SingleChatComponent implements OnInit{
     private socketService: SocketService,
     private apiAuthService: ApiAuthService,
     private route: ActivatedRoute,
-    private chatService: ChatsService
+    private chatService: ChatsService,
+    private usersService: UsersService
   ){
 
   }
@@ -59,7 +63,22 @@ export class SingleChatComponent implements OnInit{
         this.messages.push(message);
       }
     });
+    await this.getReceiverData()
     await this.getMessages()
+  }
+
+  async getReceiverData() {
+    if(!this.activeChatId) return
+    try {
+      this.loading = true
+      const response = await this.usersService.getById(this.activeChatId)
+      if(response) {
+        this.reciever = response.body
+      }
+      this.loading = false
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async getMessages() {

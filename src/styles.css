@@ -288,3 +288,57 @@ p {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.justifty-content-end {
+    justify-content: end;
+}
+
+.justifty-content-start {
+    justify-content: start;
+}
+
+.fixed-model-overflow {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.single-message {
+    max-width: 75%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.my-msg {
+    background-color: aquamarine;
+    border-radius: 16px;
+    text-align: end;
+    max-width: max-content;
+    margin-left: auto;    
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.other-msg {
+    background-color: greenyellow;
+    border-radius: 16px;
+    text-align: left;
+    max-width: max-content;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.msg-holder {
+   border-bottom: 1px solid #cfcfcf10
+}
+
+.msg-text-holder {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.date-very-small {
+    font-size: 10px;
+    color: #c9c9c9;
+}
