@@ -1,3 +1,19 @@
+<div class="secured-page-x-padding-main">
+    <div class="filter-section d-flex align-items-center container-margin-y">
+        <h3 >Your chats</h3>
+        <button nz-button [nzType]="'default'" class="ms-auto"><span>New Chat</span></button>
+    </div>
+    <div class="chats-section">
+        <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+            <ng-container *ngFor="let item of chats">
+                <nz-list-item class="cursor-pointer py-3">
+                    <nz-skeleton></nz-skeleton>
+                </nz-list-item>
+            </ng-container>
+        </nz-list>
+    </div>
+</div>
+
 <nz-modal [nzVisible]="true" [nzClosable]="false" [nzMaskClosable]="false" [nzTitle]="titleTemplate">
     <ng-template #titleTemplate>
         <div *ngIf="reciever" class="d-flex align-items-center gap-2">

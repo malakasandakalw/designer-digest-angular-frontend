@@ -2,7 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/interfaces/CommonInterface';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
+import { ChatsService } from 'src/services/api/chats.service';
 import { UsersService } from 'src/services/api/users.service';
+
+export interface Chat {
+  user_id: string,
+  user_name: string,
+  profile_picture: string,
+  latest_message: string,
+  created_at: string,
+  unread_count: number
+}
 
 @Component({
   selector: 'app-chats',
@@ -14,7 +24,7 @@ export class ChatsComponent implements OnInit{
   loading = false
   loadingUsers = false
   isVisible = false;
-  chats: any[] = []
+  chats: Chat[] = []
   users: User[] = []
   // currentUser: User | null = null
 
@@ -25,7 +35,8 @@ export class ChatsComponent implements OnInit{
   constructor(
     private usersService: UsersService,
     private router: Router,
-    private apiAuthService: ApiAuthService
+    private apiAuthService: ApiAuthService,
+    private chatService: ChatsService
   ){
     // this.currentUser = this.apiAuthService.getCurrentUser().user
   }
@@ -55,11 +66,10 @@ export class ChatsComponent implements OnInit{
   async getChatsByDesigner() {
     try {
       this.loading = true
-      // const response = await this.postsService.getPostsByDesigner();
-      // if (response) {
-      //   console.log(response)
-        // this.chats = response.body;
-      // }
+      const response = await this.chatService.getChatsByDesigner();
+      if (response) {
+        this.chats = response.body;
+      }
       this.loading = false
     } catch (error) {
       console.log(error)
@@ -73,6 +83,10 @@ export class ChatsComponent implements OnInit{
   goToSingleChat(userId: string) {
     if(!userId) return
     this.router.navigate([`/designer-digest/designer/chats/${userId}`])
+  }
+
+  handleCancel() {
+    this.isVisible = false
   }
 
 }

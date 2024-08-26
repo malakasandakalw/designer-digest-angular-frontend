@@ -1,0 +1,14 @@
+.hero-section {
+    border-radius: 8px;
+    border: 1px solid rgb(218, 220, 224);
+    padding: 48px;
+}
+
+.hero-img-holder {
+    max-width: 650px;
+}
+
+.no-posts-found span{
+    font-size: 24px;
+    color: red;
+}

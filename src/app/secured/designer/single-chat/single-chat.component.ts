@@ -19,6 +19,7 @@ import { NzFormModule } from "ng-zorro-antd/form";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 export interface MessageData {
   from_user_name: string,
@@ -52,7 +53,8 @@ export interface MessageRead {
     NzFormModule,
     NzInputModule,
     NzIconModule,
-    NzImageModule
+    NzImageModule,
+    NzSkeletonModule
   ]
 })
 export class SingleChatComponent implements OnInit, OnDestroy{
@@ -68,6 +70,8 @@ export class SingleChatComponent implements OnInit, OnDestroy{
   activeChatId: string | null = null
   disableButton = false
   msgSubscription: Subscription | undefined;
+
+  chats = [1,2,3,4,5]
 
   get currentUser() {
     return this.apiAuthService.getCurrentUser().user

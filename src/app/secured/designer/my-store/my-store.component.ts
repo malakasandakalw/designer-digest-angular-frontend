@@ -27,7 +27,8 @@ export interface post {
   media: postMedia[],
   thumbnail: postThumbnail,
   categories: postCategory[],
-  upvote_count: string
+  upvote_count: string,
+  user_has_voted?: boolean
 }
 @Component({
   selector: 'app-my-store',

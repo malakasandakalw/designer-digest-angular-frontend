@@ -29,6 +29,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { SingleChatComponent } from './single-chat/single-chat.component';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { SingleChatComponent } from './single-chat/single-chat.component';
     NzModalModule,
     NzListModule,
     NzAvatarModule,
-    SingleChatComponent
+    SingleChatComponent,
+    NzBadgeModule
 ]
 })
 export class DesignerModule { }

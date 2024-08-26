@@ -1,9 +1,36 @@
 <div class="secured-page-x-padding-main">
-    <div class="filter-section">
-        <button nz-button [nzType]="'default'" (click)="showModal()"><span>New Chat</span></button>
+    <div class="filter-section d-flex align-items-center container-margin-y">
+        <h3 >Your chats</h3>
+        <button nz-button [nzType]="'default'" (click)="showModal()" class="ms-auto"><span>New Chat</span></button>
     </div>
     <div class="chats-section">
-
+        <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+            <ng-container *ngFor="let item of chats">
+                <nz-list-item class="cursor-pointer py-3" (click)="goToSingleChat(item.user_id)">
+                    <div class="d-flex align-items-center gap-2 w-100">
+                        <div>
+                            <nz-avatar *ngIf="item.profile_picture" nzIcon="user"
+                                [nzSrc]="'http://127.0.0.1:3000'+item.profile_picture!" [nzSize]="50"></nz-avatar>
+                            <nz-avatar *ngIf="!item.profile_picture" nzIcon="user" style="background-color: black;"
+                                [nzSize]="50"></nz-avatar>
+                        </div>
+                        <div class="w-100">
+                            <div class="d-flex align-items-center">
+                                <div class="me-auto">
+                                    <h5 class="user-card-head mb-2">{{item.user_name}}</h5>
+                                    <p class="user-card-des">{{item.latest_message}}</p>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="main-chat-unread-count">{{item.unread_count}}</div>
+                                    <p class="user-card-des">{{item.created_at | date:'MMMM d, y' }}</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </nz-list-item>
+            </ng-container>
+        </nz-list>
     </div>
 </div>
 
@@ -13,7 +40,7 @@
 
 <h2 *ngIf="!chats.length">No chats found</h2>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Select user to chat">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Select user to chat" (nzOnCancel)="handleCancel()" >
     <ng-container *nzModalContent>
         <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
             <ng-container *ngFor="let item of users">
@@ -41,4 +68,5 @@
         <h2 *ngIf="!users.length">No chats found</h2>
 
     </ng-container>
+    <ng-container *nzModalFooter=""></ng-container>
 </nz-modal>

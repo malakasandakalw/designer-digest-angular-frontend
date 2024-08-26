@@ -28,6 +28,12 @@ import { RemovePrefixPipe } from './remove-prefix.pipe';
 import { CategoriesComponent } from './categories/categories.component';
 import { DesignersComponent } from './designers/designers.component';
 import { AllPostsComponent } from './all-posts/all-posts.component';
+import { MainPostsFilterComponent } from "./components/main-posts-filter/main-posts-filter.component";
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { SinglePostComponentPublic } from './single-post/single-post.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-spinner.component";
 
 registerLocaleData(en);
 
@@ -39,7 +45,8 @@ registerLocaleData(en);
     RemovePrefixPipe,
     CategoriesComponent,
     DesignersComponent,
-    AllPostsComponent
+    AllPostsComponent,
+    SinglePostComponentPublic
   ],
   imports: [
     BrowserModule,
@@ -57,7 +64,12 @@ registerLocaleData(en);
     PostsCardsHorizontalComponent,
     SinglePostCardComponent,
     FileUploadComponent,
-    MainNavbarComponent
+    MainNavbarComponent,
+    MainPostsFilterComponent,
+    NzTagModule,
+    NzToolTipModule,
+    NzIconModule,
+    LoadingSpinnerComponent
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

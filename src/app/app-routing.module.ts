@@ -6,6 +6,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { DesignersComponent } from './designers/designers.component';
 import { AllPostsComponent } from './all-posts/all-posts.component';
+import { SinglePostComponentPublic } from './single-post/single-post.component';
 
 const routes: Routes = [
   {
@@ -27,8 +28,11 @@ const routes: Routes = [
       {
         path: 'all-posts',
         component: AllPostsComponent
-      }
-      ,
+      },      
+      {
+        path: 'all-posts/:id',
+        component: SinglePostComponentPublic
+      },
       {
         path: "auth",
         loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)

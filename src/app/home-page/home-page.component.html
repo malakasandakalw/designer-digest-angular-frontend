@@ -1,7 +1,70 @@
 <app-main-navbar></app-main-navbar>
 
 <div class="container">
-    <app-posts-cards-horizontal></app-posts-cards-horizontal>
+    <div class="hero-section">
+        <h1 class="h1">Welcome to</h1>
+        <h2 class="h2 ms-2">DESIGNER DIGEST</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi ex cumque soluta optio corrupti molestias
+            adipisci facilis possimus ducimus odit quod consectetur velit veniam, provident minima obcaecati aut dolorum
+            blanditiis!</p>
+        <div class="hero-img-holder">
+            <img src="assets/hero.jpg" alt="" class="img-fluid">
+        </div>
+    </div>
+</div>
+
+<div class=" secured-page-x-padding-main">
+    <app-main-posts-filter (emitSelectedCategories)="onFilterCategoryChange($event)"
+        (emitOrderBy)="onOrderByChange($event)" (emitOnSearch)="onSearchChange($event)">
+    </app-main-posts-filter>
+    <div class="posts-section">
+
+        <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No Posts Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
+
+        <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+
+
+        <div nz-row class="">
+            <div *ngFor="let item of posts" nz-col nzSpan="6" class="px-1">
+                <div class="post-card cursor-pointer" (click)="navigateToPost(item.post_id)">
+                    <div class="media-holder relative">
+                        <ng-container *ngIf="item.thumbnail.type === 'image'">
+                            <img [src]="'http://127.0.0.1:3000'+item.thumbnail.media_url" alt="" class="img-fluid">
+                        </ng-container>
+                        <ng-container *ngIf="item.thumbnail.type === 'video'">
+                            <video [src]="'http://127.0.0.1:3000'+item.thumbnail.media_url" autoplay muted loop class="post-card-vid"></video>
+                        </ng-container>
+                        <nz-tag nzColor="success" class="upvote-count-tag" (click)="$event.preventDefault(); $event.stopPropagation(); upvoteTrigger(item.post_id)">
+                            <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+                            <span>{{item.upvote_count}}</span>
+                            <span>{{item.user_has_voted}}</span>
+                        </nz-tag>
+                    </div>
+                    <div class="card-details">
+                        <div class="title-des-holder">
+                            <h5 class="post-card-head">{{item.title}}</h5>
+                            <p class="post-card-des" nz-tooltip [nzTooltipTitle]="item.description">{{item.description}}</p>
+                        </div>
+                        <div class="categories-holder mt-2">
+                            <div class="d-flex gap-1 align-items-center flex-wrap">
+                                <div *ngFor="let cat of item.categories" class="">
+                                    <nz-tag [nzColor]="'#999999'" class="me-0">{{cat.name}}</nz-tag>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="created-at-holder mt-2">
+                            <p class="post-card-des">{{item.created_at | date:'MMMM d, y'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
