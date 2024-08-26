@@ -25,11 +25,10 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { ChatsComponent } from './chats/chats.component';
-import { SingleChatComponent } from './single-chat/single-chat.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-
+import { SingleChatComponent } from './single-chat/single-chat.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +39,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     MyStoreComponent,
     VacanciesComponent,
     SinglePostComponent,
-    ChatsComponent,
-    SingleChatComponent
+    ChatsComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +63,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     NzToolTipModule,
     NzModalModule,
     NzListModule,
-    NzAvatarModule
+    NzAvatarModule,
+    SingleChatComponent
 ]
 })
 export class DesignerModule { }

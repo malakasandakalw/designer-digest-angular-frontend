@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { User } from 'src/app/common/interfaces/CommonInterface';
@@ -8,6 +8,11 @@ import { CommonModule } from '@angular/common';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { SocketService } from 'src/services/socket.service';
+import { NzNotificationPlacement, NzNotificationService } from 'ng-zorro-antd/notification';
+import { Subscription, takeUntil } from 'rxjs';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { ChatsService } from 'src/services/api/chats.service';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-main-navbar',
@@ -19,29 +24,82 @@ import { SocketService } from 'src/services/socket.service';
     NzButtonModule,
     CommonModule,
     NzAvatarModule,
-    NzIconModule
+    NzIconModule,
+    NzBadgeModule
   ]
 })
-export class MainNavbarComponent {
+export class MainNavbarComponent implements OnInit{
 
   currentUser: User | null = null
   isLoggedIn: boolean = false
+  placement = 'topRight';
+  msgSubscription: Subscription | undefined;
+  msgReadSubscription: Subscription | undefined;
+  unreadMessageCount: string | null = null
+
+  get isDesigner() {
+    return this.apiAuthService.isDesigner()
+  }
+
+  get isPersonal() {
+    return this.apiAuthService.isPersonal()
+  }
+
+  get isEmployer() {
+    return this.apiAuthService.isEmployer()
+  }
 
   constructor(
     private apiAuthService: ApiAuthService,
     private socketService: SocketService,
-    private router: Router
+    private router: Router,
+    private notification: NzNotificationService,
+    private chatService: ChatsService
   ) {
-    if(apiAuthService.isAuthenticated()) {
+    if (apiAuthService.isAuthenticated()) {
       this.verification()
       this.currentUser = this.apiAuthService.getCurrentUser().user
     }
+    this.msgSubscription = this.socketService.getNewMessageObservable().subscribe(async (message) => {
+      if (message && this.currentUser) {
+        if ((message.to_user === this.currentUser.id) && message.id) {
+          // this.socketService.sendMessageRead(message.id)
+          this.createBasicNotification(message.from_user_name)
+          this.getUnreadMessagesCount()
+        }
+      }
+    });
+    this.chatService.onRefreshUnreadCount.pipe(takeUntilDestroyed())
+    .subscribe(() => {
+      this.getUnreadMessagesCount()
+    })
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.getUnreadMessagesCount();
+  }
+
+  createBasicNotification(userName: string): void {
+    this.notification.blank(
+      `New meessage from "${userName}"`, '', { nzPlacement: 'topRight' }
+    );
   }
 
   async verification() {
     const response = await this.apiAuthService.tokenAuthenticator()
-    if(response.verified) {
+    if (response.verified) {
       this.isLoggedIn = true;
+    }
+  }
+
+  async getUnreadMessagesCount() {
+    try {
+      const response = await this.chatService.getUnreadMessagesCount()
+      if (response) {
+        this.unreadMessageCount = response.body
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 

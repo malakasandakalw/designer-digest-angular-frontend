@@ -9,7 +9,6 @@ import { DesignerService } from 'src/services/api/designer.service';
 export class ProfileComponent implements OnInit {
   
   async ngOnInit() {
-    await this.designerService.test()
   }
 
   constructor(

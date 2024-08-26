@@ -1,21 +1,54 @@
-<nz-modal [nzVisible]="true" [nzClosable]="false" [nzMaskClosable]="false" nzTitle="The first Modal">
+<nz-modal [nzVisible]="true" [nzClosable]="false" [nzMaskClosable]="false" [nzTitle]="titleTemplate">
+    <ng-template #titleTemplate>
+        <div *ngIf="reciever" class="d-flex align-items-center gap-2">
+            <div >
+                <nz-avatar *ngIf="reciever.profile_picture" nzIcon="user"
+                    [nzSrc]="'http://127.0.0.1:3000'+reciever.profile_picture!" [nzSize]="30"></nz-avatar>
+                <nz-avatar *ngIf="!reciever.profile_picture" nzIcon="user" style="background-color: black;"
+                    [nzSize]="30"></nz-avatar>
+            </div>
+            <div>
+                <h5 class="user-card-head">{{reciever.first_name}} {{reciever.last_name}}</h5>
+                <p class="user-card-des">{{reciever.role}} - {{reciever.email}}</p>
+            </div>
+        </div>
+    </ng-template>
     <ng-container *nzModalContent>
-        <div class="fixed-model-overflow">
+        <div class="fixed-model-overflow" #scrollContainer>
             <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
                 <ng-container *ngFor="let item of messages">
                     <div class="d-flex w-100 msg-holder" [ngClass]="item.from_user === currentUser.id ? 'justifty-content-end': 'justifty-content-start'">
                         <ng-container *ngIf="item.type === 'image'">
-                            <img [src]="'http://127.0.0.1:3000'+item.file_url" alt="">
+                            <div class="single-message">
+                                <div class="message-image relative" [ngClass]="item.from_user === currentUser.id ? 'my-msg': 'other-msg'">
+                                    <img [src]="'http://127.0.0.1:3000'+item.file_url" alt="" class="img-fluid">
+                                    <div class="d-flex align-items-center mt-1">
+                                        <small class="date-very-small">{{item.created_at | date:'MMMM d, y' }}</small>
+                                        <a *ngIf="item.from_user !== currentUser.id" nz-button nzType="default" [href]="'http://127.0.0.1:3000'+item.file_url" class="msg-download ms-auto" download>
+                                            <span nz-icon nzType="download" nzTheme="outline"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </ng-container>
                         <ng-container *ngIf="item.type === 'video'">
-                            <video [src]="'http://127.0.0.1:3000'+item.file_url" [autoplay]="false"></video>
+                            <div class="single-message">
+                                <div class="message-image relative" [ngClass]="item.from_user === currentUser.id ? 'my-msg': 'other-msg'">
+                                    <video [src]="'http://127.0.0.1:3000'+item.file_url" [autoplay]="true" style="height: auto; width: 100%;"></video>
+                                    <div class="d-flex align-items-center mt-1">
+                                        <small class="date-very-small">{{item.created_at | date:'MMMM d, y' }}</small>
+                                        <a *ngIf="item.from_user !== currentUser.id" nz-button nzType="default" [href]="'http://127.0.0.1:3000'+item.file_url" class="msg-download ms-auto" download>
+                                            <span nz-icon nzType="download" nzTheme="outline"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </ng-container>
                         <ng-container *ngIf="item.type === 'text'">
                             <div class="single-message">
                                 <div [ngClass]="item.from_user === currentUser.id ? 'my-msg': 'other-msg'">
                                     <p class="post-card-des msg-text-holder">{{item.message}}</p>
                                 </div>
-                                <p >{{reciever?.first_name}}</p>
                                 <small class="date-very-small">{{item.created_at | date:'MMMM d, y' }}</small>
                             </div>
                         </ng-container>
@@ -26,7 +59,7 @@
     </ng-container>
     <div *nzModalFooter>
         <div class="d-flex align-items-center gap-2">
-            <div>
+            <div class="d-contents">
                 <input nz-input placeholder="Enter your message" [(ngModel)]="messageText" type="text" (ngModelChange)="onMessageTextChange()"
                 [ngModelOptions]="{standalone: true}"/>
             </div>

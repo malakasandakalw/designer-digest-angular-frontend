@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { MessageData } from 'src/app/secured/designer/single-chat/single-chat.component';
+import { MessageData, MessageRead } from 'src/app/secured/designer/single-chat/single-chat.component';
 import { ApiAuthService } from './api/api-auth.service';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { ApiAuthService } from './api/api-auth.service';
 export class SocketService {
   private socket: Socket;
   private newMessageSubject = new BehaviorSubject<any>(null);
+  // private messageReadSubject = new BehaviorSubject<any>(null);
 
   constructor(
     private authApiService: ApiAuthService
@@ -24,14 +25,26 @@ export class SocketService {
     this.socket.on('receiveMessage', (message: MessageData) => {
       this.newMessageSubject.next(message);
     });
+
+    // this.socket.on('receiveRead', (message: MessageRead) => {
+    //   this.messageReadSubject.next(message);
+    // });
   }
 
   getNewMessageObservable(): Observable<MessageData> {
     return this.newMessageSubject.asObservable();
   }
 
+  // getReadMessageObservable(): Observable<MessageRead> {
+  //   return this.messageReadSubject.asObservable();
+  // }
+
   sendMessage(messageData: MessageData) {
     this.socket.emit('sendMessage', messageData);
+  }
+
+  sendMessageRead(id: string, to_user: string) {
+    this.socket.emit('sendRead', {id, to_user})
   }
 
   disconnect() {

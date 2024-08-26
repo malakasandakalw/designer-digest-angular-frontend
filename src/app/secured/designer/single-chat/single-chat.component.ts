@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FileManagerService } from 'src/services/api/file-manager.service';
 import { io, Socket } from 'socket.io-client';
@@ -9,8 +9,19 @@ import { Subscription } from 'rxjs';
 import { ChatsService } from 'src/services/api/chats.service';
 import { UsersService } from 'src/services/api/users.service';
 import { User } from 'src/app/common/interfaces/CommonInterface';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { CommonModule } from '@angular/common';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NzFormModule } from "ng-zorro-antd/form";
+import { NzInputModule } from "ng-zorro-antd/input";
+import { NzIconModule } from "ng-zorro-antd/icon";
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 export interface MessageData {
+  from_user_name: string,
   from_user: string,
   to_user: string,
   message: string | null,
@@ -20,12 +31,32 @@ export interface MessageData {
   created_at?: string
 }
 
+export interface MessageRead {
+  id: string,
+  from_user: string,
+  to_user: string
+}
+
 @Component({
   selector: 'app-single-chat',
   templateUrl: './single-chat.component.html',
-  styleUrls: ['./single-chat.component.css']
+  styleUrls: ['./single-chat.component.css'],
+  standalone: true,
+  imports: [
+    NzModalModule,
+    NzListModule,
+    NzAvatarModule,
+    CommonModule,
+    NzButtonModule,
+    FormsModule, ReactiveFormsModule,
+    NzFormModule,
+    NzInputModule,
+    NzIconModule,
+    NzImageModule
+  ]
 })
-export class SingleChatComponent implements OnInit{
+export class SingleChatComponent implements OnInit, OnDestroy{
+  @ViewChild('scrollContainer') private scrollContainer: ElementRef<HTMLDivElement> | undefined;
   loading = false
   reciever: User | null = null
   files: { name: string, data: string }[] = []
@@ -44,14 +75,13 @@ export class SingleChatComponent implements OnInit{
 
   constructor(
     private fileManagerService: FileManagerService,
-    private message: NzMessageService,
     private socketService: SocketService,
     private apiAuthService: ApiAuthService,
     private route: ActivatedRoute,
     private chatService: ChatsService,
     private usersService: UsersService
   ){
-
+    this.messages = [];
   }
 
   async ngOnInit(): Promise<void> {
@@ -60,11 +90,29 @@ export class SingleChatComponent implements OnInit{
     });
     this.msgSubscription = this.socketService.getNewMessageObservable().subscribe((message) => {
       if (message) {
-        this.messages.push(message);
+        this.messages = this.messages ? [...this.messages, message] : [message];
+        this.scrollToBottom()
+
+        console.log(message)
+        console.log(this.currentUser.id)
+
+        if((message.to_user === this.currentUser.id ) && message.id) {
+          this.socketService.sendMessageRead(message.id,  message.to_user)
+        }
       }
     });
     await this.getReceiverData()
     await this.getMessages()
+    await this.readAllMessages()
+    this.chatService.emitUnreadCountRefresh()
+  }
+
+  ngOnDestroy(): void {
+    if (this.msgSubscription) {
+      this.msgSubscription.unsubscribe();
+      console.log('Subscription unsubscribed');
+    }
+    console.log('Component destroyed');;
   }
 
   async getReceiverData() {
@@ -89,7 +137,19 @@ export class SingleChatComponent implements OnInit{
       if(response) {
         this.messages = response.body
       }
-      this.loading = false
+      setTimeout(() => {
+        this.scrollToBottom()
+        this.loading = false
+      }, 800)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async readAllMessages() {
+    if(!this.currentUser.id || !this.activeChatId) return
+    try {
+      await this.chatService.readAllMessages(this.currentUser.id, this.activeChatId)
     } catch (error) {
       console.log(error)
     }
@@ -137,7 +197,7 @@ export class SingleChatComponent implements OnInit{
         const response = await this.fileManagerService.uploadFiles(this.files)
         if(response) {
           response.body.files.forEach(async (file: any) => {
-            await this.sendMessage('image', file.url)
+            await this.sendMessage(file.type, file.url)
           });
         }
         this.files = []
@@ -153,6 +213,7 @@ export class SingleChatComponent implements OnInit{
     if(!this.currentUser || !this.activeChatId) return
 
     const messageData: MessageData = {
+      from_user_name: this.currentUser.first_name,
       from_user: this.currentUser.id,
       to_user: this.activeChatId,
       message: this.messageText,
@@ -160,6 +221,14 @@ export class SingleChatComponent implements OnInit{
       file_url: file_url
     }
     this.socketService.sendMessage(messageData)
+    this.messageText = ''
+  }
+
+  scrollToBottom(): void {
+    if (this.scrollContainer) {
+      const element = this.scrollContainer.nativeElement;
+      setTimeout(() => element.scrollTop = element.scrollHeight, 100);
+    }
   }
 
 }

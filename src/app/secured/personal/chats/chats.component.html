@@ -16,7 +16,7 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Select user to chat">
     <ng-container *nzModalContent>
         <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
-            <ng-container *ngFor="let item of users">
+            <ng-container *ngFor="let item of designers">
                 <nz-list-item *ngIf="currentUser && currentUser.id !== item.id" class="cursor-pointer"
                     (click)="goToSingleChat(item.id)">
                     <div class="d-flex align-items-center gap-2">
@@ -38,7 +38,7 @@
         <ng-container *ngIf="loadingUsers">
             <app-loading-spinner></app-loading-spinner>
         </ng-container>
-        <h2 *ngIf="!users.length">No chats found</h2>
+        <h2 *ngIf="!designers.length">No chats found</h2>
 
     </ng-container>
 </nz-modal>

@@ -87,4 +87,9 @@ export class ApiAuthService extends BaseService {
     return user_.role === "Personal"
   }
 
+  public isEmployer(): boolean {
+    const user_ = this.getCurrentUser().user
+    return user_.role === "Employer"
+  }
+
 }

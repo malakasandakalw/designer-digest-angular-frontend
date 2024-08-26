@@ -12,11 +12,17 @@ import { NzIconModule } from "ng-zorro-antd/icon";
 import { FileUploadComponent } from "../../components/file-upload/file-upload.component";
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { ChatsComponent } from './chats/chats.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { LoadingSpinnerComponent } from "../../components/loading-spinner/loading-spinner.component";
+import { SingleChatComponent } from '../designer/single-chat/single-chat.component';
 
 @NgModule({
   declarations: [
     PersonalLayoutComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChatsComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +35,11 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     NzIconModule,
     FileUploadComponent,
     NzImageModule,
-    NzAvatarModule
+    NzAvatarModule,
+    NzModalModule,
+    NzListModule,
+    LoadingSpinnerComponent,
+    SingleChatComponent
 ]
 })
 export class PersonalModule { }

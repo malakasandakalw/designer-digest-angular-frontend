@@ -20,51 +20,72 @@
             </ul>
         </div>
         <div class="ms-auto">
-    
+
             <div *ngIf="!isLoggedIn">
                 <a href="/auth/signup" nz-button nzType="primary">Register normal</a>
                 <a href="/auth/login" nz-button nzType="default">Login</a>
             </div>
-    
+
             <ng-container *ngIf="isLoggedIn">
-
                 <div class="d-flex align-items-center gap-3">
+                    <div *ngIf="isDesigner" class="d-flex align-items-center-gap-3">
+                        <div class="dashboard-nav">
+                            <a href="/designer-digest/designer/dashboard" class="p-0">
+                                <span nz-icon nzType="area-chart" nzTheme="outline"></span>
+                                Dashboard
+                            </a>
+                        </div>
 
-                    <div class="dashboard-nav">
-                        <a href="/designer-digest/designer/dashboard" class="p-0">
-                            <span nz-icon nzType="area-chart" nzTheme="outline"></span>
-                            Dashboard
-                        </a>
+                        <div class="store-nav">
+                            <a href="/designer-digest/designer/my-store" class="p-0">
+                                <span nz-icon nzType="appstore" nzTheme="outline"></span>
+                                My Store
+                            </a>
+                        </div>
+
+                        <div class="vacancy-nav">
+                            <a href="/designer-digest/designer/vacancies" class="p-0">
+                                <span nz-icon nzType="diff" nzTheme="outline"></span>
+                                Job Vacancies
+                            </a>
+                        </div>
+
+                        <div class="chat-nav">
+                            <a href="/designer-digest/designer/chats" nz-button class="p-0">
+                                <span nz-icon nzType="message" nzTheme="outline"></span>
+                            </a>
+                            <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'">
+                                {{unreadMessageCount}}
+                            </div>
+                        </div>
                     </div>
-    
-                    <div class="store-nav">
-                        <a href="/designer-digest/designer/my-store" class="p-0">
-                            <span nz-icon nzType="appstore" nzTheme="outline"></span>
-                            My Store
-                        </a>
+
+                    <div *ngIf="isPersonal" class="d-flex align-items-center-gap-3">
+                        <div class="chat-nav">
+                            <a href="/designer-digest/personal/chats" nz-button class="p-0">
+                                <span nz-icon nzType="message" nzTheme="outline"></span>
+                            </a>
+                            <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'" class="unread-messages">
+                                {{unreadMessageCount}}
+                            </div>
+                        </div>
                     </div>
-    
-                    <div class="vacancy-nav">
-                        <a href="/designer-digest/designer/vacancies" class="p-0">
-                            <span nz-icon nzType="diff" nzTheme="outline"></span>
-                            Job Vacancies
-                        </a>
-                    </div>
-    
-                    <div class="chat-nav">
-                        <a href="/designer-digest/designer/chats" nz-button class="p-0">
-                            <span nz-icon nzType="message" nzTheme="outline"></span>
-                        </a>
-                    </div>
-    
+
                     <div class="profile-btn">
-                        <button nz-button nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'" class="p-0">
-                            <nz-avatar *ngIf="currentUser?.profile_picture" nzIcon="user" [nzSrc]="'http://127.0.0.1:3000'+currentUser?.profile_picture!" [nzSize]="38"></nz-avatar>
-                            <nz-avatar *ngIf="!currentUser?.profile_picture" nzIcon="user" style="background-color: black;" [nzSize]="38"></nz-avatar>
+                        <button nz-button nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'"
+                            class="p-0">
+                            <nz-avatar *ngIf="currentUser?.profile_picture" nzIcon="user"
+                                [nzSrc]="'http://127.0.0.1:3000'+currentUser?.profile_picture!"
+                                [nzSize]="38"></nz-avatar>
+                            <nz-avatar *ngIf="!currentUser?.profile_picture" nzIcon="user"
+                                style="background-color: black;" [nzSize]="38"></nz-avatar>
                         </button>
                         <nz-dropdown-menu class="bg-none border-none" #menu="nzDropdownMenu">
                             <ul nz-menu>
                                 <li nz-menu-item>
+                                    <a *ngIf="isDesigner" href="">designer</a>
+                                    <a *ngIf="isEmployer" href="">employer</a>
+                                    <a *ngIf="isPersonal" href="">personal</a>
                                     Go to Profile
                                 </li>
                                 <li nz-menu-item (click)="logOut()">Logout</li>

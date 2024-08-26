@@ -342,3 +342,37 @@ p {
     font-size: 10px;
     color: #c9c9c9;
 }
+
+.d-contents {
+    display: contents;
+}
+
+.message-image {
+    max-width: 50%;
+    padding-left: 4px;
+    padding-right: 4px;
+    overflow: hidden;
+}
+
+.message-image {
+    max-width: 50%;
+    border-radius: 16px;
+}
+
+.ant-modal-footer {
+    border: none;
+}
+
+a.ant-btn.msg-download {
+    padding: 0px !important;
+    margin-right: 4px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+.unread-messages {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 100%;
+}
