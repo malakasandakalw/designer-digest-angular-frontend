@@ -12,3 +12,8 @@
     font-size: 24px;
     color: red;
 }
+
+.highlight {
+    background-color: greenyellow;
+    color: white;
+}

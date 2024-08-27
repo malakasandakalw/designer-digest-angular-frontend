@@ -47,7 +47,7 @@ export class HomePageComponent implements OnInit {
         search: this.searchText,
         page_index: this.pageIndex,
         page_size: this.pageSize,
-        userId: this.currentUser.id ? this.currentUser.id : null
+        userId: this.currentUser && this.currentUser.id ? this.currentUser.id : null
       }
       const response = await this.postsService.getPosts(filterData);
       if (response) {
@@ -77,11 +77,19 @@ export class HomePageComponent implements OnInit {
 
   async upvoteTrigger(postId: string) {
     try{
-      // const response = await this.postsService.triggerUpvote(postId);
-      // if (response) {
-      //   this.totalPosts = response.body.result.total
-      //   this.posts = response.body.result.posts;
-      // }
+      const response = await this.postsService.triggerUpvote(postId);
+      if (response && response.body.postupvoted) {
+        console.log(response.body.postupvoted)
+        if(response.body.postupvoted.user_id === this.currentUser.id) {
+          const post = this.posts.find(post => post.post_id === response.body.postupvoted.post_id);
+          if(post) {
+            post.user_has_voted = response.body.postupvoted.voted
+            post.upvote_count = response.body.postupvoted.voted ? (parseInt(post.upvote_count) + 1).toString() : (parseInt(post.upvote_count) - 1).toString()
+          }
+        }
+        // this.totalPosts = response.body.result.total
+        // this.posts = response.body.result.posts;
+      }
     }catch(error) {
       console.log(error)
     }

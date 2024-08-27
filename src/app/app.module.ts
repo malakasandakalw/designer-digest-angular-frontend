@@ -34,6 +34,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { SinglePostComponentPublic } from './single-post/single-post.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-spinner.component";
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
 registerLocaleData(en);
 
@@ -69,7 +70,8 @@ registerLocaleData(en);
     NzTagModule,
     NzToolTipModule,
     NzIconModule,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    NzAvatarModule
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

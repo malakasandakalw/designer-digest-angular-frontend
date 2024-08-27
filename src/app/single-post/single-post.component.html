@@ -1,1 +1,66 @@
-<p>single-post works!</p>
+<app-main-navbar></app-main-navbar>
+
+
+<div *ngIf="post" class="secured-page-x-padding-main">
+    <div class="container-margin-y">
+        <div class="">
+            <div class="d-flex align-items-center gap-2">
+                <div>
+                    <nz-avatar *ngIf="post.created_by" nzIcon="user"
+                        [nzSrc]="'http://127.0.0.1:3000'+post.created_by.profile_picture!" [nzSize]="42"></nz-avatar>
+                    <nz-avatar *ngIf="!post.created_by.profile_picture" nzIcon="user" style="background-color: black;"
+                        [nzSize]="42"></nz-avatar>
+                </div>
+                <div>
+                    <h5 class="user-card-head">{{post.created_by.first_name}} {{post.created_by.last_name}}</h5>
+                    <p class="user-card-des">{{post.created_by.email}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="single-post-title">
+            <div class="d-flex align-items-center">
+                <div>
+                    <h3>{{post.title}}</h3>
+                </div>
+                <div class="relative ms-auto">
+                    <div class="vote-btn cursor-pointer" [ngClass]="post.user_has_voted ? 'highlight' : ''" (click)="upvoteTrigger(post.post_id)">
+                        <span nz-icon>
+                            <svg>
+                                <path
+                                    d="M923 283.6c-13.4-31.1-32.6-58.9-56.9-82.8-24.3-23.8-52.5-42.4-84-55.5-32.5-13.5-66.9-20.3-102.4-20.3-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5-24.4 23.9-43.5 51.7-56.9 82.8-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3 0.1-35.3-7-69.6-20.9-101.9z" />
+                            </svg>
+                        </span>
+                    </div>
+                    <small class="vote-count">{{post.upvote_count}}</small>
+                </div>
+            </div>
+        </div>
+        <div class="single-post-categories">
+            <div class="d-flex gap-1 align-items-center flex-wrap">
+                <div *ngFor="let cat of post.categories" class="">
+                    <nz-tag [nzColor]="'#999999'" class="me-0">{{cat.name}}</nz-tag>
+                </div>
+            </div>
+        </div>
+        <div class="single-post-thumbnail">
+            <ng-container *ngIf="post.thumbnail.type === 'image'">
+                <div class="single-post-thumbnail">
+                    <div class="post-thumbnail-image relative">
+                        <img [src]="'http://127.0.0.1:3000'+post.thumbnail.media_url" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="post.thumbnail.type === 'video'">
+                <div class="single-post-thumbnail">
+                    <div class="post-thumbnail-image relative">
+                        <video [src]="'http://127.0.0.1:3000'+post.thumbnail.media_url" [autoplay]="true"
+                            style="height: auto; width: 100%;"></video>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="single-post-description">
+            <p>{{post.description}}</p>
+        </div>
+    </div>
+</div>

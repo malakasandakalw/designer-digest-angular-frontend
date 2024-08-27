@@ -34,4 +34,14 @@ export class PostsService extends BaseService  {
     return this._get(this.http, `${this.API_BASE_URL}/posts/get-by-id${params}`)
   }
 
+  public getFullPostById(post_id: string, user_id: string | null): Promise<IServerResponse<any>> {
+    const params = toQueryString({post_id, user_id: user_id ? user_id : null})
+    return this._get(this.http, `${this.API_BASE_URL}/posts/get-full-by-id${params}`)
+  }
+
+
+  public triggerUpvote(post_id: string): Promise<IServerResponse<any>> {
+    return this._post(this.http, `${this.API_BASE_URL}/posts/upvote`, {post_id})
+  }
+
 }

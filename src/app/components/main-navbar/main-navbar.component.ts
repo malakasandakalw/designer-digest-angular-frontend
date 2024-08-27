@@ -93,6 +93,7 @@ export class MainNavbarComponent implements OnInit{
   }
 
   async getUnreadMessagesCount() {
+    if(!this.currentUser) return
     try {
       const response = await this.chatService.getUnreadMessagesCount()
       if (response) {

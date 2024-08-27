@@ -39,12 +39,19 @@
                         <ng-container *ngIf="item.thumbnail.type === 'video'">
                             <video [src]="'http://127.0.0.1:3000'+item.thumbnail.media_url" autoplay muted loop class="post-card-vid"></video>
                         </ng-container>
-                        <nz-tag nzColor="success" class="upvote-count-tag" (click)="$event.preventDefault(); $event.stopPropagation(); upvoteTrigger(item.post_id)">
-                            <span nz-icon nzType="caret-up" nzTheme="outline"></span>
-                            <span>{{item.upvote_count}}</span>
-                            <span>{{item.user_has_voted}}</span>
-                        </nz-tag>
+                        <div class="d-flex">
+                            <div>
+                                <nz-tag nzColor="success" class="upvote-count-tag">
+                                    <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+                                    <span>{{item.upvote_count}}</span>
+                                    <!-- <span>{{item.user_has_voted}}</span> -->
+                                </nz-tag>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <button *ngIf="currentUser && currentUser.id" class="" (click)="$event.preventDefault(); $event.stopPropagation(); upvoteTrigger(item.post_id)" [ngClass]="item.user_has_voted ? 'highlight':''">Vote</button>
+                    
                     <div class="card-details">
                         <div class="title-des-holder">
                             <h5 class="post-card-head">{{item.title}}</h5>
