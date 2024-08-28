@@ -45,25 +45,6 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-
-            <div>
-                <nz-form-item>
-                    <nz-form-control>
-                        <nz-form-label>Locations</nz-form-label>
-                        <nz-input-group [nzSize]="'large'">
-                            <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
-                                nzPlaceHolder="Please select" [(ngModel)]="selectedLocations"
-                                (ngModelChange)="onFilterLocationChange()" [ngModelOptions]="{standalone: true}"
-                                [nzLoading]="loadingLocations">
-                                <nz-option *ngFor="let item of locations" [nzLabel]="item.name"
-                                    [nzValue]="item.id"></nz-option>
-                            </nz-select>
-                            <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
-                                selected</ng-template>
-                        </nz-input-group>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
             <div>
                 <nz-form-item>
                     <nz-form-control>
@@ -79,12 +60,12 @@
 
         <div class="designers-container d-flex flex-wrap">
             <ng-container *ngFor="let item of designers">
-                <div class="width-card">
+                <div *ngIf="item.email !== currentUser.email" class="width-card">
                     <app-single-designer-card [designer]="item"></app-single-designer-card>
                 </div>
             </ng-container>
         </div>
-
+        
         <div *ngIf="!designers.length" class="no-posts-found text-center my-4 py-4">
             <h5 class="text-muted">No Designers Found</h5>
             <span nz-icon nzType="meh" nzTheme="outline"></span>

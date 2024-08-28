@@ -22,13 +22,21 @@ export interface post {
   post_id: string,
   title: string,
   description?: string,
-  created_at: string,
-  created_by?: string,
+  created_by?: {
+    id: string,
+    first_name: string,
+    last_name: string,
+    profile_picture: string,
+    email: string
+  },
   media: postMedia[],
   thumbnail: postThumbnail,
   categories: postCategory[],
   upvote_count: string,
   user_has_voted?: boolean
+  created_at: string,
+
+
 }
 @Component({
   selector: 'app-my-store',
@@ -42,7 +50,7 @@ export class MyStoreComponent implements OnInit{
 
   totalPosts = 0;
   pageIndex = 1;
-  pageSize = 20;
+  pageSize = 15;
 
   selectedCategories: string[] = []
   orderBy: string = 'recent'

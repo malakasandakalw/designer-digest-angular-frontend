@@ -30,6 +30,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { SingleChatComponent } from './single-chat/single-chat.component';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { SinglePostCardComponent } from "../../components/single-post-card/single-post-card.component";
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     NzListModule,
     NzAvatarModule,
     SingleChatComponent,
-    NzBadgeModule
+    NzBadgeModule,
+    SinglePostCardComponent
 ]
 })
 export class DesignerModule { }

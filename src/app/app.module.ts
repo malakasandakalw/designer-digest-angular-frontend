@@ -19,7 +19,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { PostsCardsHorizontalComponent } from "./components/posts-cards-horizontal/posts-cards-horizontal.component";
 import { SinglePostCardComponent } from './components/single-post-card/single-post-card.component';
 import { ResponseInterceptorService } from 'src/services/common/response-interceptor.service';
 import { FileUploadComponent } from "./components/file-upload/file-upload.component";
@@ -35,6 +34,13 @@ import { SinglePostComponentPublic } from './single-post/single-post.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-spinner.component";
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { SingleDesignerComponent } from './single-designer/single-designer.component';
+import { SingleCategoryComponent } from './single-category/single-category.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { SingleDesignerCardComponent } from "./components/single-designer-card/single-designer-card.component";
+import { SingleLocationDesignersComponent } from './single-location-designers/single-location-designers.component';
 
 registerLocaleData(en);
 
@@ -47,7 +53,10 @@ registerLocaleData(en);
     CategoriesComponent,
     DesignersComponent,
     AllPostsComponent,
-    SinglePostComponentPublic
+    SinglePostComponentPublic,
+    SingleDesignerComponent,
+    SingleCategoryComponent,
+    SingleLocationDesignersComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +71,6 @@ registerLocaleData(en);
     IconModule,
     NzLayoutModule,
     NzCardModule,
-    PostsCardsHorizontalComponent,
     SinglePostCardComponent,
     FileUploadComponent,
     MainNavbarComponent,
@@ -71,7 +79,11 @@ registerLocaleData(en);
     NzToolTipModule,
     NzIconModule,
     LoadingSpinnerComponent,
-    NzAvatarModule
+    NzAvatarModule,
+    NzPaginationModule,
+    NzSelectModule,
+    NzCheckboxModule,
+    SingleDesignerCardComponent
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

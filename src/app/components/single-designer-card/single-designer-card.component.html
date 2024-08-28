@@ -1,0 +1,38 @@
+<div *ngIf="designer" class="designer-card-main">
+    <div class="designer-card">
+        <div>
+            <nz-avatar *ngIf="designer.profile_picture" nzIcon="user"
+                [nzSrc]="'http://127.0.0.1:3000'+designer.profile_picture!" [nzSize]="100"></nz-avatar>
+            <nz-avatar *ngIf="!designer.profile_picture" nzIcon="user" style="background-color: black;"
+                [nzSize]="100"></nz-avatar>
+        </div>
+        <div class="w-100">
+            <div class="">
+                <div class="">
+                    <h5 class="single-designer-name mb-2 hover-text cursor-pointer" (click)="navgiateToSingleDesigner(designer.designer_id)">{{designer.first_name}} {{designer.last_name}}
+                    </h5>
+                    <p class="single-designer-small">{{designer.email}} <span
+                            *ngIf="designer.phone?.length">/ {{designer.phone}}</span></p>
+                </div>
+            </div>
+            <div class="stats-section">
+                <span nz-tooltip [nzTooltipTitle]="'Upvotes Count'">
+                    <span nz-icon nzType="heart" nzTheme="outline"></span>
+                    {{designer.upvotes_count}}
+                </span>
+                <span nz-tooltip [nzTooltipTitle]="'Followers Count'">
+                    <span nz-icon nzType="user" nzTheme="outline"></span>
+                    {{designer.follow_count}}
+                </span>
+                <span nz-tooltip [nzTooltipTitle]="'Posts Count'">
+                    <span nz-icon nzType="appstore" nzTheme="outline"></span>
+                    {{designer.posts_count}}
+                </span>
+            </div>
+            <div class="location-section cursor-pointer hover-text" (click)="navigateToLocationDesigners(designer.locations[0].id)">
+                <span nz-icon nzType="aim" nzTheme="outline"></span>
+                {{designer.locations[0].name}}
+            </div>
+        </div>
+    </div>
+</div>

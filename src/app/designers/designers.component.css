@@ -1,0 +1,31 @@
+.designer-card {
+    border-radius: 16px;
+    border: 1px solid rgb(218, 220, 224);
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: transparent;
+    padding: 24px 32px;
+}
+
+.width-card {
+    width: 25%;
+    padding-left: 8px;
+    padding-right: 8px;
+
+}
+
+
+.hover-text, .hover-tag {
+    transition: 0.25s all;
+}
+
+.hover-text:hover {
+    color: #1890ff;
+    text-decoration: underline;
+    transition: 0.25s all;
+}
+
+.hover-tag:hover {
+    background-color: #1890ff !important;
+}

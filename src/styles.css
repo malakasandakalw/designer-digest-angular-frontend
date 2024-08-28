@@ -121,7 +121,7 @@ h3 {
 }
 
 .card-details {
-    padding: 16px
+    padding: 4px 16px 16px 16px
 }
 
 .mt-def-sm {
@@ -261,19 +261,23 @@ p {
 }
 
 .post-card {
-    border-radius: 16px;
-    border: 1px solid rgb(218, 220, 224);
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
     background-color: transparent;
+    position: relative;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
 }
 
 .media-holder {
-    min-height: 250px;
+    /* min-height: 250px;
     max-height: 250px;
     overflow: hidden;
-    background-color: #00000005;
+    background-color: #00000005; */
 }
 
 .upvote-count-tag {
@@ -286,7 +290,7 @@ p {
 }
 .post-card-vid {
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     bottom: 0;
     height: 100%;
@@ -390,6 +394,29 @@ a.ant-btn.msg-download {
 
 .nav-spec a svg {
     margin-top: -4px;
+}
+
+.hover-text, .hover-tag {
+    transition: 0.25s all;
+}
+
+.hover-text:hover {
+    color: #1890ff;
+    text-decoration: underline;
+    transition: 0.25s all;
+}
+
+.hover-tag:hover {
+    background-color: #1890ff !important;
+}
+
+.gallery {
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.gallery .col {
+    max-width: calc((100% / 4) - 24px);
 }
 
 @media (min-width: 1200px) {

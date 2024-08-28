@@ -1,0 +1,25 @@
+<app-main-navbar></app-main-navbar>
+
+<div class="secured-page-x-padding-main">
+    <div class="container-margin-y">
+        <h3>{{category}}</h3>
+        <app-main-posts-filter [isCategoriesFilterShow]="false" (emitOrderBy)="onOrderByChange($event)" (emitOnSearch)="onSearchChange($event)">
+        </app-main-posts-filter>
+        
+        <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No Posts Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
+
+        <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+
+        <div nz-row class="">
+            <div *ngFor="let item of posts" nz-col nzSpan="6" class="px-1">
+                <app-single-post-card-common [post]="item"></app-single-post-card-common>
+            </div>
+        </div>
+        <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+    </div>
+</div>

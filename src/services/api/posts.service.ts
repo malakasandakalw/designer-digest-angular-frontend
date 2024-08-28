@@ -29,6 +29,11 @@ export class PostsService extends BaseService  {
     return this._get(this.http, `${this.API_BASE_URL}/posts/get-by-designer${params}`)
   }
 
+  public getPostsByDesignerId(filterData: any): Promise<IServerResponse<any>> {
+    const params = toQueryString(filterData)
+    return this._get(this.http, `${this.API_BASE_URL}/posts/get-by-designer-id${params}`)
+  }
+
   public getPostById(post_id: string): Promise<IServerResponse<any>> {
     const params = toQueryString({post_id})
     return this._get(this.http, `${this.API_BASE_URL}/posts/get-by-id${params}`)

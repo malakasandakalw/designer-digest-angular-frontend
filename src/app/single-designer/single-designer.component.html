@@ -1,0 +1,77 @@
+<app-main-navbar></app-main-navbar>
+
+
+<div class="secured-page-x-padding-main">
+    <div class="container-margin-y">
+
+        <div class="d-flex">
+            <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <div *ngIf="designer" class="side-details">
+                <div>
+                    <div>
+                        <nz-avatar *ngIf="designer.profile_picture" nzIcon="user"
+                            [nzSrc]="'http://127.0.0.1:3000'+designer.profile_picture!" [nzSize]="100"></nz-avatar>
+                        <nz-avatar *ngIf="!designer.profile_picture" nzIcon="user" style="background-color: black;"
+                            [nzSize]="100"></nz-avatar>
+                    </div>
+                    <div>
+                        <h5 class="user-card-head">{{designer.first_name}} {{designer.last_name}}</h5>
+                        <p class="user-card-des">{{designer.email}}</p>
+                    </div>
+                    <div>
+                        <span nz-tooltip [nzTooltipTitle]="'Upvotes Count'">
+                            <span nz-icon nzType="heart" nzTheme="outline"></span>
+                            {{designer.upvotes_count}}
+                        </span>
+                        <span nz-tooltip [nzTooltipTitle]="'Followers Count'">
+                            <span nz-icon nzType="user" nzTheme="outline"></span>
+                            {{designer.follow_count}}
+                        </span>
+                        <span nz-tooltip [nzTooltipTitle]="'Posts Count'">
+                            <span nz-icon nzType="appstore" nzTheme="outline"></span>
+                            {{designer.posts_count}}
+                        </span>
+                    </div>
+                    <div class="relative mt-3">
+                        <div class="follow-btn cursor-pointer" [ngClass]="designer.user_has_followed ? 'highlight' : ''" (click)="followTrigger()">
+                            <span *ngIf="!designer.user_has_followed" nz-icon nzType="user-add" nzTheme="outline"></span>
+                            <span *ngIf="designer.user_has_followed" nz-icon nzType="check" nzTheme="outline"></span>
+                        </div>
+                    </div>
+                    <div class="relative mt-2">
+                        <div class="chat-btn cursor-pointer"(click)="chatTrigger()">
+                            <span nz-icon nzType="comment" nzTheme="outline"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side-page-data">
+                <app-main-posts-filter [isCategoriesFilterShow]="true"
+                    (emitSelectedCategories)="onFilterCategoryChange($event)" (emitOrderBy)="onOrderByChange($event)"
+                    (emitOnSearch)="onSearchChange($event)">
+                </app-main-posts-filter>
+
+
+                <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
+                    <h5 class="text-muted">No Posts Found</h5>
+                    <span nz-icon nzType="meh" nzTheme="outline"></span>
+                </div>
+
+                <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+
+                <div nz-row class="">
+                    <div *ngFor="let item of posts" nz-col nzSpan="6" class="px-1">
+                        <app-single-post-card-common [post]="item" (triggerVote)="triggerVoteChange($event)"></app-single-post-card-common>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

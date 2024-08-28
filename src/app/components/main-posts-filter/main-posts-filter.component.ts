@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { postCategory } from 'src/app/secured/designer/my-store/my-store.component';
 import { CategoryService } from 'src/services/api/category.service';
@@ -18,6 +18,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 })
 export class MainPostsFilterComponent implements OnInit{
 
+  @Input({required: true}) isCategoriesFilterShow = true
   @Output() emitSelectedCategories = new EventEmitter<string[]>();
   @Output() emitOrderBy = new EventEmitter<string>();
   @Output() emitOnSearch = new EventEmitter<string>();

@@ -1,0 +1,64 @@
+.card-creator {
+    color: rgb(32, 33, 36);
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
+}
+
+.upvotes-holder {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.vote-btn,.chat-btn,.follow-btn {
+    border-radius: 100px;
+    border: 1px solid rgb(218, 220, 224);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white; 
+}
+
+.vote-btn.highlight {
+    background-color: #1890ff;
+}
+
+.vote-btn span {
+    font-size: 20px;
+}
+
+.vote-btn.highlight span {
+    color: white;
+}
+
+.vote-count {
+    position: absolute;
+    top: 85%;
+    right: 60%;
+    background: #d9e2e9;
+    border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.hover-text, .hover-tag {
+    transition: 0.25s all;
+}
+
+.hover-text:hover {
+    color: #1890ff;
+    text-decoration: underline;
+    transition: 0.25s all;
+}
+
+.hover-tag:hover {
+    background-color: #1890ff !important;
+}

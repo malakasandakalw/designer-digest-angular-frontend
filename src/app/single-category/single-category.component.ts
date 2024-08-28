@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { post } from '../secured/designer/my-store/my-store.component';
-import { PostsService } from 'src/services/api/posts.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
+import { PostsService } from 'src/services/api/posts.service';
+import { post } from '../secured/designer/my-store/my-store.component';
+import { CategoryService } from 'src/services/api/category.service';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: 'app-single-category',
+  templateUrl: './single-category.component.html',
+  styleUrls: ['./single-category.component.css']
 })
-export class HomePageComponent implements OnInit {
-  
-  posts: post[] = []
+export class SingleCategoryComponent {
   loading = false
+  id: string | null = null
 
   totalPosts = 0;
   pageIndex = 1;
@@ -22,27 +22,53 @@ export class HomePageComponent implements OnInit {
   orderBy: string = 'recent'
   searchText: string = ''
 
+  posts: post[] = []
+
+  category: string = ''
+
   get currentUser() {
     return this.apiAuthService.getCurrentUser().user
   }
 
+
   constructor(
+    private route: ActivatedRoute,
     private postsService: PostsService,
     private router: Router,
-    private apiAuthService: ApiAuthService
-  ) {
-
+    private apiAuthService: ApiAuthService,
+    private categoryService: CategoryService
+  ){
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+    });
   }
-
+  
   async ngOnInit(): Promise<void> {
+    await this.getCategory();
     await this.getPosts()
   }
 
+  async getCategory() {
+    if(!this.id) return
+    try {
+      this.loading = true
+      const response = await this.categoryService.getCategory(this.id);
+      if (response) {
+        console.log(response)
+        this.category = response.body.name
+      }
+      this.loading = false
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async getPosts() {
+    if(!this.id) return
     try {
       this.loading = true
       const filterData = {
-        categories: this.selectedCategories,
+        categories: [this.id],
         order_by: this.orderBy,
         search: this.searchText,
         page_index: this.pageIndex,
@@ -75,6 +101,10 @@ export class HomePageComponent implements OnInit {
     await this.getPosts()
   }
 
+  navigateToPost(postId: string) {
+    this.router.navigate([`/all-posts/${postId}`])
+  }
+
   async upvoteTrigger(postId: string) {
     try{
       const response = await this.postsService.triggerUpvote(postId);
@@ -95,8 +125,9 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  navigateToPost(postId: string) {
-    this.router.navigate([`/all-posts/${postId}`])
+  async onPageChange(pageIndex: number) {
+    this.pageIndex = pageIndex
+    await this.getPosts();
   }
 
 }

@@ -3,6 +3,7 @@ import { postMedia, postThumbnail, postCategory } from '../secured/designer/my-s
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostsService } from 'src/services/api/posts.service';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
+import { DesignerService } from 'src/services/api/designer.service';
 
 export interface SinglePost {
   post_id: string,
@@ -21,6 +22,7 @@ export interface SinglePost {
   upvote_count: string,
   user_has_voted?: boolean
   created_at: string,
+  user_has_followed?: boolean
 }
 
 @Component({
@@ -41,6 +43,7 @@ export class SinglePostComponentPublic implements OnInit{
     private route: ActivatedRoute,
     private postsService: PostsService,
     private apiAuthService: ApiAuthService,
+    private designerService: DesignerService,
     private router: Router
   ){
     this.route.paramMap.subscribe(params => {
@@ -69,7 +72,6 @@ export class SinglePostComponentPublic implements OnInit{
   }
 
   async upvoteTrigger(postId: string) {
-
     if(!this.currentUser) {
       this.router.navigate(['/auth/login']);
     } else {
@@ -85,6 +87,46 @@ export class SinglePostComponentPublic implements OnInit{
         console.log(error)
       }
     }
+  }
+
+  async followTrigger() {
+    if(!this.currentUser) {
+      this.router.navigate(['/auth/login']);
+    } else {
+      if(!this.post?.created_by.id) return
+      try{
+        const response = await this.designerService.follow(this.post.created_by.id);
+        if (response && response.body.followed && this.post) {
+          if(response.body.followed.user_id === this.currentUser.id) {
+            this.post.user_has_followed = response.body.followed.followed
+          }
+        }
+      }catch(error) {
+        console.log(error)
+      }
+    }
+  }
+
+  chatTrigger() {
+    if(!this.currentUser) {
+      this.router.navigate(['/auth/login']);
+    } else {
+      try{
+        
+      }catch(error) {
+        console.log(error)
+      }
+    }
+  }
+
+  navgiateToSingleDesigner() {
+    if(!this.post?.created_by.id) return
+    this.router.navigate([`/designers/${this.post.created_by.id}`])
+  }
+
+  navgiateToSingleCategory(id: string) {
+    if(!id) return
+    this.router.navigate([`/categories/${id}`])
   }
 
 }

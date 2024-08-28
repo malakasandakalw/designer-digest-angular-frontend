@@ -1,41 +1,17 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
 import { DesignerCategoryService } from 'src/services/api/designer-category.service';
 import { DesignerService } from 'src/services/api/designer.service';
 import { LocationsService } from 'src/services/api/locations.service';
-import { User } from '../common/interfaces/CommonInterface';
-import { Router } from '@angular/router';
+import { DesignerCategory, DesignerLocations, Designer } from '../designers/designers.component';
 
-export interface DesignerCategory {
-  id: string,
-  name: string
-}
-
-export interface DesignerLocations {
-  id: string,
-  name: string
-}
-
-export interface Designer {
-  designer_id: string,
-  first_name: string,
-  last_name: string,
-  email: string,
-  phone?: string,
-  profile_picture?: string | null,
-  locations: {id: string, name: string}[],
-  categories: {id: string, name: string}[],
-  posts_count: number,
-  follow_count: number,
-  upvotes_count: number,
-  user_has_followed?: boolean
-}
 @Component({
-  selector: 'app-designers',
-  templateUrl: './designers.component.html',
-  styleUrls: ['./designers.component.css']
+  selector: 'app-single-location-designers',
+  templateUrl: './single-location-designers.component.html',
+  styleUrls: ['./single-location-designers.component.css']
 })
-export class DesignersComponent {
+export class SingleLocationDesignersComponent  {
 
   loading = false
   followedOnly = false
@@ -48,9 +24,7 @@ export class DesignersComponent {
   loadingCategories: boolean = false
   selectedCategories: string[] = []
 
-  locations: DesignerLocations[] = []
-  loadingLocations: boolean = false
-  selectedLocations: string[] = []
+  selectedLocation:string | null = null
 
   orderByList = [
     {
@@ -77,16 +51,18 @@ export class DesignersComponent {
   }
 
   constructor(
-    private locationService: LocationsService,
     private designerCategoryService: DesignerCategoryService,
     private apiAuthService: ApiAuthService,
     private designerService: DesignerService,
-    private router: Router
-  ){}
+    private route: ActivatedRoute
+  ){
+    this.route.paramMap.subscribe(params => {
+      this.selectedLocation = params.get('id');
+    });
+  }
 
   async ngOnInit(): Promise<void> {
     await this.getCategories()
-    await this.getLocations()
     await this.getDesigners()
   }
 
@@ -104,20 +80,6 @@ export class DesignersComponent {
     }
   }
 
-  async getLocations() {
-    try {
-      this.loadingLocations = true
-      const response = await this.locationService.getAllLocations();
-      if (response) {
-        this.locations = response.body;
-      }
-      this.loadingLocations = false
-    } catch (e) {
-      console.log('Get categories error', e);
-      this.loadingLocations = false
-    }
-  }
-
   async getDesigners() {
     try {
       this.loading = true
@@ -125,7 +87,7 @@ export class DesignersComponent {
         followed_only: this.followedOnly,
         categories: this.selectedCategories,
         order_by: this.orderBy,
-        locations: this.selectedLocations,
+        locations: [this.selectedLocation],
         search: this.searchText,
         page_index: this.pageIndex,
         page_size: this.pageSize,
