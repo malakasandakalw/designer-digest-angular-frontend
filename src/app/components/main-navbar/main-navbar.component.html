@@ -62,6 +62,31 @@
                         </ul>
                     </div>
 
+                    <div *ngIf="isEmployer" class="d-flex align-items-center gap-3 nav-spec">
+                        <ul nz-menu nzMode="horizontal" class="header-menu">
+                            <li nz-menu-item>
+                                <a href="/designer-digest/employer/application" class="p-0">
+                                    <span nz-icon nzType="appstore" nzTheme="outline"></span>
+                                    Applications
+                                </a>
+                            </li>
+                            <li nz-menu-item>
+                                <a href="/designer-digest/employer/vacancies" class="p-0">
+                                    <span nz-icon nzType="diff" nzTheme="outline"></span>
+                                    Job Vacancies
+                                </a>
+                            </li>
+                            <li nz-menu-item>
+                                <a href="/designer-digest/employer/chats" nz-button class="p-0">
+                                    <span nz-icon nzType="comment" nzTheme="outline"></span>
+                                </a>
+                                <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'">
+                                    {{unreadMessageCount}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div *ngIf="isPersonal" class="d-flex align-items-center-gap-3  nav-spec">
                         <div class="chat-nav">
                             <a href="/designer-digest/personal/chats" nz-button class="p-0">

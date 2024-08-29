@@ -1,0 +1,35 @@
+<div class="secured-page-x-padding-main">
+    <div class="d-flex align-items-center container-margin-y">
+        <h3 >Your vacancies</h3>
+        <a href="/designer-digest/employer/create-vacancy" class="ms-auto" nz-button>New Vacancy</a>
+    </div>
+    <div class="filter-section">
+        <app-vacancy-filter 
+            (emitActive)="onActiveChange($event)" 
+            (emitOnSearch)="onSearchChange($event)" 
+            (emitSelectedCategories)="onFilterCategoryChange($event)" 
+            (emitSelectedLocations)="onFilterLocationChange($event)"
+        ></app-vacancy-filter>
+    </div>
+    <div class="vacancies-section">
+        <div nz-row class="gap-3">
+            <div *ngFor="let item of vacancies" nz-col>
+                <app-single-vacancy-card [vacancy]="item" [isEmployer]="true"></app-single-vacancy-card>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!vacancies.length" class="no-posts-found text-center my-4 py-4">
+        <h5 class="text-muted">No vacancies Found</h5>
+        <span nz-icon nzType="meh" nzTheme="outline"></span>
+    </div>
+
+    <ng-container *ngIf="loading">
+        <app-loading-spinner></app-loading-spinner>
+    </ng-container>
+
+    <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+</div>
+
+
+

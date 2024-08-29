@@ -62,6 +62,14 @@ export class LoginComponent implements OnInit{
       }
     }
 
+    if(user.role === 'Employer') {
+      if(!user.is_verified) {
+        this.router.navigate(['/designer-digest/employer/profile'])
+      } else {
+        this.router.navigate(['/designer-digest/employer/profile'])
+      }
+    }
+
   }
 
   async submitForm(): Promise<void> {

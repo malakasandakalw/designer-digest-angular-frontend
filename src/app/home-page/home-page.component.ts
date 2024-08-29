@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
 
   totalPosts = 0;
   pageIndex = 1;
-  pageSize = 15;
+  pageSize = 2;
 
   selectedCategories: string[] = []
   orderBy: string = 'recent'
@@ -75,28 +75,12 @@ export class HomePageComponent implements OnInit {
     await this.getPosts()
   }
 
-  async upvoteTrigger(postId: string) {
-    try{
-      const response = await this.postsService.triggerUpvote(postId);
-      if (response && response.body.postupvoted) {
-        console.log(response.body.postupvoted)
-        if(response.body.postupvoted.user_id === this.currentUser.id) {
-          const post = this.posts.find(post => post.post_id === response.body.postupvoted.post_id);
-          if(post) {
-            post.user_has_voted = response.body.postupvoted.voted
-            post.upvote_count = response.body.postupvoted.voted ? (parseInt(post.upvote_count) + 1).toString() : (parseInt(post.upvote_count) - 1).toString()
-          }
-        }
-        // this.totalPosts = response.body.result.total
-        // this.posts = response.body.result.posts;
-      }
-    }catch(error) {
-      console.log(error)
-    }
-  }
-
   navigateToPost(postId: string) {
     this.router.navigate([`/all-posts/${postId}`])
+  }
+
+  navigateToAllPosts() {
+    this.router.navigate([`/all-posts`])
   }
 
 }

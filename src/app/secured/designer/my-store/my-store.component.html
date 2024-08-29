@@ -11,18 +11,19 @@
                 <app-single-post-card-common [post]="item"></app-single-post-card-common>
             </div>
         </div>
+    </div>    
+    
+    <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+    
+    <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
+        <h5 class="text-muted">No posts Found</h5>
+        <span nz-icon nzType="meh" nzTheme="outline"></span>
     </div>
+
+    <ng-container *ngIf="loading">
+        <app-loading-spinner></app-loading-spinner>
+    </ng-container>
+
 </div>
 
 
-
-<ng-container *ngIf="loading">
-    <app-loading-spinner></app-loading-spinner>
-</ng-container>
-
-
-
-<nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
-
-
-<h2 *ngIf="!posts.length">No posts found</h2>

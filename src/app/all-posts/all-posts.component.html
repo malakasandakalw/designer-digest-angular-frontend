@@ -1,1 +1,51 @@
-<p>all-posts works!</p>
+<app-main-navbar></app-main-navbar>
+
+<div class=" secured-page-x-padding-main">
+    <app-main-posts-filter [isCategoriesFilterShow]="true" (emitSelectedCategories)="onFilterCategoryChange($event)"
+        (emitOrderBy)="onOrderByChange($event)" (emitOnSearch)="onSearchChange($event)">
+    </app-main-posts-filter>
+    <div class="posts-section">
+
+        <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No Posts Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
+
+        <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+
+        <div class="large-screen">
+            <div class="d-flex gallery">
+                <div class="col">
+                    <div *ngFor="let item of posts; let i = index">
+                        <app-single-post-card-common *ngIf="(i % 4) === 0" [post]="item"></app-single-post-card-common>
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngFor="let item of posts; let i = index">
+                        <app-single-post-card-common *ngIf="(i % 4) === 1" [post]="item"></app-single-post-card-common>
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngFor="let item of posts; let i = index">
+                        <app-single-post-card-common *ngIf="(i % 4) === 2" [post]="item"></app-single-post-card-common>
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngFor="let item of posts; let i = index">
+                        <app-single-post-card-common *ngIf="(i % 4) === 3" [post]="item"></app-single-post-card-common>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="medium-screen">
+            
+        </div>
+        <div class="small-screen">
+            
+        </div>
+
+    </div>
+    <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+</div>

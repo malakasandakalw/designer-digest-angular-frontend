@@ -54,13 +54,14 @@ export class SingleDesignerComponent implements OnInit {
     if(!this.id) return
     try {
       this.loading = true
-      const response = await this.designerService.getDesignerDataById(this.id, this.currentUser.id ? this.currentUser.id : null);
+      const response = await this.designerService.getDesignerDataById(this.id, this.currentUser?.id ? this.currentUser.id : null);
       if (response) {
         this.designer = response.body.result
       }
       this.loading = false
     } catch (error) {
       console.log(error)
+      this.loading = false
     }
   }
 
@@ -74,7 +75,7 @@ export class SingleDesignerComponent implements OnInit {
         search: this.searchText,
         page_index: this.pageIndex,
         page_size: this.pageSize,
-        user_id: this.currentUser.id ? this.currentUser.id : null
+        user_id: this.currentUser?.id ? this.currentUser.id : null
       }
       const response = await this.postsService.getPostsByDesignerId(filterData);
       if (response) {
@@ -84,6 +85,7 @@ export class SingleDesignerComponent implements OnInit {
       this.loading = false
     } catch (error) {
       console.log(error)
+      this.loading = false
     }
   }
 
@@ -135,6 +137,11 @@ export class SingleDesignerComponent implements OnInit {
     } else {
       this.designer.upvotes_count = this.designer.upvotes_count - 1
     }
+  }
+
+  navgiateToSingleDesignerCategory(categoryId: string) {
+    if(!categoryId) return
+    this.router.navigate([`/designers/category/${categoryId}`]);
   }
 
 }

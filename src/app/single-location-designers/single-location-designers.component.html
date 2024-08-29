@@ -60,7 +60,7 @@
 
         <div class="designers-container d-flex flex-wrap">
             <ng-container *ngFor="let item of designers">
-                <div *ngIf="item.email !== currentUser.email" class="width-card">
+                <div class="width-card">
                     <app-single-designer-card [designer]="item"></app-single-designer-card>
                 </div>
             </ng-container>

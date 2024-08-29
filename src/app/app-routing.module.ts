@@ -10,6 +10,7 @@ import { SinglePostComponentPublic } from './single-post/single-post.component';
 import { SingleDesignerComponent } from './single-designer/single-designer.component';
 import { SingleCategoryComponent } from './single-category/single-category.component';
 import { SingleLocationDesignersComponent } from './single-location-designers/single-location-designers.component';
+import { SingleDesignerCategoryComponent } from './single-designer-category/single-designer-category.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
       {
         path: 'designers/location/:id',
         component: SingleLocationDesignersComponent
+      },
+      {
+        path: 'designers/category/:id',
+        component: SingleDesignerCategoryComponent
       },
       {
         path: 'designers/:id',

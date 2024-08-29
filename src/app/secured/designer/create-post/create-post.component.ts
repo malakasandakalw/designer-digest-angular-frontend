@@ -133,7 +133,6 @@ export class CreatePostComponent implements OnInit {
 
     if(this.validate()) {
       try {
-
         const formData = {
           title: this.title,
           description: this.description,

@@ -408,6 +408,7 @@ a.ant-btn.msg-download {
 
 .hover-tag:hover {
     background-color: #1890ff !important;
+    color: white;
 }
 
 .gallery {

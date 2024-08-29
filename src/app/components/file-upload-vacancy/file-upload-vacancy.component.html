@@ -1,0 +1,18 @@
+<div class="dropzone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)"
+    [class.active]="isActive">
+    <input type="file" name="files" class="" (change)="onSelecttoUpload($event)" hidden #fileInput>
+    <div class="d-block">
+        <div class="mb-1 text-center">
+            <small class="">Drag file here</small>
+            <br>
+            <small>or</small>
+        </div>
+        <div>
+            <button nz-button nzType="default" type="button" (click)="fileInput.click()">Select Files</button>
+        </div>
+    </div>
+</div>
+<small *ngIf="uploading">
+    Uploading
+    <span nz-icon [nzType]="'loading'" class="ms-1"></span>
+</small>

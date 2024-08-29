@@ -61,5 +61,11 @@
             
         </div>
 
+        <div *ngIf="totalPosts > pageSize" class="see-all">
+            <button nz-button [nzType]="'default'" (click)="navigateToAllPosts()">
+                See All Posts..
+            </button>
+        </div>
+
     </div>
 </div>

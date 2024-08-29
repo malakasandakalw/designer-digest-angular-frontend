@@ -41,6 +41,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { SingleDesignerCardComponent } from "./components/single-designer-card/single-designer-card.component";
 import { SingleLocationDesignersComponent } from './single-location-designers/single-location-designers.component';
+import { SingleDesignerCategoryComponent } from './single-designer-category/single-designer-category.component';
 
 registerLocaleData(en);
 
@@ -56,7 +57,8 @@ registerLocaleData(en);
     SinglePostComponentPublic,
     SingleDesignerComponent,
     SingleCategoryComponent,
-    SingleLocationDesignersComponent
+    SingleLocationDesignersComponent,
+    SingleDesignerCategoryComponent
   ],
   imports: [
     BrowserModule,
