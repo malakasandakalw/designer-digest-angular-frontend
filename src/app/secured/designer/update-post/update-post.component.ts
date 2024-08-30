@@ -1,22 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Editor, Toolbar } from 'ngx-editor';
+import { createMessage } from 'src/app/common/utils/messages';
 import { CategoryService } from 'src/services/api/category.service';
 import { PostsService } from 'src/services/api/posts.service';
-import { RemovePrefixPipe } from 'src/app/remove-prefix.pipe';
-import { createMessage } from 'src/app/common/utils/messages';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { Router } from '@angular/router';
 import { postCategory } from '../my-store/my-store.component';
-import { Editor, Toolbar } from 'ngx-editor';
+import { PostCategory } from 'src/app/common/interfaces/CommonInterface';
 
 @Component({
-  selector: 'app-create-post',
-  templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.css']
+  selector: 'app-update-post',
+  templateUrl: './update-post.component.html',
+  styleUrls: ['./update-post.component.css']
 })
+export class UpdatePostComponent implements OnInit, OnDestroy {
 
-export class CreatePostComponent implements OnInit, OnDestroy {
+  id: string | null = null
 
   errorObject = {
     title: {
@@ -49,16 +49,20 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   ];
   description: string = ''
   categories: postCategory[] = [];
-  selectedCatgeories = [];
+  selectedCatgeories: string[] = [];
   selectedThumbnail: string = ''
   uploadProgress = false;
   uploadedFiles: any[] = [];
 
   loading = false;
+  loadingCategories = false
 
   async ngOnInit() {
     this.editor = new Editor();
-    await this.getCategories();
+    this.getCategories().then(() => this.getPostById())
+      .catch(error => {
+        console.error('Error occurred:', error);
+      });
   }
 
   ngOnDestroy(): void {
@@ -70,8 +74,13 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     private readonly categoriesApi: CategoryService,
     private postsService: PostsService,
     private message: NzMessageService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+    });
+  }
 
   onTitleChange(e: any) {
     if (this.title.length) {
@@ -99,13 +108,69 @@ export class CreatePostComponent implements OnInit, OnDestroy {
 
   async getCategories() {
     try {
-      this.loading = true
+      this.loadingCategories = true
       const response = await this.categoriesApi.getAllCategories();
       if (response) {
         this.categories = response.body;
       }
     } catch (e) {
       console.log('Get categories error', e);
+    } finally {
+      this.loadingCategories = false
+    }
+  }
+
+  async getPostById() {
+    if (!this.id) return
+    try {
+      this.loading = true
+      const response = await this.postsService.getPostById(this.id)
+      if (response && response.body.result) {
+        this.title = response.body.result.title
+        this.description = response.body.result.description
+
+        this.selectedCatgeories = this.categories.filter(category =>
+          response.body.result.categories.some((c: PostCategory) => c.id === category.id)
+        ).map(category => category.id);
+
+        this.uploadedFiles = response.body.result.media.map((media: any) => ({
+          name: media.media_url.replace("/uploads/", ""),
+          url: media.media_url
+        }));
+
+        this.selectedThumbnail = response.body.result.thumbnail.media_url;
+
+      }
+    } catch (e) {
+      console.log(e)
+    } finally {
+      this.loading = false
+    }
+  }
+
+  async deletePost() {
+    if (!this.id) return
+    try {
+      this.loading = true
+      try {
+        const formData = {
+          id: this.id
+        }
+
+        const response = await this.postsService.deletePost(formData);
+        if (response) {
+          createMessage(this.message, response.status, response.message as string)
+          if (response.status === 'success') {
+            setTimeout(() => {
+              this.router.navigate(['/designer-digest/designer/my-store'])
+            }, 800)
+          }
+        }
+      } catch (e) {
+        console.log('Create post error', e);
+      }
+    } catch (e) {
+      console.log(e)
     } finally {
       this.loading = false
     }
@@ -143,13 +208,6 @@ export class CreatePostComponent implements OnInit, OnDestroy {
       this.errorObject.categorie.show = false
     }
 
-    if (!this.uploadedFiles || !this.uploadedFiles.length) {
-      this.errorObject.files.show = true
-      return false
-    } else {
-      this.errorObject.files.show = false;
-    }
-
     if (!this.selectedThumbnail || this.selectedThumbnail.trim() === '') {
       this.errorObject.thumbnail.show = true
       return false
@@ -162,19 +220,17 @@ export class CreatePostComponent implements OnInit, OnDestroy {
 
   async submitForm(): Promise<void> {
 
-
-
     if (this.validate()) {
       try {
         const formData = {
+          id: this.id,
           title: this.title,
           description: this.description,
           categories: this.selectedCatgeories,
-          files: this.uploadedFiles,
           thumbnail: this.selectedThumbnail
         }
 
-        const response = await this.postsService.createPost(formData);
+        const response = await this.postsService.updatePost(formData);
         if (response) {
           createMessage(this.message, response.status, response.message as string)
           if (response.status === 'success') {

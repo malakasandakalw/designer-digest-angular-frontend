@@ -17,6 +17,15 @@ export class VacanciesService  extends BaseService  {
   public createVacancy(data: any): Promise<IServerResponse<any>> {
     return this._post(this.http, `${this.API_BASE_URL}/vacancy/create`, data)
   }
+  
+  public updateVacancy(data: any): Promise<IServerResponse<any>> {
+    return this._post(this.http, `${this.API_BASE_URL}/vacancy/update`, data)
+  }
+
+  public getFilteredVacancies(filterData: any): Promise<IServerResponse<any>> {
+    const params = toQueryString(filterData)
+    return this._get(this.http, `${this.API_BASE_URL}/vacancy/get-filtered-vacancies${params}`)
+  }
 
   public getVacancies(filterData: any): Promise<IServerResponse<any>> {
     const params = toQueryString(filterData)
@@ -28,8 +37,8 @@ export class VacanciesService  extends BaseService  {
     return this._get(this.http, `${this.API_BASE_URL}/vacancy/get-vacancies-by-employer${params}`)
   }
 
-  public getById(id: string): Promise<IServerResponse<any>> {
-    const params = toQueryString({id})
+  public getById(id: string, userId: string | null): Promise<IServerResponse<any>> {
+    const params = toQueryString({id,userId})
     return this._get(this.http, `${this.API_BASE_URL}/vacancy/get-by-id${params}`)
   }
 

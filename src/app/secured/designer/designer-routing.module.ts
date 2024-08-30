@@ -9,6 +9,8 @@ import { VacanciesComponent } from "./vacancies/vacancies.component";
 import { SinglePostComponent } from "./single-post/single-post.component";
 import { ChatsComponent } from "./chats/chats.component";
 import { SingleChatComponent } from "./single-chat/single-chat.component";
+import { UpdatePostComponent } from "./update-post/update-post.component";
+import { SingleVacancyComponent } from "./single-vacancy/single-vacancy.component";
 
 const routes: Routes = [
     {
@@ -21,7 +23,9 @@ const routes: Routes = [
             { path: "dashboard", component: DashboardComponent },
             { path: "my-store", component: MyStoreComponent },
             { path: "my-store/:id", component: SinglePostComponent },
-            { path: "vacancies", component: VacanciesComponent },
+            { path: "applications", component: VacanciesComponent },
+            { path: "applications/:id", component: SingleVacancyComponent },
+            { path: "update-post/:id", component: UpdatePostComponent },
             { path: "chats", component: ChatsComponent },
             { path: "chats/:id", component: SingleChatComponent },
         ]

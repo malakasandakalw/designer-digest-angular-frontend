@@ -22,4 +22,8 @@ export class FileManagerService  extends BaseService  {
     return this._post(this.http, `${this.API_BASE_URL}/file-manager/upload-vacancy-file`, {file: file})
   }
 
+  public uploadApplication(file: { name: string, data: string }): Promise<IServerResponse<any>> {
+    return this._post(this.http, `${this.API_BASE_URL}/file-manager/upload-application-file`, {file: file})
+  }
+
 }

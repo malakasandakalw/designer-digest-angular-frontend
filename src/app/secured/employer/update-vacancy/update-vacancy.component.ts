@@ -14,7 +14,7 @@ import { ILocation, UploadedVacancyFile } from '../create-vacancy/create-vacancy
   templateUrl: './update-vacancy.component.html',
   styleUrls: ['./update-vacancy.component.css']
 })
-export class UpdateVacancyComponent  implements OnInit, OnDestroy {
+export class UpdateVacancyComponent implements OnInit, OnDestroy {
   errorObject = {
     title: {
       show: false
@@ -53,7 +53,7 @@ export class UpdateVacancyComponent  implements OnInit, OnDestroy {
   loadingCategories = false
   loadingLocations = false
 
-  active = false
+  active: string = ''
 
   id: string | null = null
 
@@ -88,7 +88,7 @@ export class UpdateVacancyComponent  implements OnInit, OnDestroy {
     try {
       this.loadingCategories = true
       const response = await this.designerCategoriesService.getAllDesignerCategories()
-      if(response && response.body) {
+      if (response && response.body) {
         this.categories = response.body
       }
       this.loadingCategories = false
@@ -101,8 +101,8 @@ export class UpdateVacancyComponent  implements OnInit, OnDestroy {
   async getLocations() {
     try {
       this.loadingLocations = true
-      const response =  await this.locationsService.getAllLocations()
-      if(response && response.body) {
+      const response = await this.locationsService.getAllLocations()
+      if (response && response.body) {
         this.locations = response.body
       }
       this.loadingLocations = false
@@ -113,24 +113,27 @@ export class UpdateVacancyComponent  implements OnInit, OnDestroy {
   }
 
   async getVacancyById() {
-    if(!this.id) return
+    if (!this.id) return
     try {
       this.loading = true
       const response = await this.vacanciesService.getFullById(this.id)
-      if(response) {
+      if (response) {
         this.title = response.body.result.title
         this.description = response.body.result.description
-        this.active = response.body.result.title
-        response.body.result.categories.map((category: DesignerCategory) => {
-          this.selectedCatgeories.push(category.id);
-        })
-        response.body.result.locations.map((category: ILocation) => {
-          this.selectedLocations.push(category.id);
-        })
+
+        this.selectedCatgeories = this.categories.filter(category =>
+          response.body.result.categories.some((c: DesignerCategory) => c.id === category.id)
+        ).map(category => category.id);
+
+        this.selectedLocations = this.locations.filter(location =>
+          response.body.result.locations.some((l: ILocation) => l.id === location.id)
+        ).map(location => location.id);
+
         this.uploadedFiles = {
           name: response.body.result.application_url.replace("/uploads/vacancy/", ""),
           url: response.body.result.application_url
         }
+        this.active = response.body.result.is_active ? 'active' : 'inactive'
       }
       this.loading = false
     } catch (error) {
@@ -140,27 +143,31 @@ export class UpdateVacancyComponent  implements OnInit, OnDestroy {
   }
 
   onTitleChange(e: any) {
-    if(this.title.length) {
+    if (this.title.length) {
       this.errorObject.title.show = false
     }
   }
 
   onDescriptionChange(e: any) {
-    if(this.description && this.description.trim() !== '<p></p>') {
+    if (this.description && this.description.trim() !== '<p></p>') {
       this.errorObject.description.show = false
     }
   }
 
-  onCategory() {
-    if(this.selectedCatgeories.length) {
+  onCategory(event: any): void {
+    if (this.selectedCatgeories.length) {
       this.errorObject.categories.show = false
     }
   }
 
-  onLocation() {
-    if(this.selectedLocations.length) {
+  onLocation(event: any): void {
+    if (this.selectedLocations.length) {
       this.errorObject.locations.show = false
     }
+  }
+
+  onActiveChange(value: string): void {
+    console.log('Active status changed to:', value);
   }
 
   onProgressUpdate(progress: boolean) {
@@ -181,28 +188,28 @@ export class UpdateVacancyComponent  implements OnInit, OnDestroy {
 
   validate() {
 
-    if(!this.title || this.title.trim() === '') {
+    if (!this.title || this.title.trim() === '') {
       this.errorObject.title.show = true
       return false
     } else {
       this.errorObject.title.show = false
     }
 
-    if(!this.description || this.description.trim() === '<p></p>') {
+    if (!this.description || this.description.trim() === '<p></p>') {
       this.errorObject.description.show = true
       return false
     } else {
       this.errorObject.description.show = false
     }
 
-    if(!this.selectedCatgeories || !this.selectedCatgeories.length) {
+    if (!this.selectedCatgeories || !this.selectedCatgeories.length) {
       this.errorObject.categories.show = true
       return false
     } else {
       this.errorObject.categories.show = false
     }
 
-    if(!this.selectedLocations || !this.selectedLocations.length) {
+    if (!this.selectedLocations || !this.selectedLocations.length) {
       this.errorObject.locations.show = true
       return false
     } else {
@@ -214,7 +221,7 @@ export class UpdateVacancyComponent  implements OnInit, OnDestroy {
   }
 
   async submitForm() {
-    if(this.validate()) {
+    if (this.validate()) {
       try {
         const formData = {
           id: this.id,
@@ -223,21 +230,26 @@ export class UpdateVacancyComponent  implements OnInit, OnDestroy {
           categories: this.selectedCatgeories,
           locations: this.selectedLocations,
           files: this.uploadedFiles,
+          is_active: this.active === 'active' ? true : false
         }
 
-        // const response = await this.vacanciesService.updateVacancy(formData);
-        // if(response) {
-        //   createMessage(this.message, response.status, response.message as string)
-        //   if(response.status === 'success') {
-        //     setTimeout(() => {
-        //       this.router.navigate(['/designer-digest/employer/vacancies'])
-        //     }, 1500)
-        //   }
-        // }
+        const response = await this.vacanciesService.updateVacancy(formData);
+        if (response) {
+          createMessage(this.message, response.status, response.message as string)
+          if (response.status === 'success') {
+            setTimeout(() => {
+              this.router.navigate(['/designer-digest/employer/vacancies'])
+            }, 800)
+          }
+        }
       } catch (e) {
         console.log('Create post error', e);
       }
     }
+  }
+
+  trackByFn(index: number, item: any): string {
+    return item.id;
   }
 
 }

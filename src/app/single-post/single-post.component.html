@@ -12,7 +12,8 @@
                         [nzSize]="42"></nz-avatar>
                 </div>
                 <div>
-                    <h5 class="user-card-head cursor-pointer hover-text" (click)="navgiateToSingleDesigner()">{{post.created_by.first_name}} {{post.created_by.last_name}}</h5>
+                    <h5 class="user-card-head cursor-pointer hover-text" (click)="navgiateToSingleDesigner()">
+                        {{post.created_by.first_name}} {{post.created_by.last_name}}</h5>
                     <p class="user-card-des">{{post.created_by.email}}</p>
                 </div>
             </div>
@@ -30,7 +31,8 @@
         <div class="single-post-categories">
             <div class="d-flex gap-1 align-items-center flex-wrap">
                 <div *ngFor="let cat of post.categories" class="">
-                    <nz-tag [nzColor]="'#999999'" class="me-0 cursor-pointer hover-tag" (click)="navgiateToSingleCategory(cat.id)">{{cat.name}}</nz-tag>
+                    <nz-tag [nzColor]="'#999999'" class="me-0 cursor-pointer hover-tag"
+                        (click)="navgiateToSingleCategory(cat.id)">{{cat.name}}</nz-tag>
                 </div>
             </div>
         </div>
@@ -38,21 +40,23 @@
             <ng-container *ngIf="post.thumbnail.type === 'image'">
                 <div class="single-post-thumbnail">
                     <div class="post-thumbnail-image relative">
-                        <img [src]="'http://127.0.0.1:3000'+post.thumbnail.media_url" alt="" class="img-fluid">
+                        <img nz-image [nzSrc]="'http://127.0.0.1:3000'+post.thumbnail.media_url" alt=""
+                            class="img-fluid">
                     </div>
                 </div>
             </ng-container>
             <ng-container *ngIf="post.thumbnail.type === 'video'">
                 <div class="single-post-thumbnail">
                     <div class="post-thumbnail-image relative">
-                        <video [src]="'http://127.0.0.1:3000'+post.thumbnail.media_url" [autoplay]="true"
-                            style="height: auto; width: 100%;"></video>
+                        <video [autoplay]="true" style="height: auto; width: 100%;">
+                            <source [src]="'http://127.0.0.1:3000'+post.thumbnail.media_url" type="video/mp4">
+                        </video>
                     </div>
                 </div>
             </ng-container>
         </div>
         <div class="single-post-description">
-            <p>{{post.description}}</p>
+            <div [innerHTML]="post.description"></div>
         </div>
         <div class="single-post-media">
             <div class="d-flex media-files-holder">
@@ -60,15 +64,16 @@
                     <ng-container *ngIf="item.type === 'image'">
                         <div class="single-post-media-file">
                             <div class="post-media-image relative">
-                                <img [src]="'http://127.0.0.1:3000'+item.media_url" alt="" class="img-fluid">
+                                <img nz-image [nzSrc]="'http://127.0.0.1:3000'+item.media_url" alt="" class="img-fluid">
                             </div>
                         </div>
                     </ng-container>
                     <ng-container *ngIf="item.type === 'video'">
                         <div class="single-post-media-file">
                             <div class="post-media-image relative">
-                                <video [src]="'http://127.0.0.1:3000'+item.media_url" [autoplay]="true"
-                                    style="height: auto; width: 100%;"></video>
+                                <video [autoplay]="true" style="height: auto; width: 100%;">
+                                    <source [src]="'http://127.0.0.1:3000'+item.media_url" type="video/mp4">
+                                </video>
                             </div>
                         </div>
                     </ng-container>
@@ -79,7 +84,8 @@
 
     <div class="sider">
         <div class="relative">
-            <div class="vote-btn cursor-pointer" [ngClass]="post.user_has_voted ? 'highlight' : ''" (click)="upvoteTrigger(post.post_id)">
+            <div class="vote-btn cursor-pointer" [ngClass]="post.user_has_voted ? 'highlight' : ''"
+                (click)="upvoteTrigger(post.post_id)">
                 <span nz-icon>
                     <svg>
                         <path
@@ -90,13 +96,14 @@
             <small class="vote-count">{{post.upvote_count}}</small>
         </div>
         <div class="relative mt-3">
-            <div class="follow-btn cursor-pointer" [ngClass]="post.user_has_followed ? 'highlight' : ''" (click)="followTrigger()">
+            <div class="follow-btn cursor-pointer" [ngClass]="post.user_has_followed ? 'highlight' : ''"
+                (click)="followTrigger()">
                 <span *ngIf="!post.user_has_followed" nz-icon nzType="user-add" nzTheme="outline"></span>
                 <span *ngIf="post.user_has_followed" nz-icon nzType="check" nzTheme="outline"></span>
             </div>
         </div>
         <div class="relative mt-2">
-            <div class="chat-btn cursor-pointer"(click)="chatTrigger()">
+            <div class="chat-btn cursor-pointer" (click)="chatTrigger()">
                 <span nz-icon nzType="comment" nzTheme="outline"></span>
             </div>
         </div>

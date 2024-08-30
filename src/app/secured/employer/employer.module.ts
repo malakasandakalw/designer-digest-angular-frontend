@@ -29,6 +29,8 @@ import { SingleVacancyComponent } from './single-vacancy/single-vacancy.componen
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { FileUploadComponent } from "../../components/file-upload/file-upload.component";
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 
 
@@ -66,7 +68,9 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     SingleVacancyCardComponent,
     NzTagModule,
     NzListModule,
-    NzAvatarModule
+    NzAvatarModule,
+    FileUploadComponent,
+    NzImageModule
 ]
 })
 export class EmployerModule { }

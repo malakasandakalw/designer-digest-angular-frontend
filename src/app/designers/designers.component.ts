@@ -158,5 +158,9 @@ export class DesignersComponent {
     await this.getDesigners()
   }
 
+  async onPageChange(pageIndex: number) {
+    this.pageIndex = pageIndex
+    await this.getDesigners()
+  }
 
 }

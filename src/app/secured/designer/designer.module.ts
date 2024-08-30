@@ -31,6 +31,12 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { SingleChatComponent } from './single-chat/single-chat.component';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { SinglePostCardComponent } from "../../components/single-post-card/single-post-card.component";
+import { NgxEditorModule } from 'ngx-editor';
+import { UpdatePostComponent } from './update-post/update-post.component';
+import { SingleVacancyCardComponent } from "../../components/single-vacancy-card/single-vacancy-card.component";
+import { SingleVacancyComponent } from './single-vacancy/single-vacancy.component';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { FileUploadApplicationComponent } from "../../components/file-upload-application/file-upload-application.component";
 
 @NgModule({
   declarations: [
@@ -41,7 +47,9 @@ import { SinglePostCardComponent } from "../../components/single-post-card/singl
     MyStoreComponent,
     VacanciesComponent,
     SinglePostComponent,
-    ChatsComponent
+    ChatsComponent,
+    UpdatePostComponent,
+    SingleVacancyComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +76,11 @@ import { SinglePostCardComponent } from "../../components/single-post-card/singl
     NzAvatarModule,
     SingleChatComponent,
     NzBadgeModule,
-    SinglePostCardComponent
+    SinglePostCardComponent,
+    NgxEditorModule,
+    SingleVacancyCardComponent,
+    NzSkeletonModule,
+    FileUploadApplicationComponent
 ]
 })
 export class DesignerModule { }

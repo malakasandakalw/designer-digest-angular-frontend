@@ -17,7 +17,7 @@
 
         <div nz-row class="">
             <div *ngFor="let item of posts" nz-col nzSpan="6" class="px-1">
-                <app-single-post-card-common [post]="item"></app-single-post-card-common>
+                <app-single-post-card-common [post]="item" [isDesigner]="false"></app-single-post-card-common>
             </div>
         </div>
         <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>

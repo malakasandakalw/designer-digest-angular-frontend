@@ -19,22 +19,22 @@
             <div class="d-flex gallery">
                 <div class="col">
                     <div *ngFor="let item of posts; let i = index">
-                        <app-single-post-card-common *ngIf="(i % 4) === 0" [post]="item"></app-single-post-card-common>
+                        <app-single-post-card-common *ngIf="(i % 4) === 0" [post]="item" [isDesigner]="false"></app-single-post-card-common>
                     </div>
                 </div>
                 <div class="col">
                     <div *ngFor="let item of posts; let i = index">
-                        <app-single-post-card-common *ngIf="(i % 4) === 1" [post]="item"></app-single-post-card-common>
+                        <app-single-post-card-common *ngIf="(i % 4) === 1" [post]="item" [isDesigner]="false"></app-single-post-card-common>
                     </div>
                 </div>
                 <div class="col">
                     <div *ngFor="let item of posts; let i = index">
-                        <app-single-post-card-common *ngIf="(i % 4) === 2" [post]="item"></app-single-post-card-common>
+                        <app-single-post-card-common *ngIf="(i % 4) === 2" [post]="item" [isDesigner]="false"></app-single-post-card-common>
                     </div>
                 </div>
                 <div class="col">
                     <div *ngFor="let item of posts; let i = index">
-                        <app-single-post-card-common *ngIf="(i % 4) === 3" [post]="item"></app-single-post-card-common>
+                        <app-single-post-card-common *ngIf="(i % 4) === 3" [post]="item" [isDesigner]="false"></app-single-post-card-common>
                     </div>
                 </div>
             </div>

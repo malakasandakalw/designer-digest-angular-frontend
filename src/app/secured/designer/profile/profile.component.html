@@ -1,3 +1,121 @@
-<p>profile works!</p>
+<div *ngIf="designer">
 
+    <div class="d-flex aling-items-center container-margin-y gap-3">
+        <div class="">
+            <nz-avatar *ngIf="designer?.profile_picture" nzIcon="user" [nzSrc]="'http://127.0.0.1:3000'+currentUser.profile_picture!" [nzSize]="150"></nz-avatar>
+            <nz-avatar *ngIf="!designer?.profile_picture" nzIcon="user" style="background-color: black;" [nzSize]="150"></nz-avatar>
+        </div>
+        <div>
+            <h1 class="">Welcome, {{designer.first_name}}</h1>
+        </div>
+    </div>
 
+    <div class="divider"></div>
+
+    <div nz-col nzSpan="24" class="container-margin-y">
+        <h3>Update profile</h3>
+
+        <div class="container-margin-y">
+            <div class="form-container">
+                <div nz-col class="form-container-inner mx-auto container-margin-y">
+                    <form (submit)="submitForm()" class="signup-form" nz-form>
+
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-form-label nzRequired>First name</nz-form-label>
+                                <nz-input-group [nzPrefixIcon]="'user'" [nzSize]="'large'">
+                                    <input nz-input placeholder="First name" type="text" [(ngModel)]="firstName" (ngModelChange)="onFirstnameChange($event)" [ngModelOptions]="{standalone: true}"/>
+                                    <span *ngIf="errorObject.firstName.show" nz-typography nzType="danger">You must enter first name</span>
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-form-label nzRequired>Last name</nz-form-label>
+                                <nz-input-group [nzPrefixIcon]="'user'" [nzSize]="'large'">
+                                    <input nz-input placeholder="Last name" type="text" [(ngModel)]="lastName" (ngModelChange)="onLastnameChange($event)" [ngModelOptions]="{standalone: true}"/>
+                                    <span *ngIf="errorObject.lastName.show" nz-typography nzType="danger">You must enter last name</span>
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-form-label>Phone</nz-form-label>
+                                <nz-input-group [nzPrefixIcon]="'phone'" [nzSize]="'large'">
+                                    <input nz-input placeholder="Phone" type="text" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-form-label nzRequired>Categories</nz-form-label>
+                                <nz-input-group [nzSize]="'large'">
+                                    <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                                        nzPlaceHolder="Please select" [(ngModel)]="selectedCategories"
+                                        (ngModelChange)="onSelectCategory()"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [nzLoading]="loadingCategories">
+                                        <nz-option *ngFor="let item of categories" [nzLabel]="item.name"
+                                            [nzValue]="item.id"></nz-option>
+                                    </nz-select>
+            
+                                    <span *ngIf="errorObject.categories.show" nz-typography nzType="danger">You must select
+                                        category/categories</span>
+            
+                                    <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
+                                        selected</ng-template>
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-form-label nzRequired>Location</nz-form-label>
+                                <nz-input-group [nzSize]="'large'">
+                                    <nz-select [(ngModel)]="selectedLocation" (ngModelChange)="onSelectLocation()" [ngModelOptions]="{standalone: true}">
+                                        <nz-option *ngFor="let item of locations" [nzValue]="item.id"
+                                            [nzLabel]="item.name"></nz-option>
+                                    </nz-select>
+                                    <span *ngIf="errorObject.locations.show" nz-typography nzType="danger">You must select a location</span>
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-form-label>Profile Picture</nz-form-label>
+
+                                <app-file-upload [acceptBoth]="false" [multiple]="false"
+                                    (progressUpdate)="onProgressUpdate($event)"
+                                    (uploadComplete)="onUploadComplete($event);onProgressUpdate(false)"
+                                    (uploadError)="onUploadError($event);onProgressUpdate(false)"></app-file-upload>
+
+                                <div *ngFor="let item of uploadedFiles">
+                                    <div nz-row [nzGutter]="16">
+                                        <div nz-col class="gutter-row" [nzSpan]="6">
+                                            <div class="inner-box">
+                                                <img nz-image [nzSrc]="'http://127.0.0.1:3000'+item.url" alt="" class="img-fluid" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-control>
+                                <button [nzLoading]="loading" [nzType]="'primary'" class="mt-1 font-x-lg" nz-button
+                                    nzBlock [nzSize]="'large'" type="submit" [disabled]="uploadProgress">Update
+                                    Profile</button>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

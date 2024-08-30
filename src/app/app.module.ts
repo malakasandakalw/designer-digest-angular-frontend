@@ -42,6 +42,12 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { SingleDesignerCardComponent } from "./components/single-designer-card/single-designer-card.component";
 import { SingleLocationDesignersComponent } from './single-location-designers/single-location-designers.component';
 import { SingleDesignerCategoryComponent } from './single-designer-category/single-designer-category.component';
+import { VacanciesComponent } from './vacancies/vacancies.component';
+import { SingleVacancyCardComponent } from "./components/single-vacancy-card/single-vacancy-card.component";
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse'
+import { FileUploadApplicationComponent } from "./components/file-upload-application/file-upload-application.component";
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 registerLocaleData(en);
 
@@ -58,7 +64,8 @@ registerLocaleData(en);
     SingleDesignerComponent,
     SingleCategoryComponent,
     SingleLocationDesignersComponent,
-    SingleDesignerCategoryComponent
+    SingleDesignerCategoryComponent,
+    VacanciesComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +92,12 @@ registerLocaleData(en);
     NzPaginationModule,
     NzSelectModule,
     NzCheckboxModule,
-    SingleDesignerCardComponent
+    SingleDesignerCardComponent,
+    SingleVacancyCardComponent,
+    NzModalModule,
+    NzCollapseModule,
+    FileUploadApplicationComponent,
+    NzImageModule
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

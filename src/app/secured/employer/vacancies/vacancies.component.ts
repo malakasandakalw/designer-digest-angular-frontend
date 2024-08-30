@@ -14,6 +14,7 @@ export interface Vacancy {
   categories: DesignerCategory[]
   locations: ILocation[]
   applications?: any[]
+  applied: boolean
 }
 
 @Component({

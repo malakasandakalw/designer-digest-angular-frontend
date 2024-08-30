@@ -1,1 +1,62 @@
-<p>vacancies works!</p>
+<div class="secured-page-x-padding-main">
+    <div class="container-margin-y">
+
+        <div class="d-flex align-items-center gap-3">
+            <div>
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label>Categories</nz-form-label>
+                        <nz-input-group [nzSize]="'large'">
+                            <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                                nzPlaceHolder="Please select" [(ngModel)]="selectedCategories"
+                                (ngModelChange)="onFilterCategoryChange()" [ngModelOptions]="{standalone: true}"
+                                [nzLoading]="loadingCategories">
+                                <nz-option *ngFor="let item of categories" [nzLabel]="item.name"
+                                    [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                            <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
+                                selected</ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div>
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label>Locations</nz-form-label>
+                        <nz-input-group [nzSize]="'large'">
+                            <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                                nzPlaceHolder="Please select" [(ngModel)]="selectedLocations"
+                                (ngModelChange)="onFilterLocationChange()" [ngModelOptions]="{standalone: true}"
+                                [nzLoading]="loadingLocations">
+                                <nz-option *ngFor="let item of locations" [nzLabel]="item.name"
+                                    [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                            <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
+                                selected</ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+        </div>
+
+        <div class="vacancies-container d-flex flex-wrap">
+            <ng-container *ngFor="let item of vacancies">
+                <app-single-vacancy-card [vacancy]="item" [isEmployer]="false" [isDesignerEdit]="true"></app-single-vacancy-card>
+            </ng-container>
+        </div>
+
+        <div *ngIf="!vacancies.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No vacancies Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
+
+        <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize"
+            (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+    </div>
+</div>

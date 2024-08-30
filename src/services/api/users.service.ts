@@ -23,4 +23,8 @@ export class UsersService extends BaseService  {
     return this._get(this.http, `${this.API_BASE_URL}/users/get-by-id${q}`)
   }
 
+  public updateUser(data: any): Promise<IServerResponse<any>> {
+    return this._post(this.http, `${this.API_BASE_URL}/users/update`, data)
+  }
+
 }

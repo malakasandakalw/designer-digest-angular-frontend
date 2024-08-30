@@ -18,16 +18,18 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 @Component({
   selector: 'app-single-post-card-common',
   templateUrl: './single-post-card.component.html',
   styleUrls: ['./single-post-card.component.css'],
   standalone: true,
-  imports: [NzCardModule, NzGridModule, CommonModule, NzIconModule, NzButtonModule, NzTagModule, NzToolTipModule, NzAvatarModule]
+  imports: [NzCardModule, NzGridModule, CommonModule, NzIconModule, NzButtonModule, NzTagModule, NzToolTipModule, NzAvatarModule, NzImageModule]
 })
 export class SinglePostCardComponent {
   @Input({required: true}) post: post | null = null
+  @Input({required: true}) isDesigner: boolean = false
   @Output() triggerVote = new EventEmitter<boolean>();
   
   get currentUser() {
@@ -76,4 +78,10 @@ export class SinglePostCardComponent {
     if(!id) return
     this.router.navigate([`/categories/${id}`])
   }
+  
+  navigateToEdit() {
+    if(!this.isDesigner || !this.post?.post_id) return
+    this.router.navigate([`/designer-digest/designer/update-post/${this.post.post_id}`])
+  }
+
 }

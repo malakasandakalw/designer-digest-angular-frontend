@@ -203,12 +203,15 @@ p {
 
 .inner-box {
     max-height: 110px;
+    max-width: 110px;
     overflow: hidden;
     position: relative;
+    margin-top: 12px;
 }
 
 .inner-box video {
     width: 100%;
+    margin-top: 12px;
 }
 
 .file-remove-btn {

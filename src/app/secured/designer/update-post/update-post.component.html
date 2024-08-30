@@ -1,14 +1,17 @@
 <div class="container-margin-y">
+
+    <div class="filter-section container-margin-y">
+        <h3 >Update post</h3>
+    </div>
+
     <div class="form-page-flex">
-        <div class="logo-container-form">
-            <div class="text-muted text-center">
-                <h1 class="container-margin-y">Create new post.</h1>
-            </div>
-            <div class="divider"></div>
-            <img src="assets/create-post.png" alt="" class="img-fluid">
-        </div>
-        <div class="form-container w-50">
+        <div class="form-container w-100">
             <div class="form-container-inner mx-auto container-margin-y">
+
+                <ng-container *ngIf="loading">
+                    <app-loading-spinner></app-loading-spinner>
+                </ng-container>
+
                 <form (submit)="submitForm()" class="create-post-form" nz-form>
                     <nz-form-item>
                         <nz-form-control>
@@ -45,7 +48,7 @@
                                     nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories"
                                     (ngModelChange)="onCategory()"
                                     [ngModelOptions]="{standalone: true}"
-                                    [nzLoading]="loading">
+                                    [nzLoading]="loadingCategories">
                                     <nz-option *ngFor="let item of categories" [nzLabel]="item.name"
                                         [nzValue]="item.id"></nz-option>
                                 </nz-select>
@@ -56,38 +59,6 @@
                                 <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
                                     selected</ng-template>
                             </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-        
-                    <nz-form-item>
-                        <nz-form-control>
-                            <nz-form-label nzRequired>Media Files</nz-form-label>
-                            <app-file-upload [acceptBoth]="true" [multiple]="true" (progressUpdate)="onProgressUpdate($event)"
-                                (uploadComplete)="onUploadComplete($event);onProgressUpdate(false)"
-                                (uploadError)="onUploadError($event);onProgressUpdate(false)"></app-file-upload>
-        
-                            <span *ngIf="errorObject.files.show" nz-typography nzType="danger">You must upload files</span>
-        
-                            <div nz-row [nzGutter]="16" class="mt-3">
-                                <div *ngFor="let item of uploadedFiles" nz-col class="gutter-row" [nzSpan]="6">
-                                    <div class="inner-box">
-                                        <button nz-button nzType="default" nzShape="circle" class="file-remove-btn" (click)="removeFile(item)">
-                                            <span nz-icon nzType="close-circle" nzTheme="outline"></span>
-                                        </button>
-                                        <img nz-image *ngIf="item.type === 'image'" nz-image [nzSrc]="'http://127.0.0.1:3000'+item.url"
-                                            alt="" class="img-fluid" />
-                                        <video *ngIf="item.type === 'video'"  autoplay
-                                            [controls]="false">
-                                            <source [src]="'http://127.0.0.1:3000'+item.url" type="video/mp4">
-                                        </video>
-                                    </div>
-                                    <div class="small mt-1">{{item.name}}</div>
-                                </div>
-                            </div>
-        
-                            <div *ngIf="uploadProgress">
-                                Uploading.....
-                            </div>
                         </nz-form-control>
                     </nz-form-item>
         
@@ -107,7 +78,10 @@
                     <nz-form-item>
                         <nz-form-control>
                             <button [nzLoading]="loading" [nzType]="'primary'" class="mt-1" nz-button nzBlock [nzSize]="'large'"
-                                type="submit">Create Post</button>
+                                type="submit">Update Post</button>
+                                
+                            <button [nzLoading]="loading" nzType="default" nzDanger class="mt-1" nz-button nzBlock [nzSize]="'large'"
+                            type="button" (click)="deletePost()">Delete Post</button>
                         </nz-form-control>
                     </nz-form-item>
                 </form>

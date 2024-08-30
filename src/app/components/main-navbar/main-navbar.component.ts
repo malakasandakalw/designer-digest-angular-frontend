@@ -104,6 +104,18 @@ export class MainNavbarComponent implements OnInit{
     }
   }
 
+  navigateProfile() {
+    if(this.isDesigner) {
+      this.router.navigate([`/designer-digest/designer/profile`])
+    }
+    if(this.isEmployer) {
+      this.router.navigate([`/designer-digest/employer/profile`])
+    }
+    if(this.isPersonal) {
+      this.router.navigate([`/designer-digest/personal/profile`])
+    }
+  }
+
   async logOut() {
     await this.apiAuthService.logout()
   }

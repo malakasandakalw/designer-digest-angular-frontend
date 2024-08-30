@@ -14,6 +14,11 @@ export class DesignerService extends BaseService  {
     super();
   }
 
+  public getDesignerByUserId(userId: string): Promise<IServerResponse<any>> {
+    const parms = toQueryString({userId})
+    return this._get(this.http, `${this.API_BASE_URL}/designers/get-designer-by-user-id${parms}`)
+  }
+
   public getAllDesigners(): Promise<IServerResponse<any>> {
     return this._get(this.http, `${this.API_BASE_URL}/designers/get-all-designers`)
   }
@@ -30,6 +35,10 @@ export class DesignerService extends BaseService  {
 
   public follow(designer_id: string): Promise<IServerResponse<any>> {
     return this._post(this.http, `${this.API_BASE_URL}/designers/follow`, {designer_id})
+  }
+
+  public updateDesigner(formData: any): Promise<IServerResponse<any>> {
+    return this._post(this.http, `${this.API_BASE_URL}/designers/update`, formData)
   }
 
 }

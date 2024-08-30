@@ -196,7 +196,7 @@ export class CreateVacancyComponent implements OnInit, OnDestroy {
           if(response.status === 'success') {
             setTimeout(() => {
               this.router.navigate(['/designer-digest/employer/vacancies'])
-            }, 1500)
+            }, 800)
           }
         }
       } catch (e) {

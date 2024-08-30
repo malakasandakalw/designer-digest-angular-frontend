@@ -19,6 +19,14 @@ export class PostsService extends BaseService  {
     return this._post(this.http, `${this.API_BASE_URL}/posts/create`, data)
   }
 
+  public updatePost(data: any): Promise<IServerResponse<any>> {
+    return this._post(this.http, `${this.API_BASE_URL}/posts/update`, data)
+  }
+
+  public deletePost(data: any): Promise<IServerResponse<any>> {
+    return this._post(this.http, `${this.API_BASE_URL}/posts/delete`, data)
+  }
+
   public getPosts(filterData: any): Promise<IServerResponse<any>> {
     const params = toQueryString(filterData)
     return this._get(this.http, `${this.API_BASE_URL}/posts/get-posts${params}`)

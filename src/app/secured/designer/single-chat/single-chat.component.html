@@ -50,7 +50,9 @@
                         <ng-container *ngIf="item.type === 'video'">
                             <div class="single-message">
                                 <div class="message-image relative" [ngClass]="item.from_user === currentUser.id ? 'my-msg': 'other-msg'">
-                                    <video [src]="'http://127.0.0.1:3000'+item.file_url" [autoplay]="true" style="height: auto; width: 100%;"></video>
+                                    <video  [autoplay]="true" style="height: auto; width: 100%;">
+                                        <source [src]="'http://127.0.0.1:3000'+item.file_url" type="video/mp4">
+                                    </video>
                                     <div class="d-flex align-items-center mt-1">
                                         <small class="date-very-small">{{item.created_at | date:'MMMM d, y' }}</small>
                                         <a *ngIf="item.from_user !== currentUser.id" nz-button nzType="default" [href]="'http://127.0.0.1:3000'+item.file_url" class="msg-download ms-auto" download>

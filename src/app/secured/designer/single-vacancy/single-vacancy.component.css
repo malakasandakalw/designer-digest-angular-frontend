@@ -1,0 +1,25 @@
+.vacancy-description-holder {
+    padding: 16px;
+    background-color: rgb(236 240 243 / 30%);
+    border-radius: 4px;
+}
+
+.vacancy-download-btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #1890ff;
+    color: white;
+    width: 28px;
+    height: 28px;
+    font-size: 20px;
+    padding-top: 4px;
+    border-radius: 8px;
+}
+
+.retrived-vacancy-card-des {
+    font-size: 12px;
+}

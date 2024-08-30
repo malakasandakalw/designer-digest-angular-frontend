@@ -8,7 +8,7 @@
     <div class="posts-section">
         <div nz-row class="gap-3">
             <div *ngFor="let item of posts" nz-col nzSpan="6" >
-                <app-single-post-card-common [post]="item"></app-single-post-card-common>
+                <app-single-post-card-common [post]="item" [isDesigner]="true"></app-single-post-card-common>
             </div>
         </div>
     </div>    

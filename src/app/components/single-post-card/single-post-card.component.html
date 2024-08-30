@@ -2,10 +2,12 @@
     <div class="post-card">
         <div class="media-holder relative cursor-pointer" (click)="navigateToPost(post.post_id)">
             <ng-container *ngIf="post.thumbnail.type === 'image'">
-                <img [src]="'http://127.0.0.1:3000'+post.thumbnail.media_url" alt="" class="img-fluid">
+                <img nz-image [nzSrc]="'http://127.0.0.1:3000'+post.thumbnail.media_url" alt="" class="img-fluid">
             </ng-container>
             <ng-container *ngIf="post.thumbnail.type === 'video'">
-                <video [src]="'http://127.0.0.1:3000'+post.thumbnail.media_url" autoplay muted loop class="post-card-vid"></video>
+                <video autoplay muted loop class="post-card-vid">
+                    <source [src]="'http://127.0.0.1:3000'+post.thumbnail.media_url" type="video/mp4">
+                </video>
             </ng-container>
             <div class="upvotes-holder">
                 <div class="vote-btn cursor-pointer" [ngClass]="post.user_has_voted ? 'highlight' : ''" (click)="$event.preventDefault(); $event.stopPropagation(); upvoteTrigger(post.post_id)">
@@ -18,6 +20,11 @@
                 </div>
                 <small class="vote-count">{{post.upvote_count}}</small>
             </div>
+            <ng-container *ngIf="isDesigner">
+                <button nz-button [nzType]="'default'" class="ms-1 edit-btn" (click)="navigateToEdit()">
+                    <span nz-icon nzType="edit" nzTheme="outline"></span>
+                </button>
+            </ng-container>
         </div>
         
         <div class="card-details">

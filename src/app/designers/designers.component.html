@@ -94,5 +94,6 @@
             <app-loading-spinner></app-loading-spinner>
         </div>
 
+        <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalDesigners" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
     </div>
 </div>
