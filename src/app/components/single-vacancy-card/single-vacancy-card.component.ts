@@ -5,11 +5,13 @@ import { Router } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'app-single-vacancy-card',
   standalone: true,
-  imports: [CommonModule, NzButtonModule, NzIconModule],
+  imports: [CommonModule, NzButtonModule, NzIconModule, NzAvatarModule, NzToolTipModule],
   templateUrl: './single-vacancy-card.component.html',
   styleUrls: ['./single-vacancy-card.component.css']
 })

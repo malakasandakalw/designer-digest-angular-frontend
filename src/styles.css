@@ -45,19 +45,25 @@ a {
     text-decoration: none !important;
 }
 
-input, textarea, .ant-input-affix-wrapper, nz-select {
-    border-radius: 8px;
-    border-color: rgb(218, 220, 224);
-    padding-left: 10px;
-    padding-right: 8px;
-    font-family: Inter, monospace;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px;
-    letter-spacing: 1px;
-    font-size: 13.5px !important;
-    padding-top: 8px;
-    padding-bottom: 8px;
+input, textarea, .ant-input-affix-wrapper, nz-select, nz-select-top-control,.ant-picker {
+    border-radius: 8px !important;
+    border-color: rgb(218, 220, 224) !important;
+    font-family: 'Inter', monospace !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    height: 32px;
+    align-items: center;
+}
+
+.ant-input {
+    max-height: 32px !important;
+    background-color: transparent;
+    background: transparent;
+}
+
+.ant-select-arrow, .ant-select-clear {
+    right: 18px !important;
 }
 
 textarea {
@@ -154,7 +160,7 @@ h3 {
 }
 
 .container-margin-y {
-    margin: 40px 0px
+    margin: 0px 0px 24px 0px
 }
 
 .form-container {
@@ -165,6 +171,8 @@ h3 {
 .form-container-inner {
     padding-right: 24px;
     padding-left: 24px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .form-page-flex {
@@ -180,6 +188,7 @@ h3 {
 }
 
 .secured-page-x-padding-main {
+    margin-top: 24px;
     padding-left: 96px;
     padding-right: 96px;
 }
@@ -320,12 +329,17 @@ p {
     max-width: 75%;
     margin-top: 8px;
     margin-bottom: 8px;
-    margin-left: 16px;
+    margin-left: 2px;
     margin-right: 16px;
 }
 
+.single-message * {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
 .my-msg {
-    background-color: aquamarine;
+    background-color: #2e2e2ee8;
     border-radius: 16px;
     text-align: end;
     max-width: max-content;
@@ -334,8 +348,12 @@ p {
     padding-bottom: 4px;
 }
 
+.my-msg * {
+    color: white;
+}
+
 .other-msg {
-    background-color: greenyellow;
+    background-color: #efefef;
     border-radius: 16px;
     text-align: left;
     max-width: max-content;
@@ -387,8 +405,18 @@ a.ant-btn.msg-download {
 .unread-messages {
     background-color: red;
     color: white;
-    font-size: 12px;
-    border-radius: 100%;
+    font-size: 11px;
+    width: 18px;
+    border-radius: 111px;
+    height: 18px;
+    line-height: normal;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .nav-spec a {
@@ -423,6 +451,10 @@ a.ant-btn.msg-download {
     max-width: calc((100% / 4) - 24px);
 }
 
+.justifty-content-between {
+    justify-content: space-between;
+}
+
 @media (min-width: 1200px) {
     .hero-section .h1 {
         font-size: 48px !important;
@@ -444,4 +476,65 @@ a.ant-btn.msg-download {
         -webkit-text-fill-color: transparent;
         font-weight: 800;
     }
+}
+
+
+.overflow-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+nz-pagination {
+    text-align: center;
+}
+
+
+.filter-selector {
+    max-width: 180px;
+    width: 180px;
+    min-width: 180px;
+}
+
+.filter-single-selector {
+    max-width: 125px;
+    width: 125px;
+    min-width: 125px;
+}
+
+.filter-search {
+    max-width: 175px;
+    width: 175px;
+    min-width: 175px;
+}
+
+.ant-select-multiple .ant-select-selection-item {
+    max-width: 120px;
+    font-size: 12px;
+}
+
+.ant-input-group .ant-input {
+    height: 32px;
+    max-height: 32px;
+    min-height: 32px;
+}
+
+.ant-btn-primary {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.main-chat-unread-count {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    border-radius: 100px;
+    background-color: #1890ff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    font-weight: 600;
 }

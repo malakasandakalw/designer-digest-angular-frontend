@@ -2,19 +2,9 @@
 
 <div class="secured-page-x-padding-main">
     <div class="container-margin-y">
-
+        <h3 >Designers</h3>  
         <div class="d-flex align-items-center gap-3">
-            <div *ngIf="currentUser">
-                <nz-form-item>
-                    <nz-form-control>
-                        <nz-input-group [nzSize]="'large'">
-                            <label nz-checkbox [(ngModel)]="followedOnly" (ngModelChange)="getDesigners()"
-                                class="mt-3">Followings only</label>
-                        </nz-input-group>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <div>
+            <div class="filter-single-selector">
                 <nz-form-item>
                     <nz-form-control>
                         <nz-form-label>Order By</nz-form-label>
@@ -27,25 +17,24 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <div>
+            <div class="filter-selector">
                 <nz-form-item>
                     <nz-form-control>
                         <nz-form-label>Categories</nz-form-label>
                         <nz-input-group [nzSize]="'large'">
-                            <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                            <nz-select [nzMaxTagCount]="1" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
                                 nzPlaceHolder="Please select" [(ngModel)]="selectedCategories"
                                 (ngModelChange)="onFilterCategoryChange()" [ngModelOptions]="{standalone: true}"
                                 [nzLoading]="loadingCategories">
                                 <nz-option *ngFor="let item of categories" [nzLabel]="item.name"
                                     [nzValue]="item.id"></nz-option>
                             </nz-select>
-                            <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
-                                selected</ng-template>
+                            <ng-template #tagPlaceHolder let-selectedList>{{ selectedList.length }}+</ng-template>
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <div>
+            <div class="filter-search">
                 <nz-form-item>
                     <nz-form-control>
                         <nz-form-label>Search by name</nz-form-label>
@@ -56,14 +45,22 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
+            <div *ngIf="currentUser">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-input-group [nzSize]="'large'">
+                            <label nz-checkbox [(ngModel)]="followedOnly" (ngModelChange)="getDesigners()"
+                                class="mt-3">Followings only</label>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
         </div>
 
-        <div class="designers-container d-flex flex-wrap">
-            <ng-container *ngFor="let item of designers">
-                <div class="width-card">
-                    <app-single-designer-card [designer]="item"></app-single-designer-card>
-                </div>
-            </ng-container>
+        <div class="designers-container d-flex gap-3 flex-wrap">
+            <div *ngFor="let item of designers" class="public-designer-card relative">
+                <app-single-designer-card [designer]="item"></app-single-designer-card>
+            </div>
         </div>
         
         <div *ngIf="!designers.length" class="no-posts-found text-center my-4 py-4">

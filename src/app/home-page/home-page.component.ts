@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
 
   totalPosts = 0;
   pageIndex = 1;
-  pageSize = 2;
+  pageSize = 20;
 
   selectedCategories: string[] = []
   orderBy: string = 'recent'

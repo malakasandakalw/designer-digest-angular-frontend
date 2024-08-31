@@ -3,6 +3,16 @@
 
 <div *ngIf="post" class="secured-page-x-padding-main">
     <div class="container-margin-y">
+        <div class="single-post-created-at">
+            <small>{{post.created_at | date : 'MMM dd, YYYY'}}</small>
+        </div>
+        <div class="single-post-title">
+            <div class="d-flex align-items-center">
+                <div>
+                    <h3>{{post.title}}</h3>
+                </div>
+            </div>
+        </div>
         <div class="">
             <div class="d-flex align-items-center gap-2">
                 <div class="cursor-pointer" (click)="navgiateToSingleDesigner()">
@@ -18,17 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="single-post-created-at">
-            <small>{{post.created_at | date : 'MMM dd, YYYY'}}</small>
-        </div>
-        <div class="single-post-title">
-            <div class="d-flex align-items-center">
-                <div>
-                    <h3>{{post.title}}</h3>
-                </div>
-            </div>
-        </div>
-        <div class="single-post-categories">
+        <div class="single-post-categories mt-3">
             <div class="d-flex gap-1 align-items-center flex-wrap">
                 <div *ngFor="let cat of post.categories" class="">
                     <nz-tag [nzColor]="'#999999'" class="me-0 cursor-pointer hover-tag"

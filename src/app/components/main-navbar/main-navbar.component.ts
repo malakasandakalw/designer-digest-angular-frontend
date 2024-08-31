@@ -81,7 +81,7 @@ export class MainNavbarComponent implements OnInit{
 
   createBasicNotification(userName: string): void {
     this.notification.blank(
-      `New meessage from "${userName}"`, '', { nzPlacement: 'topRight' }
+      ``, `New meessage from "${userName}"`, { nzPlacement: 'topRight' }
     );
   }
 
@@ -118,5 +118,6 @@ export class MainNavbarComponent implements OnInit{
 
   async logOut() {
     await this.apiAuthService.logout()
+    this.router.navigate([`/`])
   }
 }

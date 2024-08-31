@@ -53,22 +53,27 @@
         </div>
 
         <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
-            <ng-container *ngFor="let item of vacancy.applications">
+            <ng-container *ngFor="let application of vacancy.applications">
                 <nz-list-item class="cursor-pointer py-3">
                     <div class="d-flex align-items-center gap-2 w-100">
                         <div>
-                            <nz-avatar *ngIf="item.profile_picture" nzIcon="user"
-                                [nzSrc]="'http://127.0.0.1:3000'+item.profile_picture!" [nzSize]="50"></nz-avatar>
-                            <nz-avatar *ngIf="!item.profile_picture" nzIcon="user" style="background-color: black;"
+                            <nz-avatar *ngIf="application.profile_picture" nzIcon="user"
+                                [nzSrc]="'http://127.0.0.1:3000'+application.profile_picture!" [nzSize]="50"></nz-avatar>
+                            <nz-avatar *ngIf="!application.profile_picture" nzIcon="user" style="background-color: black;"
                                 [nzSize]="50"></nz-avatar>
                         </div>
                         <div class="w-100">
                             <div class="d-flex align-items-center">
                                 <div class="me-auto">
-                                    <h5 class="user-card-head mb-2">{{item.user_name}}</h5>
+                                    <h5 class="user-card-head">{{application.applicant_first_name}} {{application.applicant_last_name}}</h5>
+                                    <p class="applicant-small">{{application.applicant_email}}</p>
+                                    <p class="applicant-small">{{application.applied_at | date:'MMMM d, y' }}</p>
                                 </div>
                                 <div class="ms-auto">
-                                    <p class="user-card-des">{{item.created_at | date:'MMMM d, y' }}</p>
+                                    <a [href]="'http://127.0.0.1:3000'+application.resume_url" nz-button [nzType]="'primary'" download>
+                                        <span nz-icon nzType="download" nzTheme="outline" class="resume-download-btn"></span>
+                                        Download Resume
+                                    </a>
                                 </div>
                             </div>
                             

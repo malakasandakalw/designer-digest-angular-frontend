@@ -17,6 +17,7 @@ export interface DesignerLocations {
 }
 
 export interface Designer {
+  user_id: string,
   designer_id: string,
   first_name: string,
   last_name: string,
@@ -139,6 +140,7 @@ export class DesignersComponent {
       this.loading = false
     } catch (error) {
       console.log(error)
+      this.loading = false
     }
   }
 

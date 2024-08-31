@@ -97,7 +97,8 @@ registerLocaleData(en);
     NzModalModule,
     NzCollapseModule,
     FileUploadApplicationComponent,
-    NzImageModule
+    NzImageModule,
+    NzTagModule
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

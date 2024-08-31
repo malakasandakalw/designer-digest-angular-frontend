@@ -41,4 +41,11 @@ export class DesignerService extends BaseService  {
     return this._post(this.http, `${this.API_BASE_URL}/designers/update`, formData)
   }
 
+  public getDashboardData(startDate: Date, endDate:Date): Promise<IServerResponse<any>> {
+    const start_date = startDate.toISOString()
+    const end_date = endDate.toISOString()
+    const params = toQueryString({start_date, end_date})
+    return this._get(this.http, `${this.API_BASE_URL}/designers/get-dashboard-data${params}`)
+  }
+
 }

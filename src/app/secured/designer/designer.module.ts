@@ -37,6 +37,7 @@ import { SingleVacancyCardComponent } from "../../components/single-vacancy-card
 import { SingleVacancyComponent } from './single-vacancy/single-vacancy.component';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { FileUploadApplicationComponent } from "../../components/file-upload-application/file-upload-application.component";
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { FileUploadApplicationComponent } from "../../components/file-upload-app
     NgxEditorModule,
     SingleVacancyCardComponent,
     NzSkeletonModule,
-    FileUploadApplicationComponent
+    FileUploadApplicationComponent,
+    NzDatePickerModule
 ]
 })
 export class DesignerModule { }

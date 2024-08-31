@@ -5,11 +5,12 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { Designer } from 'src/app/designers/designers.component';
 import { Router } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
   selector: 'app-single-designer-card',
   standalone: true,
-  imports: [CommonModule, NzAvatarModule, NzToolTipModule,NzIconModule],
+  imports: [CommonModule, NzAvatarModule, NzToolTipModule,NzIconModule, NzTagModule],
   templateUrl: './single-designer-card.component.html',
   styleUrls: ['./single-designer-card.component.css']
 })

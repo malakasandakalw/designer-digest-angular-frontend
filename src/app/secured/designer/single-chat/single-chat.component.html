@@ -37,7 +37,7 @@
                         <ng-container *ngIf="item.type === 'image'">
                             <div class="single-message">
                                 <div class="message-image relative" [ngClass]="item.from_user === currentUser.id ? 'my-msg': 'other-msg'">
-                                    <img [src]="'http://127.0.0.1:3000'+item.file_url" alt="" class="img-fluid">
+                                    <img nz-image [nzSrc]="'http://127.0.0.1:3000'+item.file_url" alt="" class="img-fluid">
                                     <div class="d-flex align-items-center mt-1">
                                         <small class="date-very-small">{{item.created_at | date:'MMMM d, y' }}</small>
                                         <a *ngIf="item.from_user !== currentUser.id" nz-button nzType="default" [href]="'http://127.0.0.1:3000'+item.file_url" class="msg-download ms-auto" download>

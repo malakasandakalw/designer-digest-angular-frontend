@@ -12,8 +12,8 @@
         ></app-vacancy-filter>
     </div>
     <div class="vacancies-section">
-        <div nz-row class="gap-3">
-            <div *ngFor="let item of vacancies" nz-col>
+        <div class="d-flex flex-wrap gap-3">
+            <div *ngFor="let item of vacancies" class="public-vacancy-card relative">
                 <app-single-vacancy-card [vacancy]="item" [isEmployer]="true"></app-single-vacancy-card>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <app-loading-spinner></app-loading-spinner>
     </ng-container>
 
-    <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+    <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
 </div>
 
 

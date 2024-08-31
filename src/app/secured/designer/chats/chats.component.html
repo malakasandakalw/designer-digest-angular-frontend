@@ -4,9 +4,15 @@
         <button nz-button [nzType]="'default'" (click)="showModal()" class="ms-auto"><span>New Chat</span></button>
     </div>
     <div class="chats-section">
+
+        <div *ngIf="!chats.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No Chats Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
+
         <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
             <ng-container *ngFor="let item of chats">
-                <nz-list-item class="cursor-pointer py-3" (click)="goToSingleChat(item.user_id)">
+                <nz-list-item *ngIf="item.user_id !== currentUser.id" class="cursor-pointer py-3" (click)="goToSingleChat(item.user_id)">
                     <div class="d-flex align-items-center gap-2 w-100">
                         <div>
                             <nz-avatar *ngIf="item.profile_picture" nzIcon="user"
@@ -34,12 +40,6 @@
     </div>
 </div>
 
-<ng-container *ngIf="loading">
-    <app-loading-spinner></app-loading-spinner>
-</ng-container>
-
-<h2 *ngIf="!chats.length">No chats found</h2>
-
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Select user to chat" (nzOnCancel)="handleCancel()" >
     <ng-container *nzModalContent>
         <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
@@ -65,7 +65,10 @@
         <ng-container *ngIf="loadingUsers">
             <app-loading-spinner></app-loading-spinner>
         </ng-container>
-        <h2 *ngIf="!users.length">No chats found</h2>
+        <div *ngIf="!users.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No Chats Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
 
     </ng-container>
     <ng-container *nzModalFooter=""></ng-container>

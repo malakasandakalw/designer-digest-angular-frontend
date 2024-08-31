@@ -1,6 +1,10 @@
 <app-main-navbar></app-main-navbar>
 
 <div class=" secured-page-x-padding-main">
+
+    
+    <h3 >All Posts</h3>
+
     <app-main-posts-filter [isCategoriesFilterShow]="true" (emitSelectedCategories)="onFilterCategoryChange($event)"
         (emitOrderBy)="onOrderByChange($event)" (emitOnSearch)="onSearchChange($event)">
     </app-main-posts-filter>
@@ -47,5 +51,5 @@
         </div>
 
     </div>
-    <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+    <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
 </div>

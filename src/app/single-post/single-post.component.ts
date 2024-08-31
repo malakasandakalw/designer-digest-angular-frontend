@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostsService } from 'src/services/api/posts.service';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
 import { DesignerService } from 'src/services/api/designer.service';
+import { createMessage } from '../common/utils/messages';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 export interface SinglePost {
   post_id: string,
@@ -22,7 +24,8 @@ export interface SinglePost {
   upvote_count: string,
   user_has_voted?: boolean
   created_at: string,
-  user_has_followed?: boolean
+  user_has_followed?: boolean,
+  created_user_id: string
 }
 
 @Component({
@@ -39,12 +42,28 @@ export class SinglePostComponentPublic implements OnInit{
     return this.apiAuthService.getCurrentUser().user
   }
 
+  get isDesigner() {
+    if(this.currentUser) return this.apiAuthService.isDesigner()
+    return false
+  }
+
+  get isEmployer() {
+    if(this.currentUser) return this.apiAuthService.isEmployer()
+    return false
+  }
+
+  get isPersonal() {
+    if(this.currentUser) return this.apiAuthService.isPersonal()
+    return false
+  }
+
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
     private apiAuthService: ApiAuthService,
     private designerService: DesignerService,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService,
   ){
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
@@ -81,6 +100,7 @@ export class SinglePostComponentPublic implements OnInit{
           if(response.body.postupvoted.user_id === this.currentUser.id) {
             this.post.user_has_voted = response.body.postupvoted.voted
             this.post.upvote_count = response.body.postupvoted.voted ? (parseInt(this.post.upvote_count) + 1).toString() : (parseInt(this.post.upvote_count) - 1).toString()
+            createMessage(this.message, response.status, response.body.postupvoted.voted ? `You upvoted ${this.post.title}!` : `You have removed your vote from ${this.post.title}`)
           }
         }
       }catch(error) {
@@ -99,6 +119,7 @@ export class SinglePostComponentPublic implements OnInit{
         if (response && response.body.followed && this.post) {
           if(response.body.followed.user_id === this.currentUser.id) {
             this.post.user_has_followed = response.body.followed.followed
+            createMessage(this.message, response.status, response.body.followed.followed ? `Now you are following ${this.post.created_by.first_name}!` : `You have unfollowed ${this.post.created_by.first_name}`)
           }
         }
       }catch(error) {
@@ -108,11 +129,24 @@ export class SinglePostComponentPublic implements OnInit{
   }
 
   chatTrigger() {
+    if(this.currentUser.id === this.post?.created_user_id) return
     if(!this.currentUser) {
       this.router.navigate(['/auth/login']);
     } else {
+      if(!this.post) return
       try{
+        if(this.isDesigner) {
+          this.router.navigate(['/designer-digest/designer/chats/'+this.post.created_user_id]);
+        }
         
+        if(this.isEmployer) {
+          this.router.navigate(['/designer-digest/employer/chats/'+this.post.created_user_id]);
+        }
+
+        if(this.isPersonal) {
+          this.router.navigate(['/designer-digest/personal/chats/'+this.post.created_user_id]);
+        }
+
       }catch(error) {
         console.log(error)
       }

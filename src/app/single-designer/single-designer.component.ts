@@ -6,6 +6,8 @@ import { PostsService } from 'src/services/api/posts.service';
 import { post } from '../secured/designer/my-store/my-store.component';
 import { DesignerService } from 'src/services/api/designer.service';
 import { Designer } from '../designers/designers.component';
+import { createMessage } from '../common/utils/messages';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-single-designer',
@@ -31,13 +33,29 @@ export class SingleDesignerComponent implements OnInit {
     return this.apiAuthService.getCurrentUser().user
   }
 
+  get isDesigner() {
+    if(this.currentUser) return this.apiAuthService.isDesigner()
+    return false
+  }
+
+  get isEmployer() {
+    if(this.currentUser) return this.apiAuthService.isEmployer()
+    return false
+  }
+
+  get isPersonal() {
+    if(this.currentUser) return this.apiAuthService.isPersonal()
+    return false
+  }
+
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
     private router: Router,
     private apiAuthService: ApiAuthService,
     private categoryService: CategoryService,
-    private designerService: DesignerService
+    private designerService: DesignerService,
+    private message: NzMessageService,
   ) {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
@@ -110,7 +128,30 @@ export class SingleDesignerComponent implements OnInit {
   }
 
   chatTrigger() {
-    alert('chat trigger')
+
+    if(this.currentUser.id === this.designer?.user_id) return
+
+    if(!this.currentUser) {
+      this.router.navigate(['/auth/login']);
+    } else {
+      if(!this.designer) return
+      try{
+        if(this.isDesigner) {
+          this.router.navigate(['/designer-digest/designer/chats/'+this.designer.user_id]);
+        }
+        
+        if(this.isEmployer) {
+          this.router.navigate(['/designer-digest/employer/chats/'+this.designer.user_id]);
+        }
+
+        if(this.isPersonal) {
+          this.router.navigate(['/designer-digest/personal/chats/'+this.designer.user_id]);
+        }
+
+      }catch(error) {
+        console.log(error)
+      }
+    }
   }
 
   async followTrigger() {
@@ -123,6 +164,7 @@ export class SingleDesignerComponent implements OnInit {
         if (response && response.body.followed && this.designer) {
           this.designer.user_has_followed = response.body.followed.followed
           this.designer.follow_count = response.body.followed.followed ? this.designer.follow_count + 1 : this.designer.follow_count - 1
+          createMessage(this.message, response.status, response.body.followed.followed ? `Now you are following ${this.designer.first_name}!` : `You have unfollowed ${this.designer.first_name}`)
         }
       }catch(error) {
         console.log(error)

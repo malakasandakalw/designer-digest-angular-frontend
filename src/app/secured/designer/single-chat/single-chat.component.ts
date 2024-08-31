@@ -54,7 +54,8 @@ export interface MessageRead {
     NzInputModule,
     NzIconModule,
     NzImageModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    NzImageModule
   ]
 })
 export class SingleChatComponent implements OnInit, OnDestroy{

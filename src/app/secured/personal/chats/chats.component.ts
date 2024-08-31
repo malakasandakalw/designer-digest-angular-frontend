@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/interfaces/CommonInterface';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
+import { ChatsService } from 'src/services/api/chats.service';
 import { DesignerService } from 'src/services/api/designer.service';
 import { UsersService } from 'src/services/api/users.service';
 
@@ -24,7 +25,8 @@ export class ChatsComponent implements OnInit{
   constructor(
     private designersService: DesignerService,
     private router: Router,
-    private apiAuthService: ApiAuthService
+    private apiAuthService: ApiAuthService,
+    private chatService: ChatsService
   ){}
 
   async ngOnInit(): Promise<void> {
@@ -52,11 +54,10 @@ export class ChatsComponent implements OnInit{
   async getChatsByPersonal() {
     try {
       this.loading = true
-      // const response = await this.postsService.getPostsByDesigner();
-      // if (response) {
-      //   console.log(response)
-        // this.chats = response.body;
-      // }
+      const response = await this.chatService.getChatsByDesigner();
+      if (response) {
+        this.chats = response.body;
+      }
       this.loading = false
     } catch (error) {
       console.log(error)

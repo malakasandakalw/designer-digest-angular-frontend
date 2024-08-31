@@ -1,9 +1,30 @@
-
 <app-main-navbar></app-main-navbar>
 
-<div class="container">
-    <p>categories works!</p>
+<div class=" secured-page-x-padding-main">
+    <div class="filter-section d-flex align-items-center container-margin-y">
+        <h3 >Categories</h3>
+    </div>
+    <div class="categories-section">
+        <div class="d-flex gap-3 flex-wrap">
+            <div *ngIf="!categories.length" class="no-posts-found text-center my-4 py-4">
+                <h5 class="text-muted">No Categories Found</h5>
+                <span nz-icon nzType="meh" nzTheme="outline"></span>
+            </div>
+
+            <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+    
+            <div *ngFor="let item of categories" class="public-category-card">
+                <div class="icon">
+                    <img src="https://www.svgrepo.com/show/442466/category.svg" alt="" class="img-fluid">
+                </div>
+                <div class="name">
+                    <h5 class="cursor-pointer hover-text" (click)="navigateToCategory(item.id)">{{item.name}}</h5>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
 </div>
-
-
-<!-- <app-file-upload ></app-file-upload> -->

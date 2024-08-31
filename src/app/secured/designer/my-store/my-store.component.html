@@ -1,9 +1,14 @@
 <div class="secured-page-x-padding-main">
+
+    <div class="d-flex align-items-center container-margin-y">
+        <h3 >My posts</h3>
+        <a href="/designer-digest/designer/create-post" nz-button class="ms-auto">New post</a>
+    </div>
+
     <div class="filter-section">
         <app-main-posts-filter [isCategoriesFilterShow]="true" (emitSelectedCategories)="onFilterCategoryChange($event)" (emitOrderBy)="onOrderByChange($event)"
             (emitOnSearch)="onSearchChange($event)">
         </app-main-posts-filter>
-        <a href="/designer-digest/designer/create-post" nz-button>New post</a>
     </div>
     <div class="posts-section">
         <div nz-row class="gap-3">
@@ -13,7 +18,7 @@
         </div>
     </div>    
     
-    <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+    <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
     
     <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
         <h5 class="text-muted">No posts Found</h5>

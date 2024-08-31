@@ -31,6 +31,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { FileUploadComponent } from "../../components/file-upload/file-upload.component";
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 
 
@@ -70,7 +72,9 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     NzListModule,
     NzAvatarModule,
     FileUploadComponent,
-    NzImageModule
+    NzImageModule,
+    NzModalModule,
+    NzSkeletonModule
 ]
 })
 export class EmployerModule { }

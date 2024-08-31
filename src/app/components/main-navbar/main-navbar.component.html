@@ -24,7 +24,7 @@
         <div class="ms-auto">
 
             <div *ngIf="!isLoggedIn">
-                <a href="/auth/signup" nz-button nzType="primary">Register normal</a>
+                <a href="/auth/signup" nz-button nzType="primary" class="me-2">Register Now</a>
                 <a href="/auth/login" nz-button nzType="default">Login</a>
             </div>
 
@@ -51,11 +51,11 @@
                                     Applications
                                 </a>
                             </li>
-                            <li nz-menu-item>
-                                <a href="/designer-digest/designer/chats" nz-button class="p-0">
+                            <li nz-menu-item class="p-0">
+                                <a href="/designer-digest/designer/chats" nz-button class="chat-btn-main pt-0">
                                     <span nz-icon nzType="comment" nzTheme="outline"></span>
                                 </a>
-                                <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'">
+                                <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'" class="unread-messages">
                                     {{unreadMessageCount}}
                                 </div>
                             </li>
@@ -70,11 +70,11 @@
                                     Job Vacancies
                                 </a>
                             </li>
-                            <li nz-menu-item>
-                                <a href="/designer-digest/employer/chats" nz-button class="p-0">
+                            <li nz-menu-item class="p-0">
+                                <a href="/designer-digest/employer/chats" nz-button class="chat-btn-main pt-0">
                                     <span nz-icon nzType="comment" nzTheme="outline"></span>
                                 </a>
-                                <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'">
+                                <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'" class="unread-messages">
                                     {{unreadMessageCount}}
                                 </div>
                             </li>
@@ -82,14 +82,16 @@
                     </div>
 
                     <div *ngIf="isPersonal" class="d-flex align-items-center-gap-3  nav-spec">
-                        <div class="chat-nav">
-                            <a href="/designer-digest/personal/chats" nz-button class="p-0">
-                                <span nz-icon nzType="comment" nzTheme="outline"></span>
-                            </a>
-                            <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'" class="unread-messages">
-                                {{unreadMessageCount}}
-                            </div>
-                        </div>
+                        <ul nz-menu nzMode="horizontal" class="header-menu">
+                            <li nz-menu-item class="p-0">
+                                <a href="/designer-digest/personal/chats" nz-button class="chat-btn-main pt-0">
+                                    <span nz-icon nzType="comment" nzTheme="outline"></span>
+                                </a>
+                                <div *ngIf="unreadMessageCount && unreadMessageCount !== '0'" class="unread-messages">
+                                    {{unreadMessageCount}}
+                                </div>
+                            </li>
+                        </ul>
                     </div>
 
                     <div class="profile-btn">
