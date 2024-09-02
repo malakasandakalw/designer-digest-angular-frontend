@@ -1,0 +1,44 @@
+<div class="secured-page-x-padding-main">
+    <div class="filter-section">
+        <button nz-button [nzType]="'default'" (click)="showModal()"><span>New Chat</span></button>
+    </div>
+    <div class="chats-section">
+
+    </div>
+</div>
+
+<ng-container *ngIf="loading">
+    <app-loading-spinner></app-loading-spinner>
+</ng-container>
+
+<h2 *ngIf="!chats.length">No chats found</h2>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Select user to chat">
+    <ng-container *nzModalContent>
+        <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+            <ng-container *ngFor="let item of designers">
+                <nz-list-item *ngIf="currentUser && currentUser.id !== item.id" class="cursor-pointer"
+                    (click)="goToSingleChat(item.id)">
+                    <div class="d-flex align-items-center gap-2">
+                        <div>
+                            <nz-avatar *ngIf="item.profile_picture" nzIcon="user"
+                                [nzSrc]="'http://127.0.0.1:3000'+item.profile_picture!" [nzSize]="30"></nz-avatar>
+                            <nz-avatar *ngIf="!item.profile_picture" nzIcon="user" style="background-color: black;"
+                                [nzSize]="30"></nz-avatar>
+                        </div>
+                        <div>
+                            <h5 class="user-card-head">{{item.first_name}} {{item.last_name}}</h5>
+                            <p class="user-card-des">{{item.role}} - {{item.email}}</p>
+                        </div>
+                    </div>
+                </nz-list-item>
+            </ng-container>
+        </nz-list>
+
+        <ng-container *ngIf="loadingUsers">
+            <app-loading-spinner></app-loading-spinner>
+        </ng-container>
+        <h2 *ngIf="!designers.length">No chats found</h2>
+
+    </ng-container>
+</nz-modal>

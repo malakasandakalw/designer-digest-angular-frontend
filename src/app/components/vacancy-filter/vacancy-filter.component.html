@@ -1,0 +1,61 @@
+<div class="d-flex align-items-center gap-3">
+    
+    <div class="filter-selector">
+        <nz-form-item>
+            <nz-form-control>
+                <nz-form-label>Categories</nz-form-label>
+                <nz-input-group [nzSize]="'large'">
+                    <nz-select [nzMaxTagCount]="1" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                        nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories" (ngModelChange)="onCatSelect()"
+                        [ngModelOptions]="{standalone: true}"
+                        [nzLoading]="loadingCategories">
+                        <nz-option *ngFor="let item of categories" [nzLabel]="item.name"
+                            [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                    <ng-template #tagPlaceHolder let-selectedList>{{ selectedList.length }}+</ng-template>
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+    <div class="filter-selector">
+        <nz-form-item>
+            <nz-form-control>
+                <nz-form-label>Locations</nz-form-label>
+                <nz-input-group [nzSize]="'large'">
+                    <nz-select [nzMaxTagCount]="1" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                        nzPlaceHolder="Please select" [(ngModel)]="selectedLocations" (ngModelChange)="onLocationSelect()"
+                        [ngModelOptions]="{standalone: true}"
+                        [nzLoading]="loadingLocations">
+                        <nz-option *ngFor="let item of locations" [nzLabel]="item.name"
+                            [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                    <ng-template #tagPlaceHolder let-selectedList>{{ selectedList.length }}+</ng-template>
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+    
+    <div class="filter-search">
+        <nz-form-item>
+            <nz-form-control>
+                <nz-form-label>Search by title</nz-form-label>
+                <nz-input-group nzPrefixIcon="search">
+                    <input nz-input placeholder="Enter title" [(ngModel)]="searchText"
+                        (ngModelChange)="onSearchChange()" [ngModelOptions]="{standalone: true}" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+
+    <div>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-input-group [nzSize]="'large'">
+                    <label nz-checkbox [(ngModel)]="active" (ngModelChange)="onActiveChange()"
+                        class="mt-3">Active only</label>
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+
+</div>

@@ -1,0 +1,21 @@
+.nav-container {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    max-width: 100px;
+}
+
+.chat-btn-main {
+    width: 38px;
+    height: 38px;
+    padding: 0px !important;
+}
+
+.profile-btn {
+    margin-top: 4px;
+}

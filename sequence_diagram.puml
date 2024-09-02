@@ -1,0 +1,26 @@
+@startuml
+
+actor User
+participant "Angular Frontend" as FE
+participant "Express.js Backend" as BE
+database "PostgreSQL Database" as DB
+
+User -> FE: Enter Signup Details
+FE -> BE: Send POST /signup request
+BE -> BE: Validate User Data
+alt If data is valid
+    BE -> DB: INSERT INTO users (details)
+    DB --> BE: Success/Failure
+    alt If insertion is successful
+        BE -> FE: Send success response
+        FE -> User: Display success message
+    else If insertion fails
+        BE -> FE: Send failure response
+        FE -> User: Display error message
+    end
+else If data is invalid
+    BE -> FE: Send validation error response
+    FE -> User: Display error message
+end
+
+@enduml

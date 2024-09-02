@@ -1,0 +1,540 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    font-family: "Inter", monospace;
+}
+.ant-layout {
+    background-color: white;
+}
+
+h1 {
+    color: rgb(32, 33, 36);
+    font-size: 36px;
+    line-height: 44px;
+    font-family: "Signika Negative", sans-serif;
+    font-weight: 700;
+}
+
+p {
+    margin-bottom: 0px !important;
+    color: rgb(32, 33, 36);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+a.ant-btn {
+    line-height: normal;
+    padding-top: 8px !important;
+}
+
+button, .ant-btn {
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    padding: 8px 24px;
+    transition: 0.3s;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    height: auto;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+input, textarea, .ant-input-affix-wrapper, nz-select, nz-select-top-control,.ant-picker {
+    border-radius: 8px !important;
+    border-color: rgb(218, 220, 224) !important;
+    font-family: 'Inter', monospace !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    height: 32px;
+    align-items: center;
+}
+
+.ant-input {
+    max-height: 32px !important;
+    background-color: transparent;
+    background: transparent;
+}
+
+.ant-select-arrow, .ant-select-clear {
+    right: 18px !important;
+}
+
+textarea {
+    min-height: 36px;
+    height: 36px;
+}
+
+label,.ant-form-item-label>label {
+    font-family: Inter, monospace;
+    color: rgb(32, 33, 36);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    height: 18px;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.gap-x-md {
+    column-gap: 16px;
+}
+
+.relative {
+    position: relative;
+}
+
+.inter {
+    font-family: "Inter", sans-serif;
+}
+
+.signika-negative {
+    font-family: "Signika Negative", sans-serif;
+}
+
+h5.card-title {
+    color: rgb(32, 33, 36);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+h3 {
+    color: rgb(32, 33, 36);
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+.ant-card-body {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.card-details {
+    padding: 4px 16px 16px 16px
+}
+
+.mt-def-sm {
+    margin-top: 8px
+}
+
+.font-sm {
+    font-size: 12px;
+}
+
+.font-md {
+    font-size: 14px;
+}
+
+.font-lg {
+    font-size: 16px;
+}
+
+.font-x-lg {
+    font-size: 18px;
+}
+
+.border-none {
+    border: none;
+}
+
+.divider {
+    height: 1px;
+    background-color: rgb(218, 220, 224);
+}
+
+.container-margin-y {
+    margin: 0px 0px 24px 0px
+}
+
+.form-container {
+    border-radius: 8px;
+    border: 1px solid rgb(218, 220, 224);
+}
+
+.form-container-inner {
+    padding-right: 24px;
+    padding-left: 24px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.form-page-flex {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container-form {
+    width: 500px;
+}
+
+.secured-page-x-padding-main {
+    margin-top: 24px;
+    padding-left: 96px;
+    padding-right: 96px;
+}
+
+.nav-container {
+    padding-left: 64px;
+    padding-right: 64px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+p {
+   color: #5f6368;
+   line-height: 2rem;
+}
+
+.ant-menu-horizontal {
+    border: none;
+    background-color: transparent;
+}
+
+.inner-box {
+    max-height: 110px;
+    max-width: 110px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 12px;
+}
+
+.inner-box video {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.file-remove-btn {
+    position: absolute;
+    padding: 0;
+    max-width: 12px;
+    width: 16px;
+    max-width: 16px;
+    font-size: 16px;
+    min-width: 19px;
+}
+
+.post-card-head {
+    color: rgb(32, 33, 36);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+}
+
+.post-card-des {
+    color: rgb(32, 33, 36);
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.user-card-head {
+    color: rgb(32, 33, 36);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.user-card-des {
+    color: rgb(32, 33, 36);
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.post-card {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: transparent;
+    position: relative;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.media-holder {
+    /* min-height: 250px;
+    max-height: 250px;
+    overflow: hidden;
+    background-color: #00000005; */
+}
+
+.upvote-count-tag {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 99;    
+    display: flex;
+    align-items: center;
+}
+.post-card-vid {
+    width: 100%;
+    /* position: absolute; */
+    top: 0;
+    bottom: 0;
+    height: 100%;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.justifty-content-end {
+    justify-content: end;
+}
+
+.justifty-content-start {
+    justify-content: start;
+}
+
+.fixed-model-overflow {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.single-message {
+    max-width: 75%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 2px;
+    margin-right: 16px;
+}
+
+.single-message * {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.my-msg {
+    background-color: #2e2e2ee8;
+    border-radius: 16px;
+    text-align: end;
+    max-width: max-content;
+    margin-left: auto;    
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.my-msg * {
+    color: white;
+}
+
+.other-msg {
+    background-color: #efefef;
+    border-radius: 16px;
+    text-align: left;
+    max-width: max-content;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.msg-holder {
+   border-bottom: 1px solid #cfcfcf10
+}
+
+.msg-text-holder {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.date-very-small {
+    font-size: 10px;
+    color: #c9c9c9;
+}
+
+.d-contents {
+    display: contents;
+}
+
+.message-image {
+    max-width: 50%;
+    padding-left: 4px;
+    padding-right: 4px;
+    overflow: hidden;
+}
+
+.message-image {
+    max-width: 50%;
+    border-radius: 16px;
+}
+
+.ant-modal-footer {
+    border: none;
+}
+
+a.ant-btn.msg-download {
+    padding: 0px !important;
+    margin-right: 4px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+.unread-messages {
+    background-color: red;
+    color: white;
+    font-size: 11px;
+    width: 18px;
+    border-radius: 111px;
+    height: 18px;
+    line-height: normal;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.nav-spec a {
+    font-size: 14px;
+}
+
+.nav-spec a svg {
+    margin-top: -4px;
+}
+
+.hover-text, .hover-tag {
+    transition: 0.25s all;
+}
+
+.hover-text:hover {
+    color: #1890ff;
+    text-decoration: underline;
+    transition: 0.25s all;
+}
+
+.hover-tag:hover {
+    background-color: #1890ff !important;
+    color: white;
+}
+
+.gallery {
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.gallery .col {
+    max-width: calc((100% / 4) - 24px);
+}
+
+.justifty-content-between {
+    justify-content: space-between;
+}
+
+@media (min-width: 1200px) {
+    .hero-section .h1 {
+        font-size: 48px !important;
+        color: #000000;
+        background-image: -webkit-radial-gradient(closest-side, #ffffff 0%, #2e2a2a 33%, #424231 67%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        text-fill-color: transparent;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+    }
+    .hero-section .h2 {
+        font-size: 60px !important;
+        color: #000000;
+        background-image: -webkit-radial-gradient(closest-side, #ffffff 0%, #2e2a2a 33%, #424231 67%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        text-fill-color: transparent;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+    }
+}
+
+
+.overflow-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+nz-pagination {
+    text-align: center;
+}
+
+
+.filter-selector {
+    max-width: 180px;
+    width: 180px;
+    min-width: 180px;
+}
+
+.filter-single-selector {
+    max-width: 125px;
+    width: 125px;
+    min-width: 125px;
+}
+
+.filter-search {
+    max-width: 175px;
+    width: 175px;
+    min-width: 175px;
+}
+
+.ant-select-multiple .ant-select-selection-item {
+    max-width: 120px;
+    font-size: 12px;
+}
+
+.ant-input-group .ant-input {
+    height: 32px;
+    max-height: 32px;
+    min-height: 32px;
+}
+
+.ant-btn-primary {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.main-chat-unread-count {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    border-radius: 100px;
+    background-color: #1890ff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    font-weight: 600;
+}

@@ -1,0 +1,77 @@
+<app-main-navbar></app-main-navbar>
+
+<div class="secured-page-x-padding-main">
+    <div class="container-margin-y">
+        <h3 >Designers</h3>   
+        <div class="d-flex align-items-center gap-3">
+            <div class="filter-single-selector">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label>Order By</nz-form-label>
+                        <nz-input-group [nzSize]="'large'">
+                            <nz-select [(ngModel)]="orderBy" (ngModelChange)="onOrderByChange()">
+                                <nz-option *ngFor="let item of orderByList" [nzValue]="item.value"
+                                    [nzLabel]="item.label"></nz-option>
+                            </nz-select>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="filter-selector">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label>Locations</nz-form-label>
+                        <nz-input-group [nzSize]="'large'">
+                            <nz-select [nzMaxTagCount]="1" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                                nzPlaceHolder="Please select" [(ngModel)]="selectedLocations"
+                                (ngModelChange)="onFilterLocationChange()" [ngModelOptions]="{standalone: true}"
+                                [nzLoading]="loadingLocations">
+                                <nz-option *ngFor="let item of locations" [nzLabel]="item.name"
+                                    [nzValue]="item.id"></nz-option>
+                            </nz-select>
+                            <ng-template #tagPlaceHolder let-selectedList>{{ selectedList.length }}+</ng-template>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="filter-search">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label>Search by name</nz-form-label>
+                        <nz-input-group nzPrefixIcon="search">
+                            <input nz-input placeholder="Enter name" [(ngModel)]="searchText"
+                                (ngModelChange)="onSearchChange()" [ngModelOptions]="{standalone: true}" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            
+            <div *ngIf="currentUser">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-input-group [nzSize]="'large'">
+                            <label nz-checkbox [(ngModel)]="followedOnly" (ngModelChange)="getDesigners()"
+                                class="mt-3">Followings only</label>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
+        <div class="designers-container d-flex  gap-3 flex-wrap">
+            <div *ngFor="let item of designers" class="public-designer-card relative">
+                    <app-single-designer-card [designer]="item"></app-single-designer-card>
+            </div>
+        </div>
+        
+        <div *ngIf="!designers.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No Designers Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
+
+        <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+
+    </div>
+</div>

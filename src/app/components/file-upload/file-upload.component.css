@@ -1,0 +1,9 @@
+.dropzone {
+    width: 100%;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    display: flex;
+    background-color: rgb(236 240 243 / 30%);
+    align-items: center;
+    justify-content: center;
+}

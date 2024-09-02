@@ -1,0 +1,98 @@
+<app-main-navbar></app-main-navbar>
+
+<div class="secured-page-x-padding-main">
+    <div class="container-margin-y">
+
+        <div class="d-flex">
+            <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <div *ngIf="designer" class="side-details">
+                <div>
+                    <div class="text-center">
+                        <nz-avatar *ngIf="designer.profile_picture" nzIcon="user"
+                            [nzSrc]="'http://127.0.0.1:3000'+designer.profile_picture!" [nzSize]="100"></nz-avatar>
+                        <nz-avatar *ngIf="!designer.profile_picture" nzIcon="user" style="background-color: black;"
+                            [nzSize]="100"></nz-avatar>
+                    </div>
+                    <div>
+                        <h5 class="single-designer-name">{{designer.first_name}} {{designer.last_name}}</h5>
+                        <p class="single-designer-small">{{designer.email}}</p>
+                        <p class="single-designer-small">{{designer.phone}}</p>
+                    </div>
+                    <div class="stats-section">
+                        <div class="d-flex gap-2 align-items-center flex-wrap">
+                            <div>
+                                <span class="d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Upvotes Count'">
+                                    <span nz-icon nzType="heart" nzTheme="outline"></span>
+                                    {{designer.upvotes_count}}
+                                </span>
+                            </div>
+                            <div>
+                                <span class="d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Followers Count'">
+                                    <span nz-icon nzType="user" nzTheme="outline"></span>
+                                    {{designer.follow_count}}
+                                </span>
+                            </div>
+                            <div>
+                                <span class="d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Posts Count'">
+                                    <span nz-icon nzType="appstore" nzTheme="outline"></span>
+                                    {{designer.posts_count}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="d-flex gap-1 align-posts-center flex-wrap justify-content-center">
+                            <div *ngFor="let cat of designer.categories" class="">
+                                <nz-tag [nzColor]="'#999999'" class="me-0 hover-tag hover-tag cursor-pointer" (click)="navgiateToSingleDesignerCategory(cat.id)">{{cat.name}}</nz-tag>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mt-3 justify-content-center">
+                        <div class="relative">
+                            <div class="follow-btn cursor-pointer" [ngClass]="designer.user_has_followed ? 'highlight' : ''" (click)="followTrigger()">
+                                <span *ngIf="!designer.user_has_followed" nz-icon nzType="user-add" nzTheme="outline"></span>
+                                <span *ngIf="designer.user_has_followed" nz-icon nzType="check" nzTheme="outline"></span>
+                            </div>
+                        </div>
+                        <div class="relative ">
+                            <div class="chat-btn cursor-pointer"(click)="chatTrigger()">
+                                <span nz-icon nzType="comment" nzTheme="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-page-data">
+
+                <h3 class="mt-2">Posts by {{designer?.first_name}}</h3>
+
+                <app-main-posts-filter [isCategoriesFilterShow]="true"
+                    (emitSelectedCategories)="onFilterCategoryChange($event)" (emitOrderBy)="onOrderByChange($event)"
+                    (emitOnSearch)="onSearchChange($event)">
+                </app-main-posts-filter>
+
+
+                <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
+                    <h5 class="text-muted">No Posts Found</h5>
+                    <span nz-icon nzType="meh" nzTheme="outline"></span>
+                </div>
+
+                <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+
+                <div nz-row class="">
+                    <div *ngFor="let item of posts" nz-col nzSpan="6" class="px-1">
+                        <app-single-post-card-common [post]="item" (triggerVote)="triggerVoteChange($event)" [isDesigner]="false"></app-single-post-card-common>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

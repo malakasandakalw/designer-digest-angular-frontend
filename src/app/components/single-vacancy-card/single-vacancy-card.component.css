@@ -1,0 +1,39 @@
+.edit-btn {
+    position: absolute;
+    position: absolute;
+    right: 8px;
+    bottom: 4px;
+    height: 32px;
+    width: 32px;
+    padding: 0;
+}
+
+.single-vacancy-small {
+    font-size: 13px;
+    line-height: 20px;
+}
+.single-vacancy-name {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.vacancy-download-btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #1890ff;
+    color: white;
+    width: 28px;
+    height: 28px;
+    font-size: 20px;
+    padding-top: 4px;
+    border-radius: 8px;
+}
+
+.created-by-section {
+    justify-content: center;
+    margin-top: 12px;
+}

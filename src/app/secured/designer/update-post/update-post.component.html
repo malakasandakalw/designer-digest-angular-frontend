@@ -1,0 +1,91 @@
+<div class="container-margin-y">
+
+    <div class="filter-section container-margin-y">
+        <h3 >Update post</h3>
+    </div>
+
+    <div class="form-page-flex">
+        <div class="form-container w-100">
+            <div class="form-container-inner mx-auto container-margin-y">
+
+                <ng-container *ngIf="loading">
+                    <app-loading-spinner></app-loading-spinner>
+                </ng-container>
+
+                <form (submit)="submitForm()" class="create-post-form" nz-form>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-form-label nzRequired>Title</nz-form-label>
+                            <nz-input-group [nzSize]="'large'">
+                                <input nz-input placeholder="Post title" type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange($event)" [ngModelOptions]="{standalone: true}"/>
+                                <span *ngIf="errorObject.title.show" nz-typography nzType="danger">You must enter title</span>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-form-label>Description</nz-form-label>
+                            <nz-input-group [nzSize]="'large'">
+                                <!-- <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize
+                                    [(ngModel)]="description" [ngModelOptions]="{standalone: true}"
+                                    [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea> -->
+
+                                <div *ngIf="editor" class="NgxEditor__Wrapper">
+                                    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                                    <ngx-editor [editor]="editor" [(ngModel)]="description" (ngModelChange)="onDescriptionChange($event)" [disabled]="false" [placeholder]="'Type here...'" [ngModelOptions]="{standalone: true}"></ngx-editor>
+                                </div>
+                                <span *ngIf="errorObject.description.show" nz-typography nzType="danger">You must enter description</span>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-form-label nzRequired>Categories</nz-form-label>
+                            <nz-input-group [nzSize]="'large'">
+                                <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                                    nzPlaceHolder="Please select" [(ngModel)]="selectedCatgeories"
+                                    (ngModelChange)="onCategory()"
+                                    [ngModelOptions]="{standalone: true}"
+                                    [nzLoading]="loadingCategories">
+                                    <nz-option *ngFor="let item of categories" [nzLabel]="item.name"
+                                        [nzValue]="item.id"></nz-option>
+                                </nz-select>
+        
+                                <span *ngIf="errorObject.categorie.show" nz-typography nzType="danger">You must select
+                                    category/categories</span>
+        
+                                <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
+                                    selected</ng-template>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item *ngIf="uploadedFiles.length">
+                        <nz-form-control>
+                            <nz-form-label nzRequired>Select Thumbnail</nz-form-label>
+                            <nz-input-group [nzSize]="'large'">
+                                <nz-select [(ngModel)]="selectedThumbnail" (ngModelChange)="onSelectThumbnail()" [ngModelOptions]="{standalone: true}">
+                                    <nz-option *ngFor="let item of uploadedFiles" [nzValue]="item.url"
+                                        [nzLabel]="item.name"></nz-option>
+                                </nz-select>
+                                <span *ngIf="errorObject.thumbnail.show" nz-typography nzType="danger">You must select thumbnail file</span>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-control>
+                            <button [nzLoading]="loading" [nzType]="'primary'" class="mt-1" nz-button nzBlock [nzSize]="'large'"
+                                type="submit">Update Post</button>
+                                
+                            <button [nzLoading]="loading" nzType="default" nzDanger class="mt-1" nz-button nzBlock [nzSize]="'large'"
+                            type="button" (click)="deletePost()">Delete Post</button>
+                        </nz-form-control>
+                    </nz-form-item>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
