@@ -1,6 +1,15 @@
 <div class="container-margin-y">
-    <h3>Create new post</h3>
-    <div class="form-page-flex">
+    <div class="filter-title-bg">
+        <div class="main-container-size">
+            <div class="filter-title">
+                <div class="title-section">
+                    <h3 class="mb-0">Create new post</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-page-flex main-container-size">
         <div class="form-container w-100">
             <div class="form-container-inner mx-auto container-margin-y">
                 <form (submit)="submitForm()" class="create-post-form" nz-form>
@@ -47,8 +56,7 @@
                                 <span *ngIf="errorObject.categorie.show" nz-typography nzType="danger">You must select
                                     category/categories</span>
         
-                                <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
-                                    selected</ng-template>
+                                <ng-template #tagPlaceHolder let-selectedList>{{ selectedList.length }} +</ng-template>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
@@ -71,7 +79,7 @@
                                         <img nz-image *ngIf="item.type === 'image'" nz-image [nzSrc]="'http://127.0.0.1:3000'+item.url"
                                             alt="" class="img-fluid" />
                                         <video *ngIf="item.type === 'video'"  autoplay
-                                            [controls]="false">
+                                            [controls]="false" loop>
                                             <source [src]="'http://127.0.0.1:3000'+item.url" type="video/mp4">
                                         </video>
                                     </div>

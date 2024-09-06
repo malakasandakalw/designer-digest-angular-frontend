@@ -9,6 +9,7 @@ import { CreateVacancyComponent } from "./create-vacancy/create-vacancy.componen
 import { ApplicationsComponent } from "./applications/applications.component";
 import { UpdateVacancyComponent } from "./update-vacancy/update-vacancy.component";
 import { SingleVacancyComponent } from "./single-vacancy/single-vacancy.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 
 const routes: Routes = [
     {
@@ -24,6 +25,7 @@ const routes: Routes = [
             { path: "vacancies/:id", component: SingleVacancyComponent },
             { path: "chats", component: ChatsComponent },
             { path: "chats/:id", component: SingleChatComponent },
+            { path: "reset-password", component: ResetPasswordComponent},
         ]
     }
 ];

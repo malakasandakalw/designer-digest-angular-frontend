@@ -3,7 +3,7 @@
 <div class="secured-page-x-padding-main">
     <div class="container-margin-y">
         <h3 >Designers</h3>   
-        <div class="d-flex align-items-center gap-3">
+        <div class="mob-d-flex align-items-center gap-3">
             <div class="filter-single-selector">
                 <nz-form-item>
                     <nz-form-control>
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="designers-container d-flex  gap-3 flex-wrap">
+        <div class="designers-container mob-d-flex  gap-3 flex-wrap">
             <div *ngFor="let item of designers" class="public-designer-card relative">
                     <app-single-designer-card [designer]="item"></app-single-designer-card>
             </div>
@@ -75,3 +75,5 @@
 
     </div>
 </div>
+
+<app-footer></app-footer>

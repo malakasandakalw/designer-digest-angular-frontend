@@ -1,8 +1,15 @@
 <div class="secured-page-x-padding-main">
-    <h3>Your apllications</h3>
-    <div class="container-margin-y">
-
-        <div class="d-flex align-items-center gap-3">
+    <div class="filter-title-bg">
+        <div class="main-container-size">
+            <div class="filter-title">
+                <div class="title-section">
+                    <h3 class="mb-0">Your applications</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-margin-y main-container-size">
+        <div class="mob-d-flex align-items-center gap-3 justifty-content-end">
             <div class="filter-selector">
                 <nz-form-item>
                     <nz-form-control>
@@ -43,10 +50,10 @@
 
         </div>
 
-        <div class="vacancies-container d-flex flex-wrap">
-            <ng-container *ngFor="let item of vacancies">
+        <div class="vacancies-container mob-d-flex flex-wrap gap-3">
+            <div *ngFor="let item of vacancies" class="public-vacancy-card relative">
                 <app-single-vacancy-card [vacancy]="item" [isEmployer]="false" [isDesignerEdit]="true"></app-single-vacancy-card>
-            </ng-container>
+            </div>
         </div>
 
         <div *ngIf="!vacancies.length" class="no-posts-found text-center my-4 py-4">
@@ -58,6 +65,6 @@
             <app-loading-spinner></app-loading-spinner>
         </div>
         <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize"
-            (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+            (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="pageSize=$event"></nz-pagination>
     </div>
 </div>

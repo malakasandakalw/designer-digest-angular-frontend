@@ -17,21 +17,21 @@
                 </div>
             </div>
             <div class="stats-section">
-                <div class="d-flex gap-2 align-items-center flex-wrap">
+                <div class="mob-d-flex gap-2 align-items-center flex-wrap">
                     <div>
-                        <span class="d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Upvotes Count'">
+                        <span class="mob-d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Upvotes Count'">
                             <span nz-icon nzType="heart" nzTheme="outline"></span>
                             {{designer.upvotes_count}}
                         </span>
                     </div>
                     <div>
-                        <span class="d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Followers Count'">
+                        <span class="mob-d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Followers Count'">
                             <span nz-icon nzType="user" nzTheme="outline"></span>
                             {{designer.follow_count}}
                         </span>
                     </div>
                     <div>
-                        <span class="d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Posts Count'">
+                        <span class="mob-d-flex align-items-center flex-wrap gap-1" nz-tooltip [nzTooltipTitle]="'Posts Count'">
                             <span nz-icon nzType="appstore" nzTheme="outline"></span>
                             {{designer.posts_count}}
                         </span>
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <nz-tag [nzColor]="'#999999'" class="location-section hover-tag hover-tag cursor-pointer align-items-center d-flex gap-2" (click)="navigateToLocationDesigners(designer.locations[0].id)">
+            <nz-tag [nzColor]="'#999999'" class="location-section hover-tag hover-tag cursor-pointer align-items-center mob-d-flex gap-2" (click)="navigateToLocationDesigners(designer.locations[0].id)">
                 <span nz-icon nzType="aim" nzTheme="outline"></span>
                 {{designer.locations[0].name}}
             </nz-tag>

@@ -215,7 +215,7 @@ export class VacanciesComponent {
 
   navigateToUpdateApplication(vacancyId: string) {
     if(!vacancyId) return
-    this.router.navigate(['/vacancies'])
+    this.router.navigate(['/designer-digest/designer/applications/'+vacancyId])
   }
 
 }

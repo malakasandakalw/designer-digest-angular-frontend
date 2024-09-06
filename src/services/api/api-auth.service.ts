@@ -63,6 +63,10 @@ export class ApiAuthService extends BaseService {
     return this._post(this.http, `${this.API_BASE_URL}/users/login`, { email, password })
   }
 
+  public resetPassword(current_password: string, new_password: string) {
+    return this._post(this.http, `${this.API_BASE_URL}/users/reset-password`, { current_password, new_password })
+  }
+
   public logout() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/'])

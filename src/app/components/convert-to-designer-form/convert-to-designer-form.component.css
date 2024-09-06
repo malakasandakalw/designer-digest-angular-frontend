@@ -1,0 +1,13 @@
+.signup-form-main {
+    margin-top: 120px;
+}
+
+.convert-form-input {
+    width: 400px;
+}
+
+@media(max-width: 1050px) {
+    .convert-form-input {
+        width: 100%;
+    }
+}

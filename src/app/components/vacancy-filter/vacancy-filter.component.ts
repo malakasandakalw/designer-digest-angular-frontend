@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -20,6 +20,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
   styleUrls: ['./vacancy-filter.component.css']
 })
 export class VacancyFilterComponent implements OnInit{
+  @Input() additionalFilterClasses = ''
   @Output() emitSelectedCategories = new EventEmitter<string[]>();
   @Output() emitSelectedLocations = new EventEmitter<string[]>();
   @Output() emitActive = new EventEmitter<boolean>();

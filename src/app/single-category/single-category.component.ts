@@ -4,6 +4,8 @@ import { ApiAuthService } from 'src/services/api/api-auth.service';
 import { PostsService } from 'src/services/api/posts.service';
 import { post } from '../secured/designer/my-store/my-store.component';
 import { CategoryService } from 'src/services/api/category.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { createMessage } from '../common/utils/messages';
 
 @Component({
   selector: 'app-single-category',
@@ -16,7 +18,7 @@ export class SingleCategoryComponent {
 
   totalPosts = 0;
   pageIndex = 1;
-  pageSize = 15;
+  pageSize = 20;
 
   selectedCategories: string[] = []
   orderBy: string = 'recent'
@@ -36,7 +38,8 @@ export class SingleCategoryComponent {
     private postsService: PostsService,
     private router: Router,
     private apiAuthService: ApiAuthService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private message: NzMessageService,
   ){
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
@@ -106,6 +109,9 @@ export class SingleCategoryComponent {
   }
 
   async upvoteTrigger(postId: string) {
+    if(!this.currentUser) {
+      this.router.navigate(['/auth/login']);
+    } else {
     try{
       const response = await this.postsService.triggerUpvote(postId);
       if (response && response.body.postupvoted) {
@@ -115,6 +121,7 @@ export class SingleCategoryComponent {
           if(post) {
             post.user_has_voted = response.body.postupvoted.voted
             post.upvote_count = response.body.postupvoted.voted ? (parseInt(post.upvote_count) + 1).toString() : (parseInt(post.upvote_count) - 1).toString()
+            createMessage(this.message, response.status, response.body.postupvoted.voted ? `You upvoted ${post.title}!` : `You have removed your vote from ${post.title}`)
           }
         }
         // this.totalPosts = response.body.result.total
@@ -123,6 +130,7 @@ export class SingleCategoryComponent {
     }catch(error) {
       console.log(error)
     }
+  }
   }
 
   async onPageChange(pageIndex: number) {

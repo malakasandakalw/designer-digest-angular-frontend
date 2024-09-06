@@ -1,23 +1,81 @@
 <app-main-navbar></app-main-navbar>
 
-<div class="container-fluid">
-    <div class="hero-section">
-        <h1 class="h1">Welcome to</h1>
-        <h2 class="h2 ms-2">DESIGNER DIGEST</h2>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi ex cumque soluta optio corrupti molestias
-            adipisci facilis possimus ducimus odit quod consectetur velit veniam, provident minima obcaecati aut dolorum
-            blanditiis!</p>
-        <a href="/auth/signup" nz-button nzType="primary" class="my-3">Register Now</a>
-        <div class="hero-img-holder">
-            <img src="assets/hero.jpg" alt="" class="img-fluid">
+<div class="bg-gradient-main py-5">
+    <div class="main-container-size">
+        <div class="mob-d-flex mob-mob-d-flex">
+            <div class="hero-section">
+                <h1 class="h1">Welcome to</h1>
+                <h2 class="h2">DESIGNER DIGEST</h2>
+                <p class="p-text">Join with us today and become a part of a thriving community where creativity meets opportunity. Let’s create a more inclusive and supportive fashion industry together!</p>
+                <div class="mob-d-flex">
+                    <a *ngIf="!currentUser" href="/auth/signup" nz-button nzType="primary" class="my-3 font-x-lg me-3">Register Now</a>
+                    <a href="#about" nz-button nzType="default" class="my-3 font-x-lg">More About Us</a>
+                </div>
+            </div>
+            <div class="hero-img-holder">
+                <img src="assets/hero.jpg" alt="" class="img-fluid">
+            </div>
         </div>
     </div>
 </div>
 
-<div class=" secured-page-x-padding-main">
-    <app-main-posts-filter [isCategoriesFilterShow]="true" (emitSelectedCategories)="onFilterCategoryChange($event)"
-        (emitOrderBy)="onOrderByChange($event)" (emitOnSearch)="onSearchChange($event)">
-    </app-main-posts-filter>
+<div class="about-us-section main-container-size" id="about">
+    <div class="bg-gradient-dark-main paddings-def">
+        <h3 class="text-center text-white">What is Designer Digest...</h3>
+        <p class="text-center text-white">Designer Digest is revolutionizing the way fashion designers interact, showcase their talents, and find career opportunities. Our platform is dedicated to empowering both emerging and established designers by providing a focused environment that fosters creativity, collaboration, and growth. Forget the overwhelming competition and high costs of social media marketing—Designer Digest is your space to shine.</p>
+    </div>
+</div>
+
+<div class="about-us-more main-container-size">
+    <div class="mob-d-flex align-items-center">
+        <div class="left">
+            <h3>Why Choose Designer Digest?</h3>
+            <ul>
+                <li>
+                    <b>Showcase Your Work:</b> Create a stunning online portfolio to display your designs. Designer Digest provides a dedicated space for you to present your creations to the world, helping you build your brand and attract attention from industry professionals.
+                </li>
+                <li>
+                   <b>Find Your Next Opportunity:</b>  With a specialized job board tailored to the fashion industry, you can browse job openings, internships, and collaborations. Whether you’re looking for your first job or your next big opportunity, Designer Digest helps you find the perfect fit.
+                </li>
+                <li>
+                   <b>Network with the Best:</b>  Build meaningful connections with other designers, brands, and fashion houses. Designer Digest makes it easy to network within the industry, opening doors to collaborations, partnerships, and mentorships that can propel your career forward.
+                </li>
+                <li>
+                   <b>Apply for Vacancies:</b>  Large fashion houses and brands post their job openings directly on Designer Digest, allowing new designers to apply easily and conveniently. This feature simplifies the job application process, making it more accessible for everyone.
+                </li>
+                <li>
+                   <b>Secure Communication:</b>  Engage in private conversations with other designers, mentors, or potential employers. Our platform ensures your communication is safe and secure, allowing you to share insights, receive feedback, and build professional relationships without barriers.
+                </li>
+                <li>
+                   <b>Community Engagement:</b> Be part of a vibrant community of fashion enthusiasts. Share ideas, participate in discussions, and support fellow designers. Designer Digest is not just a platform; it’s a community where designers help each other grow.
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="img-holder">
+                <img src="/assets/create-post.png" alt="" class="img-fluid">
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="join-section">
+    <p>Join Designer Digest today and experience a platform built exclusively for fashion designers. Whether you’re a fresh graduate looking to make a mark or an established designer seeking new opportunities, Designer Digest offers the tools and connections you need to succeed. Let your creativity flourish and take your fashion career to new heights!</p>
+</div>
+
+<div class="main-container-size">
+
+    <div class="mob-d-flex align-items-center">
+        <div class="title-section">
+            <h3>Some Latest Posts</h3>
+        </div>
+        <div class="filter-section ms-auto">
+            <app-main-posts-filter [isCategoriesFilterShow]="true" (emitSelectedCategories)="onFilterCategoryChange($event)"
+                (emitOrderBy)="onOrderByChange($event)" (emitOnSearch)="onSearchChange($event)">
+            </app-main-posts-filter>
+        </div>
+    </div>
     <div class="posts-section">
 
         <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
@@ -32,7 +90,7 @@
 
 
         <div class="large-screen">
-            <div class="d-flex gallery">
+            <div class="mob-d-flex gallery">
                 <div class="col">
                     <div *ngFor="let item of posts; let i = index">
                         <app-single-post-card-common *ngIf="(i % 4) === 0" [post]="item" [isDesigner]="false"></app-single-post-card-common>
@@ -56,17 +114,37 @@
             </div>
         </div>
         <div class="medium-screen">
-            
+            <div class="mob-d-flex gallery">
+                <div class="col">
+                    <div *ngFor="let item of posts; let i = index">
+                        <app-single-post-card-common *ngIf="(i % 3) === 0" [post]="item" [isDesigner]="false"></app-single-post-card-common>
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngFor="let item of posts; let i = index">
+                        <app-single-post-card-common *ngIf="(i % 3) === 1" [post]="item"  [isDesigner]="false"></app-single-post-card-common>
+                    </div>
+                </div>
+                <div class="col">
+                    <div *ngFor="let item of posts; let i = index">
+                        <app-single-post-card-common *ngIf="(i % 3) === 2" [post]="item" [isDesigner]="false"></app-single-post-card-common>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="small-screen">
-            
+            <div *ngFor="let item of posts; let i = index">
+                <app-single-post-card-common [post]="item" [isDesigner]="false"></app-single-post-card-common>
+            </div>
         </div>
 
-        <div *ngIf="totalPosts > pageSize" class="see-all">
-            <button nz-button [nzType]="'default'" (click)="navigateToAllPosts()">
+        <div class="see-all text-center mb-5">
+            <button nz-button [nzType]="'primary'" (click)="navigateToAllPosts()" class="ms-auto font-x-lg">
                 See All Posts..
             </button>
         </div>
 
     </div>
 </div>
+
+<app-footer></app-footer>

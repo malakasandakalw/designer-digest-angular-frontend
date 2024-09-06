@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SinglePostComponent } from './single-post.component';
+import { SinglePostComponentPublic } from './single-post.component';
 
-describe('SinglePostComponent', () => {
-  let component: SinglePostComponent;
-  let fixture: ComponentFixture<SinglePostComponent>;
+describe('SinglePostComponentPublic', () => {
+  let component: SinglePostComponentPublic;
+  let fixture: ComponentFixture<SinglePostComponentPublic>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SinglePostComponent]
+      declarations: [SinglePostComponentPublic]
     });
-    fixture = TestBed.createComponent(SinglePostComponent);
+    fixture = TestBed.createComponent(SinglePostComponentPublic);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

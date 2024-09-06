@@ -48,6 +48,8 @@ export class ChatsComponent implements OnInit{
       this.loadingUsers = false
     } catch (error) {
       console.log(error)
+    } finally {
+      this.loadingUsers = false
     }
   }
 
@@ -60,7 +62,10 @@ export class ChatsComponent implements OnInit{
       }
       this.loading = false
     } catch (error) {
+      this.loading = false
       console.log(error)
+    } finally {
+      this.loading = false
     }
   }
 

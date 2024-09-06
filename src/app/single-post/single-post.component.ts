@@ -113,7 +113,7 @@ export class SinglePostComponentPublic implements OnInit{
     if(!this.currentUser) {
       this.router.navigate(['/auth/login']);
     } else {
-      if(!this.post?.created_by.id) return
+      if(!this.post?.created_by.id || this.post.created_user_id === this.currentUser.id) return
       try{
         const response = await this.designerService.follow(this.post.created_by.id);
         if (response && response.body.followed && this.post) {

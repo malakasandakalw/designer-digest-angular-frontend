@@ -1,33 +1,45 @@
 <div class="secured-page-x-padding-main">
 
-    <div class="d-flex align-items-center container-margin-y">
-        <h3 >My posts</h3>
-        <a href="/designer-digest/designer/create-post" nz-button class="ms-auto">New post</a>
-    </div>
-
-    <div class="filter-section">
-        <app-main-posts-filter [isCategoriesFilterShow]="true" (emitSelectedCategories)="onFilterCategoryChange($event)" (emitOrderBy)="onOrderByChange($event)"
-            (emitOnSearch)="onSearchChange($event)">
-        </app-main-posts-filter>
-    </div>
-    <div class="posts-section">
-        <div nz-row class="gap-3">
-            <div *ngFor="let item of posts" nz-col nzSpan="6" >
-                <app-single-post-card-common [post]="item" [isDesigner]="true"></app-single-post-card-common>
+    <div class="filter-title-bg">
+        <div class="main-container-size">
+            <div class="filter-title">
+                <div class="title-section">
+                    <h3 class="mb-0">My posts</h3>
+                </div>
+                <div class="filter-section">
+                    <a href="/designer-digest/designer/create-post" nz-button [nzType]="'primary'" class="ms-auto">New post</a>
+                </div>
             </div>
         </div>
-    </div>    
-    
-    <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
-    
-    <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
-        <h5 class="text-muted">No posts Found</h5>
-        <span nz-icon nzType="meh" nzTheme="outline"></span>
     </div>
 
-    <ng-container *ngIf="loading">
-        <app-loading-spinner></app-loading-spinner>
-    </ng-container>
+    <div class="main-container-size">
+        <div class="filter-section">
+            <app-main-posts-filter [isCategoriesFilterShow]="true" (emitSelectedCategories)="onFilterCategoryChange($event)" (emitOrderBy)="onOrderByChange($event)"
+                (emitOnSearch)="onSearchChange($event)" [additionalFilterClasses]="'justify-end mb-3'">
+            </app-main-posts-filter>
+        </div>
+
+        <div class="posts-section">
+            <div nz-row class="gap-3">
+                <div *ngFor="let item of posts" nz-col nzSpan="6" >
+                    <app-single-post-card-common [post]="item" [isDesigner]="true"></app-single-post-card-common>
+                </div>
+            </div>
+        </div>    
+        
+        <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="pageSize=$event"></nz-pagination>
+        
+        <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No posts Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
+    
+        <ng-container *ngIf="loading">
+            <app-loading-spinner></app-loading-spinner>
+        </ng-container>
+
+    </div>
 
 </div>
 

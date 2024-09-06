@@ -1,9 +1,19 @@
 <div class="secured-page-x-padding-main">
-    <div class="filter-section d-flex align-items-center container-margin-y">
-        <h3 >Your chats</h3>
-        <button nz-button [nzType]="'default'" (click)="showModal()" class="ms-auto"><span>New Chat</span></button>
+
+    <div class="filter-title-bg">
+        <div class="main-container-size">
+            <div class="filter-title">
+                <div class="title-section">
+                    <h3 class="mb-0">Your chats</h3>
+                </div>
+                <div class="filter-section">
+                    <button nz-button [nzType]="'primary'" (click)="showModal()" class="ms-auto"><span>New Chat</span></button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="chats-section">
+
+    <div class="chats-section main-container-size">
 
         <div *ngIf="!chats.length" class="no-posts-found text-center my-4 py-4">
             <h5 class="text-muted">No Chats Found</h5>
@@ -13,7 +23,7 @@
         <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
             <ng-container *ngFor="let item of chats">
                 <nz-list-item *ngIf="item.user_id !== currentUser.id" class="cursor-pointer py-3" (click)="goToSingleChat(item.user_id)">
-                    <div class="d-flex align-items-center gap-2 w-100">
+                    <div class="mob-d-flex align-items-center gap-2 w-100">
                         <div>
                             <nz-avatar *ngIf="item.profile_picture" nzIcon="user"
                                 [nzSrc]="'http://127.0.0.1:3000'+item.profile_picture!" [nzSize]="50"></nz-avatar>
@@ -21,7 +31,7 @@
                                 [nzSize]="50"></nz-avatar>
                         </div>
                         <div class="w-100">
-                            <div class="d-flex align-items-center">
+                            <div class="mob-d-flex align-items-center">
                                 <div class="me-auto">
                                     <h5 class="user-card-head mb-2">{{item.user_name}}</h5>
                                     <p class="user-card-des">{{item.latest_message}}</p>
@@ -46,7 +56,7 @@
             <ng-container *ngFor="let item of users">
                 <nz-list-item *ngIf="currentUser && currentUser.id !== item.id" class="cursor-pointer"
                     (click)="goToSingleChat(item.id)">
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="mob-d-flex align-items-center gap-2">
                         <div>
                             <nz-avatar *ngIf="item.profile_picture" nzIcon="user"
                                 [nzSrc]="'http://127.0.0.1:3000'+item.profile_picture!" [nzSize]="30"></nz-avatar>

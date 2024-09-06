@@ -33,6 +33,8 @@ import { FileUploadComponent } from "../../components/file-upload/file-upload.co
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PublicResetPasswordComponent } from 'src/app/components/reset-password/reset-password.component';
 
 
 
@@ -46,7 +48,8 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     SingleChatComponent,
     UpdateVacancyComponent,
     ApplicationsComponent,
-    SingleVacancyComponent
+    SingleVacancyComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +77,8 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     FileUploadComponent,
     NzImageModule,
     NzModalModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    PublicResetPasswordComponent
 ]
 })
 export class EmployerModule { }

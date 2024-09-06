@@ -22,13 +22,32 @@
         <p class="single-vacancy-small">{{vacancy.created_at| date:'MMMM d, y'}}</p>
     </div>
     
-    <div *ngIf="!isEmployer" class="d-flex align-items-center gap-1 created-by-section mx-auto" nz-tooltip [nzTooltipTitle]="vacancy.created_by.first_name+ ' ' + vacancy.created_by.last_name">
+    <div *ngIf="!isEmployer" class="mob-d-flex align-items-center gap-1 created-by-section mx-auto" nz-tooltip [nzTooltipTitle]="titleTemplate">
         <nz-avatar *ngIf="vacancy.created_by.profile_picture" nzIcon="user"
             [nzSrc]="'http://127.0.0.1:3000'+vacancy.created_by.profile_picture!" [nzSize]="20"></nz-avatar>
         <nz-avatar *ngIf="!vacancy.created_by.profile_picture" nzIcon="user" style="background-color: black;"
             [nzSize]="20"></nz-avatar>
-
         <small class="single-vacancy-small">{{vacancy.created_by.first_name}}</small>
+        <ng-template #titleTemplate let-thing>
+            <div class="mob-d-flex align-items-center gap-2 w-100">
+                <div>
+                    <nz-avatar *ngIf="vacancy.created_by.profile_picture" nzIcon="user"
+                        [nzSrc]="'http://127.0.0.1:3000'+vacancy.created_by.profile_picture!" [nzSize]="50"></nz-avatar>
+                    <nz-avatar *ngIf="!vacancy.created_by.profile_picture" nzIcon="user" style="background-color: black;"
+                        [nzSize]="50"></nz-avatar>
+                </div>
+                <div class="w-100">
+                    <div class="mob-d-flex align-items-center">
+                        <div class="me-auto">
+                            <h5 class="user-card-head mb-2">{{vacancy.created_by.first_name + ' ' + vacancy.created_by.last_name}}</h5>
+                            <p class="user-card-des">{{vacancy.created_by.email}}</p>
+                            <p class="user-card-des">{{vacancy.created_by.phone}}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </ng-template>
     </div>
 
     <ng-container *ngIf="!isEmployer">

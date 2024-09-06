@@ -11,6 +11,7 @@ import { ChatsComponent } from "./chats/chats.component";
 import { SingleChatComponent } from "./single-chat/single-chat.component";
 import { UpdatePostComponent } from "./update-post/update-post.component";
 import { SingleVacancyComponent } from "./single-vacancy/single-vacancy.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 
 const routes: Routes = [
     {
@@ -28,6 +29,7 @@ const routes: Routes = [
             { path: "update-post/:id", component: UpdatePostComponent },
             { path: "chats", component: ChatsComponent },
             { path: "chats/:id", component: SingleChatComponent },
+            { path: "reset-password", component: ResetPasswordComponent},
         ]
     }
 ];

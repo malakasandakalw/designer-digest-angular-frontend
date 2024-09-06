@@ -38,6 +38,9 @@ import { SingleVacancyComponent } from './single-vacancy/single-vacancy.componen
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { FileUploadApplicationComponent } from "../../components/file-upload-application/file-upload-application.component";
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { FooterComponent } from "../../components/footer/footer.component";
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PublicResetPasswordComponent } from 'src/app/components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     SinglePostComponent,
     ChatsComponent,
     UpdatePostComponent,
-    SingleVacancyComponent
+    SingleVacancyComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +86,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     SingleVacancyCardComponent,
     NzSkeletonModule,
     FileUploadApplicationComponent,
-    NzDatePickerModule
+    NzDatePickerModule,
+    FooterComponent,
+    PublicResetPasswordComponent
 ]
 })
 export class DesignerModule { }

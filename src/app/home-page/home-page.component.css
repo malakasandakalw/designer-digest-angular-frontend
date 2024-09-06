@@ -16,3 +16,87 @@
     background-color: greenyellow;
     color: white;
 }
+
+.right .img-holder {
+    max-width: 650px;
+}
+
+.p-text {
+    font-size: 16px;
+}
+
+.about-us-section {
+    margin-top: 42px;
+    border-radius: 16px;
+    overflow: hidden;
+} 
+
+.about-us-more {
+    margin-top: 42px;
+
+}
+
+.left {
+    padding: 42px 72px;
+    max-width: 65%;
+}
+
+.paddings-def {
+    padding: 72px 240px;
+}
+
+.join-section {
+    max-width: 1024px;
+    margin-top: 42px;
+    margin-bottom: 72px;
+    padding: 72px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #d9d9d9;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media(max-width: 1440px) {
+    .left {
+        padding: 42px 56px;
+        max-width: 65%;
+    }
+    .paddings-def {
+        padding: 72px 180px;
+    }
+}
+
+@media(max-width: 1340px) {
+    .left {
+        padding: 42px 48px;
+        max-width: 65%;
+    }
+}
+
+@media(max-width: 1280px) {
+    .left {
+        padding: 42px 32px;
+        max-width: 65%;
+    }
+}
+
+@media(max-width: 1050px) {
+    .left {
+        padding: 24px 24px;
+        max-width: 100%;
+    }
+    .paddings-def {
+        padding: 24px 24px;
+        border-radius: 24px;
+    }
+    .hero-section {
+        padding: 24px;
+    }
+    .join-section {
+        max-width: 95%;
+        margin-top: 32px;
+        margin-bottom: 32px;
+        padding: 24px;
+    }
+}

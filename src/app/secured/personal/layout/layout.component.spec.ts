@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayoutComponent } from './layout.component';
+import { PersonalLayoutComponent } from './layout.component';
 
-describe('LayoutComponent', () => {
-  let component: LayoutComponent;
-  let fixture: ComponentFixture<LayoutComponent>;
+describe('PersonalLayoutComponent', () => {
+  let component: PersonalLayoutComponent;
+  let fixture: ComponentFixture<PersonalLayoutComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LayoutComponent]
+      declarations: [PersonalLayoutComponent]
     });
-    fixture = TestBed.createComponent(LayoutComponent);
+    fixture = TestBed.createComponent(PersonalLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

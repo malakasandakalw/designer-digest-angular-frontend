@@ -10,6 +10,8 @@ import { NzFormModule } from "ng-zorro-antd/form";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { NzButtonModule } from "ng-zorro-antd/button";
+import { MainNavbarComponent } from "../components/main-navbar/main-navbar.component";
+import { FooterComponent } from "../components/footer/footer.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { NzButtonModule } from "ng-zorro-antd/button";
     NzInputModule,
     NzIconModule,
     NzButtonModule,
-  ]
+    MainNavbarComponent,
+    FooterComponent
+]
 })
 export class AuthModule { }

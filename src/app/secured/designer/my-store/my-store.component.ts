@@ -50,7 +50,7 @@ export class MyStoreComponent implements OnInit{
 
   totalPosts = 0;
   pageIndex = 1;
-  pageSize = 15;
+  pageSize = 20;
 
   selectedCategories: string[] = []
   orderBy: string = 'recent'

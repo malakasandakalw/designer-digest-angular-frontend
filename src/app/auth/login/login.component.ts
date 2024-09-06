@@ -38,13 +38,6 @@ export class LoginComponent implements OnInit{
       password: ['', [Validators.required]],
     })
 
-    // const currentUser = this.authApiService.getCurrentUser();
-    // if(currentUser && currentUser.user) {
-    //  this.navigateUser(currentUser.user);
-    // } else {
-    //   this.authApiService.logout()
-    // }
-
   }
 
   navigateUser(user: User) {

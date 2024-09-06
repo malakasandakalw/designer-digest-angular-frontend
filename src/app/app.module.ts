@@ -48,6 +48,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse'
 import { FileUploadApplicationComponent } from "./components/file-upload-application/file-upload-application.component";
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { FooterComponent } from "./components/footer/footer.component";
 
 registerLocaleData(en);
 
@@ -98,7 +99,8 @@ registerLocaleData(en);
     NzCollapseModule,
     FileUploadApplicationComponent,
     NzImageModule,
-    NzTagModule
+    NzTagModule,
+    FooterComponent
 ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

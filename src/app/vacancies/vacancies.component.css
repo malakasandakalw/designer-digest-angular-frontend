@@ -3,10 +3,17 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: white;
-    width: 19%;
+    width: 100%;
+    max-width: calc((100% / 5) - 16px);
+    min-width: calc((100% / 5) - 16px);
     text-align: center;
 }
-
+@media(max-width: 1340px) {
+    .public-vacancy-card {
+        max-width: calc((100% / 4) - 16px);
+        min-width: calc((100% / 4) - 16px);
+    }
+}
 .vacancy-description-holder {
     padding: 16px;
     background-color: rgb(236 240 243 / 30%);

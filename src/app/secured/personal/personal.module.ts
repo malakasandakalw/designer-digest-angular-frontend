@@ -17,12 +17,15 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { LoadingSpinnerComponent } from "../../components/loading-spinner/loading-spinner.component";
 import { SingleChatComponent } from '../designer/single-chat/single-chat.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PublicResetPasswordComponent } from 'src/app/components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     PersonalLayoutComponent,
     ProfileComponent,
-    ChatsComponent
+    ChatsComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { SingleChatComponent } from '../designer/single-chat/single-chat.compone
     NzModalModule,
     NzListModule,
     LoadingSpinnerComponent,
-    SingleChatComponent
+    SingleChatComponent,
+    PublicResetPasswordComponent
 ]
 })
 export class PersonalModule { }

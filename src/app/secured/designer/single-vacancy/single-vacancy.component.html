@@ -1,6 +1,12 @@
 <div class="secured-page-x-padding-main">
-    <div class="filter-section d-flex align-items-center container-margin-y">
-        <h3 >Your applications</h3>
+    <div class="filter-title-bg">
+        <div class="main-container-size">
+            <div class="filter-title">
+                <div class="title-section">
+                    <h3 class="mb-0">Your applications</h3>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="chats-section">
         <nz-list nzItemLayout="horizontal" [nzLoading]="loadingVacancy">
@@ -13,7 +19,7 @@
 
 <nz-modal [nzVisible]="true" [nzClosable]="false" [nzMaskClosable]="false" [nzWidth]="1024">
     <div *nzModalTitle>
-        <div *ngIf="retrivedVacancy && retrivedVacancy.created_by" class="d-flex align-items-center gap-2">
+        <div *ngIf="retrivedVacancy && retrivedVacancy.created_by" class="mob-d-flex align-items-center gap-2">
             <div>
                 <nz-avatar *ngIf="retrivedVacancy.created_by.profile_picture" nzIcon="user"
                     [nzSrc]="'http://127.0.0.1:3000'+retrivedVacancy.created_by.profile_picture!" [nzSize]="48"></nz-avatar>
@@ -30,7 +36,7 @@
         <div *ngIf="loadingVacancy" class="no-posts-found text-center my-4 py-4">
             <app-loading-spinner></app-loading-spinner>
         </div>
-        <div class="d-flex gap-3">
+        <div class="mob-d-flex gap-3">
             <div class="single-vacancy-icon-holder relative">
                 <a [href]="'http://127.0.0.1:3000'+retrivedVacancy?.application_url" download>
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 100 100">
@@ -42,7 +48,7 @@
             <div class="single-vacancy-title">
                 <h3 class="mb-0">{{retrivedVacancy?.title}}</h3>
                 <div class="single-vacancy-created-at">
-                    <div class="d-flex gap-2">
+                    <div class="mob-d-flex gap-2">
                         <small>{{retrivedVacancy?.created_at | date : 'MMM dd, YYYY'}}</small>
                     </div>
                 </div>
@@ -50,8 +56,8 @@
         </div>
         <div class="single-vacancy-locations mt-3">
             <h6>Locations</h6>
-            <div class="d-flex align-items-center flex-wrap gap-2">
-                <nz-tag *ngFor="let item of retrivedVacancy?.locations" [nzColor]="'#707070'" class="me-0 d-flex align-items-center" >
+            <div class="mob-d-flex align-items-center flex-wrap gap-2">
+                <nz-tag *ngFor="let item of retrivedVacancy?.locations" [nzColor]="'#707070'" class="me-0 mob-d-flex align-items-center" >
                     <span nz-icon nzType="aim" nzTheme="outline" class="me-1"></span>
                     {{item.name}}
                 </nz-tag>
@@ -59,8 +65,8 @@
         </div>
         <div class="single-vacancy-categories mt-3">
             <h6>Categories</h6>
-            <div class="d-flex align-items-center flex-wrap gap-2">
-                <nz-tag *ngFor="let item of retrivedVacancy?.categories" [nzColor]="'#707070'" class="me-0 d-flex align-items-center" >
+            <div class="mob-d-flex align-items-center flex-wrap gap-2">
+                <nz-tag *ngFor="let item of retrivedVacancy?.categories" [nzColor]="'#707070'" class="me-0 mob-d-flex align-items-center" >
                     <span nz-icon nzType="tag" nzTheme="outline" class="me-1"></span>
                     {{item.name}}
                 </nz-tag>

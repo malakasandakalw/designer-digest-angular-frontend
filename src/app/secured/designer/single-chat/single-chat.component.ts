@@ -72,7 +72,7 @@ export class SingleChatComponent implements OnInit, OnDestroy{
   disableButton = false
   msgSubscription: Subscription | undefined;
 
-  chats = [1,2,3,4,5]
+  chats = []
 
   get currentUser() {
     return this.apiAuthService.getCurrentUser().user
@@ -98,9 +98,6 @@ export class SingleChatComponent implements OnInit, OnDestroy{
         this.messages = this.messages ? [...this.messages, message] : [message];
         this.scrollToBottom()
 
-        console.log(message)
-        console.log(this.currentUser.id)
-
         if((message.to_user === this.currentUser.id ) && message.id) {
           this.socketService.sendMessageRead(message.id,  message.to_user)
         }
@@ -117,7 +114,6 @@ export class SingleChatComponent implements OnInit, OnDestroy{
       this.msgSubscription.unsubscribe();
       console.log('Subscription unsubscribed');
     }
-    console.log('Component destroyed');;
   }
 
   async getReceiverData() {
