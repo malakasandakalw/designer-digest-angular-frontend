@@ -84,4 +84,10 @@ export class AllPostsComponent implements OnInit {
     await this.getPosts();
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getPosts()
+
+  }
+
 }

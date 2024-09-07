@@ -99,7 +99,7 @@
             <div *ngIf="loading" class="no-posts-found text-center my-4 py-4">
                 <app-loading-spinner></app-loading-spinner>
             </div>
-            <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalDesigners" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="pageSize=$event"></nz-pagination>
+            <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalDesigners" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
         </div>
     </div>
 </div>

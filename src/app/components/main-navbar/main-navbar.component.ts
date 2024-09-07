@@ -46,7 +46,8 @@ export class MainNavbarComponent implements OnInit{
     dashboard: false,
     myStore: false,
     applications: false,
-    chat: false
+    chat: false,
+    vacancies: false
   }
 
   get currentUser() {
@@ -111,6 +112,11 @@ export class MainNavbarComponent implements OnInit{
     if (fullUrl.includes('applications')) {
       this.mainNav.applications = true;
     }
+
+    if (fullUrl.includes('vacancies')) {
+      this.mainNav.vacancies = true;
+    }
+    
 
     this.activeRoute.url.subscribe((urlSegments) => {
       if (urlSegments && urlSegments.length > 0) {

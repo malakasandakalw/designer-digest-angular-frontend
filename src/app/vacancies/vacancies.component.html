@@ -80,7 +80,7 @@
                 <app-loading-spinner></app-loading-spinner>
             </div>
             <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize"
-                (nzPageIndexChange)="onPageChange($event)" class="mt-4" (nzPageSizeChange)="pageSize=$event"></nz-pagination>
+                (nzPageIndexChange)="onPageChange($event)" class="mt-4" (nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
         </div>
 
     </div>

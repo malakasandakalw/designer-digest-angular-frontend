@@ -112,6 +112,11 @@ export class MyStoreComponent implements OnInit{
     await this.getPostsByDesigner()
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getPostsByDesigner()
+  }
+
   navigateToPost(postId: string) {
     this.router.navigate([`/designer-digest/designer/my-store/${postId}`])
   }

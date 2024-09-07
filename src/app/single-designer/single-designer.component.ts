@@ -127,6 +127,11 @@ export class SingleDesignerComponent implements OnInit {
     await this.getPostsByDesignerId()
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getPostsByDesignerId()
+  }
+
   chatTrigger() {
 
     if(this.currentUser.id === this.designer?.user_id) return

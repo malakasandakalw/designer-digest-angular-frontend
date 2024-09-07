@@ -10,7 +10,6 @@ import { ApiAuthService } from './api/api-auth.service';
 export class SocketService {
   private socket: Socket;
   private newMessageSubject = new BehaviorSubject<any>(null);
-  // private messageReadSubject = new BehaviorSubject<any>(null);
 
   constructor(
     private authApiService: ApiAuthService
@@ -26,18 +25,11 @@ export class SocketService {
       this.newMessageSubject.next(message);
     });
 
-    // this.socket.on('receiveRead', (message: MessageRead) => {
-    //   this.messageReadSubject.next(message);
-    // });
   }
 
   getNewMessageObservable(): Observable<MessageData> {
     return this.newMessageSubject.asObservable();
   }
-
-  // getReadMessageObservable(): Observable<MessageRead> {
-  //   return this.messageReadSubject.asObservable();
-  // }
 
   sendMessage(messageData: MessageData) {
     this.socket.emit('sendMessage', messageData);

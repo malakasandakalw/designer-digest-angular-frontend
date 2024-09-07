@@ -38,7 +38,7 @@
         </ng-container>
 
         <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize"
-            (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="pageSize=$event"></nz-pagination>
+            (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
 
     </div>
 

@@ -14,14 +14,14 @@ export class TokenVerifyService implements CanActivate {
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     const result = await this.apiAuthService.tokenAuthenticator();
-    console.log(result);
-    return true;
-    // if() {
-    //   return true
-    // } else {
-    //   this.apiAuthService.logout()
-    //   this.router.navigate(['/auth/login'], {queryParams: {returnUrl: state.url}});
-    //   return false;
-    // }
+    // console.log('result', result.verified)
+    if(result) {
+      if(result.verified) {
+        if(result.verified === true) {
+          return true;
+        }
+      }
+    }
+    return false
   }
 }

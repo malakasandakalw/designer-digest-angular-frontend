@@ -104,6 +104,11 @@ export class SingleCategoryComponent {
     await this.getPosts()
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getPosts()
+  }
+
   navigateToPost(postId: string) {
     this.router.navigate([`/all-posts/${postId}`])
   }

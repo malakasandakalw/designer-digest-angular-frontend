@@ -187,13 +187,13 @@
 
                 <div *ngIf="isEmployer" class=" gap-3 nav-spec">
                     <ul nz-menu nzMode="vertical" class="header-menu ">
-                        <li nz-menu-item>
+                        <li nz-menu-item [nzSelected]="mainNav.vacancies">
                             <a href="/designer-digest/employer/vacancies" class="p-0">
                                 <span nz-icon nzType="diff" nzTheme="outline"></span>
                                 Job Vacancies
                             </a>
                         </li>
-                        <li nz-menu-item class="">
+                        <li nz-menu-item class="" [nzSelected]="mainNav.chat">
                             <a href="/designer-digest/employer/chats" nz-button class="chat-btn-main pt-0 br-100">
                                 <span nz-icon nzType="comment" nzTheme="outline"></span>
                             </a>
@@ -207,7 +207,7 @@
 
                 <div *ngIf="isPersonal" class="nav-spec">
                     <ul nz-menu nzMode="horizontal" class="header-menu mob-d-flex align-items-center">
-                        <li nz-menu-item class="">
+                        <li nz-menu-item class="" [nzSelected]="mainNav.chat">
                             <a href="/designer-digest/personal/chats" nz-button class="chat-btn-main pt-0 br-100">
                                 <span nz-icon nzType="comment" nzTheme="outline"></span>
                             </a>

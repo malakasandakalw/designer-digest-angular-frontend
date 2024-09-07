@@ -271,16 +271,17 @@ li {
     box-sizing: border-box;
     background-color: transparent;
     position: relative;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
     box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
     background-color: #fff;
     transition: 0.25s all;
+    border: 2px solid #000;
 }
 
 .post-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 }
 
 .media-holder {
@@ -447,7 +448,7 @@ a.ant-btn.msg-download {
 }
 
 .gallery {
-    gap: 8px;
+    gap: 24px;
     flex-wrap: wrap;
 }
 
@@ -599,6 +600,8 @@ nz-pagination {
 
 .side-page-data {
     padding-left: 12px;
+    width: 100%;
+    max-width: calc(1400px - 225px);
 }
 
 @media(max-width: 1440px) {
@@ -611,6 +614,9 @@ nz-pagination {
     }
     .side-page-data .gallery .col, .medium-screen .col {
         max-width: calc((100% / 3) - 12px);
+    }
+    .side-page-data {
+        max-width: calc(1280px - 225px);
     }
 }
 
@@ -625,6 +631,9 @@ nz-pagination {
     .side-page-data .gallery .col, .medium-screen .col {
         max-width: calc((100% / 3) - 12px);
     }
+    .side-page-data {
+        max-width: calc(1200px - 225px);
+    }
 
 }
 
@@ -635,6 +644,9 @@ nz-pagination {
     }
     .side-page-data .gallery .col, .medium-screen .col {
         max-width: calc((100% / 3) - 12px);
+    }
+    .side-page-data {
+        max-width: calc(1024px - 225px);
     }
 }
 

@@ -65,10 +65,6 @@
     border-bottom-left-radius: 8px;
 }
 
-.side-page-data {
-    max-width: calc(100% - 225px);
-}
-
 .container-margin-y {
     margin-top: 48px;
 }

@@ -9,6 +9,10 @@
     text-align: center;
 }
 
+.ant-select {
+    max-width: 125px !important;
+}
+
 @media(max-width: 1340px) {
     .public-designer-card {
         max-width: calc((100% / 4) - 16px);

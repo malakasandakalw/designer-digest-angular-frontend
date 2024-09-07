@@ -28,7 +28,7 @@
             </div>
         </div>    
         
-        <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="pageSize=$event"></nz-pagination>
+        <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalPosts" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
         
         <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
             <h5 class="text-muted">No posts Found</h5>

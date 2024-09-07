@@ -123,6 +123,11 @@ export class VacanciesComponent {
     await this.getVacancies()
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getVacancies()
+  }
+
   showModel = false
   loadingVacancy = false
   retrivedVacancy: Vacancy | null = null
