@@ -165,4 +165,10 @@ export class DesignersComponent {
     await this.getDesigners()
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getDesigners()
+
+  }
+
 }

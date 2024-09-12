@@ -23,7 +23,7 @@ export class SingleDesignerComponent implements OnInit {
 
   totalPosts = 0;
   pageIndex = 1;
-  pageSize = 15;
+  pageSize = 20;
 
   selectedCategories: string[] = []
   orderBy: string = 'recent'
@@ -127,6 +127,11 @@ export class SingleDesignerComponent implements OnInit {
     await this.getPostsByDesignerId()
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getPostsByDesignerId()
+  }
+
   chatTrigger() {
 
     if(this.currentUser.id === this.designer?.user_id) return
@@ -158,7 +163,7 @@ export class SingleDesignerComponent implements OnInit {
     if(!this.currentUser) {
       this.router.navigate(['/auth/login']);
     } else {
-      if(!this.id) return
+      if(!this.id || this.id === this.currentUser.id) return
       try{
         const response = await this.designerService.follow(this.id);
         if (response && response.body.followed && this.designer) {

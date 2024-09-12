@@ -19,6 +19,8 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { createMessage } from 'src/app/common/utils/messages';
 
 @Component({
   selector: 'app-single-post-card-common',
@@ -39,12 +41,17 @@ export class SinglePostCardComponent {
   constructor(
     private postsService: PostsService,
     private router: Router,
-    private apiAuthService: ApiAuthService
+    private apiAuthService: ApiAuthService,
+    private message: NzMessageService,
   ) {
 
   }
 
   async upvoteTrigger(postId: string) {
+  
+    if(!this.currentUser) {
+    this.router.navigate(['/auth/login']);
+    } else {
     try{
       const response = await this.postsService.triggerUpvote(postId);
       if (response && response.body.postupvoted) {
@@ -55,6 +62,7 @@ export class SinglePostCardComponent {
             this.post.user_has_voted = response.body.postupvoted.voted
             this.post.upvote_count = response.body.postupvoted.voted ? (parseInt(this.post.upvote_count) + 1).toString() : (parseInt(this.post.upvote_count) - 1).toString()
             this.triggerVote.emit(response.body.postupvoted.voted)
+            createMessage(this.message, response.status, response.body.postupvoted.voted ? `You upvoted ${this.post.title}!` : `You have removed your vote from ${this.post.title}`)
           }
         }
         // this.totalPosts = response.body.result.total
@@ -63,6 +71,7 @@ export class SinglePostCardComponent {
     }catch(error) {
       console.log(error)
     }
+  }
   }
 
   navigateToPost(postId: string) {

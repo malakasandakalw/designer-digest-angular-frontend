@@ -3,6 +3,8 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, lastValueFrom, map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { createMessage } from 'src/app/common/utils/messages';
 
 export interface userSignupRequestData {
   first_name: string,
@@ -18,7 +20,8 @@ export class ApiAuthService extends BaseService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService,
   ) {
     super();
   }
@@ -63,9 +66,13 @@ export class ApiAuthService extends BaseService {
     return this._post(this.http, `${this.API_BASE_URL}/users/login`, { email, password })
   }
 
+  public resetPassword(current_password: string, new_password: string) {
+    return this._post(this.http, `${this.API_BASE_URL}/users/reset-password`, { current_password, new_password })
+  }
+
   public logout() {
     localStorage.removeItem('currentUser');
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 
   public tokenAuthenticator() {

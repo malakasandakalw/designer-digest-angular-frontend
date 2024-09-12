@@ -66,7 +66,6 @@ export class SignupComponent implements OnInit {
 
 
   async submitForm(): Promise<void> {
-    this.loading = true
     if (this.signupForm.valid) {
       if (this.signupForm.controls.firstName.value && this.signupForm.controls.lastName.value && this.signupForm.controls.email.value && this.signupForm.controls.password.value) {
 
@@ -78,6 +77,7 @@ export class SignupComponent implements OnInit {
         }
 
         try {
+          this.loading = true
           const response = await this.authApiService.signup(requestData);
           if (response) {
             this.createMessage(response.status, response.message);
@@ -92,10 +92,11 @@ export class SignupComponent implements OnInit {
         } catch (e) {
           console.log('User signup error', e);
           this.loading = false
+        } finally {
+        this.loading = false
         }
 
       } else {
-        this.loading = false
         return;
       }
     } else {

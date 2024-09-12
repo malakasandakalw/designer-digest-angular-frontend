@@ -122,4 +122,8 @@ export class VacanciesComponent {
     this.pageIndex = pageIndex
     await this.getVacancies()
   }
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getVacancies()
+  }
 }

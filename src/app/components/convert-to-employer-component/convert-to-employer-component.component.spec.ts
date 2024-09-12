@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConvertToEmployerComponentComponent } from './convert-to-employer-component.component';
+import { ConvertToEmployerComponent } from './convert-to-employer-component.component';
 
-describe('ConvertToEmployerComponentComponent', () => {
-  let component: ConvertToEmployerComponentComponent;
-  let fixture: ComponentFixture<ConvertToEmployerComponentComponent>;
+describe('ConvertToEmployerComponent', () => {
+  let component: ConvertToEmployerComponent;
+  let fixture: ComponentFixture<ConvertToEmployerComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ConvertToEmployerComponentComponent]
+      declarations: [ConvertToEmployerComponent]
     });
-    fixture = TestBed.createComponent(ConvertToEmployerComponentComponent);
+    fixture = TestBed.createComponent(ConvertToEmployerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

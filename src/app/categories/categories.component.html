@@ -1,11 +1,17 @@
 <app-main-navbar></app-main-navbar>
 
 <div class=" secured-page-x-padding-main">
-    <div class="filter-section d-flex align-items-center container-margin-y">
-        <h3 >Categories</h3>
+    <div class="filter-title-bg">
+        <div class="main-container-size">
+            <div class="filter-title">
+                <div class="title-section">
+                    <h3 class="mb-0">All Categories</h3>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="categories-section">
-        <div class="d-flex gap-3 flex-wrap">
+    <div class="categories-section main-container-size">
+        <div class="mob-d-flex gap-3 flex-wrap">
             <div *ngIf="!categories.length" class="no-posts-found text-center my-4 py-4">
                 <h5 class="text-muted">No Categories Found</h5>
                 <span nz-icon nzType="meh" nzTheme="outline"></span>
@@ -28,3 +34,5 @@
         
     </div>
 </div>
+
+<app-footer></app-footer>

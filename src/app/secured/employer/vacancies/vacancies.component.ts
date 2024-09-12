@@ -92,4 +92,9 @@ export class VacanciesComponent implements OnInit {
     await this.getVacanciesByEmployer()
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getVacanciesByEmployer()
+  }
+
 }

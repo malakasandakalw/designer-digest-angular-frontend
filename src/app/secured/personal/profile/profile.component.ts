@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { User } from 'src/app/common/interfaces/CommonInterface';
+import { createMessage } from 'src/app/common/utils/messages';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
 import { PersonalService, UpdatePersonalProfileData } from 'src/services/api/personal.service';
 
@@ -26,6 +28,7 @@ export class ProfileComponent implements OnInit{
     private apiAuthService: ApiAuthService,
     private readonly formBuilder: FormBuilder,
     private personalService: PersonalService,
+    private message: NzMessageService,
   ) {
     this.currentUser = this.apiAuthService.getCurrentUser().user;
     this.updateForm = this.formBuilder.group({
@@ -59,6 +62,7 @@ export class ProfileComponent implements OnInit{
       const response = await this.personalService.updateProfile(requestData)
 
       if(response.status === 'success') {
+        createMessage(this.message, response.status, response.message as string)
         this.apiAuthService.updateCurrentUserSession(response.body.user)
         setTimeout(() => {
           window.location.reload()

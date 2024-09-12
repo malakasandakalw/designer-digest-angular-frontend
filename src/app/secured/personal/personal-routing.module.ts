@@ -6,6 +6,7 @@ import { ConvertToDesignerFormComponent } from "src/app/components/convert-to-de
 import { ConvertToEmployerComponent } from "src/app/components/convert-to-employer-component/convert-to-employer-component.component";
 import { ChatsComponent } from "./chats/chats.component";
 import { SingleChatComponent } from "../designer/single-chat/single-chat.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 
 const routes: Routes = [
     {
@@ -17,7 +18,8 @@ const routes: Routes = [
             { path: "convert-to-designer", component: ConvertToDesignerFormComponent },
             { path: "convert-to-employer", component: ConvertToEmployerComponent },
             { path: "chats", component: ChatsComponent },
-            { path: "chats/:id", component: SingleChatComponent }
+            { path: "chats/:id", component: SingleChatComponent },
+            { path: "reset-password", component: ResetPasswordComponent},
         ]
     }
 ];

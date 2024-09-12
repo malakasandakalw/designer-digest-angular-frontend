@@ -123,6 +123,11 @@ export class VacanciesComponent {
     await this.getVacancies()
   }
 
+  async onPageSizeChange(size: number) {
+    this.pageSize = size
+    await this.getVacancies()
+  }
+
   showModel = false
   loadingVacancy = false
   retrivedVacancy: Vacancy | null = null
@@ -215,7 +220,7 @@ export class VacanciesComponent {
 
   navigateToUpdateApplication(vacancyId: string) {
     if(!vacancyId) return
-    this.router.navigate(['/vacancies'])
+    this.router.navigate(['/designer-digest/designer/applications/'+vacancyId])
   }
 
 }

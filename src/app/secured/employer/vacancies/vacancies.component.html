@@ -1,35 +1,45 @@
 <div class="secured-page-x-padding-main">
-    <div class="d-flex align-items-center container-margin-y">
-        <h3 >Your vacancies</h3>
-        <a href="/designer-digest/employer/create-vacancy" class="ms-auto" nz-button>New Vacancy</a>
-    </div>
-    <div class="filter-section">
-        <app-vacancy-filter 
-            (emitActive)="onActiveChange($event)" 
-            (emitOnSearch)="onSearchChange($event)" 
-            (emitSelectedCategories)="onFilterCategoryChange($event)" 
-            (emitSelectedLocations)="onFilterLocationChange($event)"
-        ></app-vacancy-filter>
-    </div>
-    <div class="vacancies-section">
-        <div class="d-flex flex-wrap gap-3">
-            <div *ngFor="let item of vacancies" class="public-vacancy-card relative">
-                <app-single-vacancy-card [vacancy]="item" [isEmployer]="true"></app-single-vacancy-card>
+    <div class="filter-title-bg">
+        <div class="main-container-size">
+            <div class="filter-title">
+                <div class="title-section">
+                    <h3 class="mb-0">Your vacancies</h3>
+                </div>
+                <div class="filter-section">
+                    <a href="/designer-digest/employer/create-vacancy" class="ms-auto" nz-button
+                        [nzType]="'primary'">New Vacancy</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div *ngIf="!vacancies.length" class="no-posts-found text-center my-4 py-4">
-        <h5 class="text-muted">No vacancies Found</h5>
-        <span nz-icon nzType="meh" nzTheme="outline"></span>
+
+    <div class="main-container-size">
+        <div class="filter-section mob-d-flex justify-end">
+            <app-vacancy-filter (emitActive)="onActiveChange($event)" (emitOnSearch)="onSearchChange($event)"
+                (emitSelectedCategories)="onFilterCategoryChange($event)"
+                (emitSelectedLocations)="onFilterLocationChange($event)" [additionalFilterClasses]="'justify-end mb-3'"></app-vacancy-filter>
+        </div>
+        <div class="vacancies-section">
+            <div class="mob-d-flex flex-wrap gap-3">
+                <div *ngFor="let item of vacancies" class="public-vacancy-card relative">
+                    <app-single-vacancy-card [vacancy]="item" [isEmployer]="true"></app-single-vacancy-card>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!vacancies.length" class="no-posts-found text-center my-4 py-4">
+            <h5 class="text-muted">No vacancies Found</h5>
+            <span nz-icon nzType="meh" nzTheme="outline"></span>
+        </div>
+
+        <ng-container *ngIf="loading">
+            <app-loading-spinner></app-loading-spinner>
+        </ng-container>
+
+        <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize"
+            (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
+
     </div>
 
-    <ng-container *ngIf="loading">
-        <app-loading-spinner></app-loading-spinner>
-    </ng-container>
-
-    <nz-pagination class="mt-4" [nzPageIndex]="pageIndex" [nzTotal]="totalVacancies" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
 </div>
-
-
-

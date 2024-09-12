@@ -38,35 +38,28 @@ export class LoginComponent implements OnInit{
       password: ['', [Validators.required]],
     })
 
-    // const currentUser = this.authApiService.getCurrentUser();
-    // if(currentUser && currentUser.user) {
-    //  this.navigateUser(currentUser.user);
-    // } else {
-    //   this.authApiService.logout()
-    // }
-
   }
 
   navigateUser(user: User) {
     if(user.role === 'Personal') {
       if(!user.is_verified) {
-        this.router.navigate(['/designer-digest/personal/profile'])
+        this.router.navigate(['/'])
       }
     }
 
     if(user.role === 'Designer') {
       if(!user.is_verified) {
-        this.router.navigate(['/designer-digest/designer/profile'])
+        this.router.navigate(['/'])
       } else {
-        this.router.navigate(['/designer-digest/designer/dashboard'])
+        this.router.navigate(['/'])
       }
     }
 
     if(user.role === 'Employer') {
       if(!user.is_verified) {
-        this.router.navigate(['/designer-digest/employer/profile'])
+        this.router.navigate(['/'])
       } else {
-        this.router.navigate(['/designer-digest/employer/profile'])
+        this.router.navigate(['/'])
       }
     }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { User } from 'src/app/common/interfaces/CommonInterface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiAuthService } from 'src/services/api/api-auth.service';
 import { CommonModule } from '@angular/common';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -13,6 +13,8 @@ import { Subscription, takeUntil } from 'rxjs';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { ChatsService } from 'src/services/api/chats.service';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import { createMessage } from 'src/app/common/utils/messages';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-main-navbar',
@@ -30,23 +32,46 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 })
 export class MainNavbarComponent implements OnInit{
 
-  currentUser: User | null = null
   isLoggedIn: boolean = false
   placement = 'topRight';
   msgSubscription: Subscription | undefined;
   msgReadSubscription: Subscription | undefined;
   unreadMessageCount: string | null = null
 
+  openNavMenu = false
+
+  mainNav = {
+    allPosts : false,
+    allCategories: false,
+    allDesigners: false,
+    allVacancies: false,
+    dashboard: false,
+    myStore: false,
+    applications: false,
+    chat: false,
+    vacancies: false
+  }
+
+  get currentUser() {
+    return this.apiAuthService.getCurrentUser().user
+  }
+
   get isDesigner() {
-    return this.apiAuthService.isDesigner()
+    if(this.currentUser) return this.apiAuthService.isDesigner()
+    return false
+   
   }
 
   get isPersonal() {
-    return this.apiAuthService.isPersonal()
+    if(this.currentUser)return this.apiAuthService.isPersonal()
+    return false
+    
   }
 
   get isEmployer() {
-    return this.apiAuthService.isEmployer()
+    if(this.currentUser) return this.apiAuthService.isEmployer()
+    return false
+    
   }
 
   constructor(
@@ -54,11 +79,12 @@ export class MainNavbarComponent implements OnInit{
     private socketService: SocketService,
     private router: Router,
     private notification: NzNotificationService,
-    private chatService: ChatsService
+    private chatService: ChatsService,
+    private activeRoute: ActivatedRoute,
+    private message: NzMessageService
   ) {
     if (apiAuthService.isAuthenticated()) {
       this.verification()
-      this.currentUser = this.apiAuthService.getCurrentUser().user
     }
     this.msgSubscription = this.socketService.getNewMessageObservable().subscribe(async (message) => {
       if (message && this.currentUser) {
@@ -77,6 +103,51 @@ export class MainNavbarComponent implements OnInit{
 
   async ngOnInit(): Promise<void> {
     await this.getUnreadMessagesCount();
+
+    const fullUrl = this.router.url;
+
+    if (fullUrl.includes('dashboard')) {
+      this.mainNav.dashboard = true;
+    }
+    if (fullUrl.includes('my-store')) {
+      this.mainNav.myStore = true;
+    }
+    if (fullUrl.includes('applications')) {
+      this.mainNav.applications = true;
+    }
+
+    if (fullUrl.includes('vacancies')) {
+      this.mainNav.vacancies = true;
+    }
+    
+
+    this.activeRoute.url.subscribe((urlSegments) => {
+      if (urlSegments && urlSegments.length > 0) {
+        const urlSegment = urlSegments[0];
+        const { path } = urlSegment;
+  
+        if(path.includes('all-posts')) {
+          this.mainNav.allPosts = true;
+        } 
+  
+        if(path.includes('categories')) {
+          this.mainNav.allCategories = true;
+        } 
+  
+        if(path.includes('designers')) {
+          this.mainNav.allDesigners = true;
+        } 
+  
+        if(path.includes('vacancies')) {
+          this.mainNav.allVacancies = true;
+        }
+  
+        if(path.includes('dashboard')) {
+          this.mainNav.dashboard = true;
+        }
+      }
+    });
+
   }
 
   createBasicNotification(userName: string): void {
@@ -104,6 +175,18 @@ export class MainNavbarComponent implements OnInit{
     }
   }
 
+  navigateResetPassword() {
+    if(this.isDesigner) {
+      this.router.navigate([`/designer-digest/designer/reset-password`])
+    }
+    if(this.isEmployer) {
+      this.router.navigate([`/designer-digest/employer/reset-password`])
+    }
+    if(this.isPersonal) {
+      this.router.navigate([`/designer-digest/personal/reset-password`])
+    }
+  } 
+
   navigateProfile() {
     if(this.isDesigner) {
       this.router.navigate([`/designer-digest/designer/profile`])
@@ -118,6 +201,7 @@ export class MainNavbarComponent implements OnInit{
 
   async logOut() {
     await this.apiAuthService.logout()
-    this.router.navigate([`/`])
+    window.location.reload();
+    createMessage(this.message, 'success', 'Successfully Logged Out')
   }
 }

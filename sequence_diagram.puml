@@ -5,22 +5,33 @@ participant "Angular Frontend" as FE
 participant "Express.js Backend" as BE
 database "PostgreSQL Database" as DB
 
-User -> FE: Enter Signup Details
-FE -> BE: Send POST /signup request
-BE -> BE: Validate User Data
-alt If data is valid
-    BE -> DB: INSERT INTO users (details)
-    DB --> BE: Success/Failure
-    alt If insertion is successful
-        BE -> FE: Send success response
-        FE -> User: Display success message
-    else If insertion fails
-        BE -> FE: Send failure response
-        FE -> User: Display error message
+User -> FE: Enter Current Password and New Password
+FE -> BE: Send POST /reset-password request with current and new password
+BE -> BE: Validate user session (Check if logged in)
+alt If user is logged in
+    BE -> DB: SELECT current_password_hash FROM users WHERE user_id = current_user
+    DB --> BE: Return password hash
+    BE -> BE: Compare provided current password with stored hash
+    alt If passwords match
+        BE -> DB: UPDATE users SET password = new_password_hash WHERE user_id = current_user
+        DB --> BE: Success/Failure
+        alt If update is successful
+            BE -> FE: Send success response
+            FE -> User: Display success message and logout user
+            FE -> BE: Send POST /logout request
+            BE -> DB: Invalidate session/token
+            BE --> FE: Logout successful
+        else If update fails
+            BE -> FE: Send failure response
+            FE -> User: Display error message
+        end
+    else If passwords do not match
+        BE -> FE: Send password mismatch error response
+        FE -> User: Display "Current password is incorrect"
     end
-else If data is invalid
-    BE -> FE: Send validation error response
-    FE -> User: Display error message
+else If user is not logged in
+    BE -> FE: Send authentication error response
+    FE -> User: Display "User not logged in"
 end
 
 @enduml

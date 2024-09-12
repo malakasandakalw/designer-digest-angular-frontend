@@ -7,7 +7,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 80%;
+    width: 85px;
 }
 
 .upvotes-holder {
@@ -67,8 +67,12 @@
     position: absolute;
     position: absolute;
     right: 8px;
-    bottom: 4px;
-    height: 32px;
-    width: 32px;
+    bottom: 10px;
+    height: 48px;
+    width: 48px;
     padding: 0;
+}
+
+.edit-btn span {
+    font-size: 20px;
 }

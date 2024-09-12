@@ -10,7 +10,7 @@
                 </video>
             </ng-container>
             <div class="upvotes-holder">
-                <div class="vote-btn cursor-pointer" [ngClass]="post.user_has_voted ? 'highlight' : ''" (click)="$event.preventDefault(); $event.stopPropagation(); upvoteTrigger(post.post_id)">
+                <div class="vote-btn cursor-pointer" [ngClass]="post.user_has_voted ? 'highlight' : ''" (click)="$event.preventDefault(); $event.stopPropagation(); upvoteTrigger(post.post_id)" nz-tooltip [nzTooltipTitle]="post.user_has_voted ? 'Remove Vote' : 'Upvote Post'">
                     <span nz-icon>
                         <svg>
                             <path
@@ -33,13 +33,13 @@
                 <!-- <p class="post-card-des" nz-tooltip [nzTooltipTitle]="post.description">{{post.description}}</p> -->
             </div>
             <!-- <div class="categories-holder mt-2">
-                <div class="d-flex gap-1 align-posts-center flex-wrap">
+                <div class="mob-d-flex gap-1 align-posts-center flex-wrap">
                     <div *ngFor="let cat of post.categories" class="">
                         <nz-tag [nzColor]="'#999999'" class="me-0 hover-tag hover-tag cursor-pointer" (click)="navgiateToSingleCategory(cat.id)">{{cat.name}}</nz-tag>
                     </div>
                 </div>
             </div> -->
-            <div *ngIf="post.created_by" class="d-flex align-items-center gap-2">
+            <div *ngIf="post.created_by" class="mob-d-flex align-items-center gap-2">
                 <div class="cursor-pointer" (click)="$event.preventDefault(); $event.stopPropagation();navgiateToSingleDesigner(post.created_by.id)">
                     <nz-avatar *ngIf="post.created_by.profile_picture" nzIcon="user"
                         [nzSrc]="'http://127.0.0.1:3000'+post.created_by.profile_picture!" [nzSize]="18"></nz-avatar>

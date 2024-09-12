@@ -19,6 +19,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 export class MainPostsFilterComponent implements OnInit{
 
   @Input({required: true}) isCategoriesFilterShow = true
+  @Input() additionalFilterClasses = ''
   @Output() emitSelectedCategories = new EventEmitter<string[]>();
   @Output() emitOrderBy = new EventEmitter<string>();
   @Output() emitOnSearch = new EventEmitter<string>();

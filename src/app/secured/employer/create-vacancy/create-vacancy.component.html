@@ -1,8 +1,14 @@
 <div class="container-margin-y">
-    <div class="filter-section container-margin-y">
-        <h3 >Create new vacancy</h3>
+    <div class="filter-title-bg">
+        <div class="main-container-size">
+            <div class="filter-title">
+                <div class="title-section">
+                    <h3 class="mb-0">Create new vacancy</h3>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-page-flex">
+    <div class="form-page-flex main-container-size">
         <!-- <div class="logo-container-form">
             <div class="text-muted text-center">
                 <h1 class="container-margin-y">Create new vacancy.</h1>
@@ -17,7 +23,7 @@
                         <nz-form-control>
                             <nz-form-label nzRequired>Title</nz-form-label>
                             <nz-input-group [nzSize]="'large'">
-                                <input nz-input placeholder="Post title" type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange($event)" [ngModelOptions]="{standalone: true}"/>
+                                <input nz-input placeholder="Vacancy title" type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange($event)" [ngModelOptions]="{standalone: true}"/>
                                 <span *ngIf="errorObject.title.show" nz-typography nzType="danger">You must enter title</span>
                             </nz-input-group>
                         </nz-form-control>
