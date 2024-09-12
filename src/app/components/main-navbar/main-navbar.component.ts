@@ -13,6 +13,8 @@ import { Subscription, takeUntil } from 'rxjs';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { ChatsService } from 'src/services/api/chats.service';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import { createMessage } from 'src/app/common/utils/messages';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-main-navbar',
@@ -78,7 +80,8 @@ export class MainNavbarComponent implements OnInit{
     private router: Router,
     private notification: NzNotificationService,
     private chatService: ChatsService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private message: NzMessageService
   ) {
     if (apiAuthService.isAuthenticated()) {
       this.verification()
@@ -198,6 +201,7 @@ export class MainNavbarComponent implements OnInit{
 
   async logOut() {
     await this.apiAuthService.logout()
-    this.router.navigate([`/`])
+    window.location.reload();
+    createMessage(this.message, 'success', 'Successfully Logged Out')
   }
 }

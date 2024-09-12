@@ -5,6 +5,7 @@
 
 .hero-img-holder {
     max-width: 650px;
+    width: 100%;
 }
 
 .no-posts-found span{

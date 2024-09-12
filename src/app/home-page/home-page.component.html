@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="hero-img-holder">
-                <img src="assets/hero.jpg" alt="" class="img-fluid">
+                <img src="assets/hero.png" alt="" class="img-fluid">
             </div>
         </div>
     </div>
@@ -29,7 +29,6 @@
 <div class="about-us-more main-container-size">
     <div class="mob-d-flex align-items-center">
         <div class="left">
-            <h3>Why Choose Designer Digest?</h3>
             <ul>
                 <li>
                     <b>Showcase Your Work:</b> Create a stunning online portfolio to display your designs. Designer Digest provides a dedicated space for you to present your creations to the world, helping you build your brand and attract attention from industry professionals.
@@ -60,11 +59,14 @@
     </div>
 </div>
 
-<div class="join-section">
-    <p>Join Designer Digest today and experience a platform built exclusively for fashion designers. Whether you’re a fresh graduate looking to make a mark or an established designer seeking new opportunities, Designer Digest offers the tools and connections you need to succeed. Let your creativity flourish and take your fashion career to new heights!</p>
+
+<div class="about-us-section main-container-size">
+    <div class="bg-gradient-dark-main paddings-def">
+        <p class="text-center text-white">Join Designer Digest today and experience a platform built exclusively for fashion designers. Whether you’re a fresh graduate looking to make a mark or an established designer seeking new opportunities, Designer Digest offers the tools and connections you need to succeed. Let your creativity flourish and take your fashion career to new heights!</p>
+    </div>
 </div>
 
-<div class="main-container-size">
+<div class="main-container-size mt-5">
 
     <div class="mob-d-flex align-items-center">
         <div class="title-section">
@@ -76,7 +78,7 @@
             </app-main-posts-filter>
         </div>
     </div>
-    <div class="posts-section">
+    <div class="posts-section mt-4">
 
         <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
             <h5 class="text-muted">No Posts Found</h5>
@@ -139,7 +141,7 @@
         </div>
 
         <div class="see-all text-center mb-5">
-            <button nz-button [nzType]="'primary'" (click)="navigateToAllPosts()" class="ms-auto font-x-lg">
+            <button nz-button [nzType]="'primary'" (click)="navigateToAllPosts()" class="ms-auto font-x-lg w-100">
                 See All Posts..
             </button>
         </div>

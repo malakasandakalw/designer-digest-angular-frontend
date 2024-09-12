@@ -60,6 +60,10 @@
     z-index: 999;
 }
 
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-item, .ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-submenu {
+    padding: 0 12px !important;
+}
+
 @media(max-width: 1050px) {
     .mobile-nav-section {
         display: block;

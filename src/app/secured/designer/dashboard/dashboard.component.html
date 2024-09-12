@@ -29,34 +29,22 @@
 
             <div class="chart-col">
                 <h6>Followers count</h6>
-                <div id="follow_count" [ngClass]="!following.length ? 'd-none' : ''" style="width: 550px;height:400px;">
+                <div id="follow_count" style="width: 550px;height:400px;">
 
-                </div>
-                <div *ngIf="!following.length" class="no-posts-found text-center my-4 py-4">
-                    <h5 class="text-muted">No Data</h5>
-                    <span nz-icon nzType="meh" nzTheme="outline"></span>
                 </div>
             </div>
 
             <div class="chart-col">
                 <h6>Posts votes</h6>
-                <div id="votes_count" [ngClass]="!votes.length ? 'd-none' : ''" style="width: 550px;height:400px;">
+                <div id="votes_count" style="width: 550px;height:400px;">
 
-                </div>
-                <div *ngIf="!votes.length" class="no-posts-found text-center my-4 py-4">
-                    <h5 class="text-muted">No Data</h5>
-                    <span nz-icon nzType="meh" nzTheme="outline"></span>
                 </div>
             </div>
 
             <div class="chart-col">
                 <h6>Posts created</h6>
-                <div id="posts_count" [ngClass]="!posts.length ? 'd-none' : ''" style="width: 550px;height:400px;">
+                <div id="posts_count" style="width: 550px;height:400px;">
 
-                </div>
-                <div *ngIf="!posts.length" class="no-posts-found text-center my-4 py-4">
-                    <h5 class="text-muted">No Data</h5>
-                    <span nz-icon nzType="meh" nzTheme="outline"></span>
                 </div>
             </div>
 

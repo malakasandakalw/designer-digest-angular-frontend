@@ -2,7 +2,7 @@
     <div class="main-container-size">
         <div class="mob-d-flex align-items-center">
             <div class="me-auto mob-d-flex align-items-center">
-                <div class="logo">
+                <div class="logo me-2">
                     <a href="/">
                         <img src="assets/logo.png" alt="" class="img-fluid">
                     </a>
@@ -66,7 +66,7 @@
 
                         <div *ngIf="isEmployer" class="mob-d-flex align-items-center gap-3 nav-spec">
                             <ul nz-menu nzMode="horizontal" class="header-menu mob-d-flex align-items-center">
-                                <li nz-menu-item>
+                                <li nz-menu-item [nzSelected]="mainNav.vacancies">
                                     <a href="/designer-digest/employer/vacancies" class="p-0">
                                         <span nz-icon nzType="diff" nzTheme="outline"></span>
                                         Job Vacancies

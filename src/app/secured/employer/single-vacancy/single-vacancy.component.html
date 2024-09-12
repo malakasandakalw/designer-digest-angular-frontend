@@ -1,5 +1,5 @@
-<div *ngIf="vacancy" class="secured-page-x-padding-main container-margin-y">
-    <div class="mob-d-flex gap-3">
+<div *ngIf="vacancy" class="secured-page-x-padding-main container-margin-y holder main-container-size mt-5">
+    <div class="mob-d-flex gap-3 ">
         <div class="single-vacancy-icon-holder relative">
             <a [href]="'http://127.0.0.1:3000'+vacancy.application_url" download>
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 100 100">
@@ -70,7 +70,7 @@
                                     <p class="applicant-small">{{application.applied_at | date:'MMMM d, y' }}</p>
                                 </div>
                                 <div class="ms-auto">
-                                    <a [href]="'http://127.0.0.1:3000'+application.resume_url" nz-button [nzType]="'primary'" download>
+                                    <a [href]="'http://127.0.0.1:3000'+application.resume_url" nz-button [nzType]="'default'" download>
                                         <span nz-icon nzType="download" nzTheme="outline" class="resume-download-btn"></span>
                                         Download Resume
                                     </a>

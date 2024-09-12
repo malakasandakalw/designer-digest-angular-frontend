@@ -84,18 +84,19 @@ export class ConvertToDesignerFormComponent implements OnInit{
   }
 
   validate() {
-    if(!this.selectedCatgeories || !this.selectedCatgeories.length) {
-      this.errorObject.categoryError.show = true;
-      return false
-    } else {
-      this.errorObject.categoryError.show = false;
-    }
 
     if(!this.selectedLocation) {
       this.errorObject.locationError.show = true
       return false
     } else {
       this.errorObject.locationError.show = false;
+    }
+    
+    if(!this.selectedCatgeories || !this.selectedCatgeories.length) {
+      this.errorObject.categoryError.show = true;
+      return false
+    } else {
+      this.errorObject.categoryError.show = false;
     }
 
     return true

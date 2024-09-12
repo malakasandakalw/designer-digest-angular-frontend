@@ -27,6 +27,9 @@ export class UpdateVacancyComponent implements OnInit, OnDestroy {
     },
     locations: {
       show: false
+    },
+    file: {
+      show: false
     }
   }
 
@@ -214,6 +217,13 @@ export class UpdateVacancyComponent implements OnInit, OnDestroy {
       return false
     } else {
       this.errorObject.locations.show = false
+    }
+
+    if(!this.uploadedFiles) {
+      this.errorObject.file.show = true
+      return false
+    } else {
+      this.errorObject.file.show = false
     }
 
     return true

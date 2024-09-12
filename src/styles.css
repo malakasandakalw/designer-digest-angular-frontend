@@ -222,7 +222,7 @@ li {
     max-width: 12px;
     width: 16px;
     max-width: 16px;
-    font-size: 16px;
+    font-size: 14px;
     min-width: 19px;
 }
 
@@ -277,7 +277,7 @@ li {
     overflow: hidden;
     background-color: #fff;
     transition: 0.25s all;
-    border: 2px solid #000;
+    border: 1px solid #000;
 }
 
 .post-card:hover {
@@ -401,7 +401,7 @@ li {
 }
 
 a.ant-btn.msg-download {
-    padding: 0px !important;
+    padding: 6px 0px !important;
     margin-right: 4px;
     background-color: transparent;
     border-radius: 4px;
@@ -604,6 +604,18 @@ nz-pagination {
     max-width: calc(1400px - 225px);
 }
 
+.h3, h3 {
+    font-size: 24px !important;
+}
+.justify-end {
+    justify-content: end;
+}
+.msg-text-holder {
+    font-size: 12px;
+    border-radius: 100px;
+    line-height: 24px;
+    text-align: left;
+}
 @media(max-width: 1440px) {
     .main-container-size {
         max-width: 1280px;
@@ -626,7 +638,7 @@ nz-pagination {
         min-width: 1200px;
     }
     .gallery .col {
-        max-width: calc((100% / 4) - 8px);
+        max-width: calc((100% / 4) - 18px);
     }
     .side-page-data .gallery .col, .medium-screen .col {
         max-width: calc((100% / 3) - 12px);
@@ -815,4 +827,12 @@ nz-pagination {
 .bg-gradient-dark-main {
     background-color: #1d1d1d;
     background-image: radial-gradient(circle farthest-corner at 0% 50%, rgba(255, 1, 1, 0.15), transparent 47%), radial-gradient(circle farthest-corner at 40% 130%, rgba(122, 167, 255, 0.41), transparent 58%);
+}
+
+.ant-btn {
+    line-height: normal !important;
+}
+
+ngx-editor * {
+    font-size: 14px;
 }

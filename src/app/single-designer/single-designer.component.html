@@ -58,7 +58,7 @@
                         <div class="mob-d-flex align-items-center gap-2 mt-3 justify-content-center">
                             <div class="relative">
                                 <div class="follow-btn cursor-pointer"
-                                    [ngClass]="designer.user_has_followed ? 'highlight' : ''" (click)="followTrigger()">
+                                    [ngClass]="designer.user_has_followed ? 'highlight' : ''" (click)="followTrigger()" nz-tooltip [nzTooltipTitle]="designer.user_has_followed ? 'Unfollow' : 'Follow'">
                                     <span *ngIf="!designer.user_has_followed" nz-icon nzType="user-add"
                                         nzTheme="outline"></span>
                                     <span *ngIf="designer.user_has_followed" nz-icon nzType="check"
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="relative ">
-                                <div class="chat-btn cursor-pointer" (click)="chatTrigger()">
+                                <div class="chat-btn cursor-pointer" (click)="chatTrigger()" nz-tooltip [nzTooltipTitle]="'Chat now'">
                                     <span nz-icon nzType="comment" nzTheme="outline"></span>
                                 </div>
                             </div>
