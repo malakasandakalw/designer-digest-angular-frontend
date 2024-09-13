@@ -26,6 +26,26 @@
     <div class="main-container-size ">
 
         <div class="mob-d-flex gap-2 flex-wrap mt-3">
+            <div class="stat-card">
+                <h6>Total Followers</h6>
+                <p class="d-flex align-items-center gap-2">
+                    <span nz-icon nzType="user" nzTheme="outline"></span>
+                    {{followers_count}}
+                </p>
+            </div>
+            <div class="stat-card">
+                <h6>Total Upvotes</h6>
+                <p class="d-flex align-items-center gap-2"><span nz-icon nzType="heart" nzTheme="outline"></span>{{upvotes_count}}</p>
+                
+            </div>
+            <div class="stat-card">
+                <h6>Total Posts</h6>
+                <p class="d-flex align-items-center gap-2"><span nz-icon nzType="appstore" nzTheme="outline"></span>{{post_count}}</p>
+                
+            </div>
+        </div>
+
+        <div class="mob-d-flex gap-2 flex-wrap mt-3">
 
             <div class="chart-col">
                 <h6>Followers count</h6>

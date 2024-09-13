@@ -472,14 +472,14 @@ a.ant-btn.msg-download {
         font-weight: 600;
     }
     .hero-section .h2 {
-        font-size: 52px !important;
+        font-size: 48px !important;
         color: #000000;
         background-image: -webkit-radial-gradient(closest-side, #ffffff 0%, #2e2a2a 33%, #424231 67%);
         background-clip: text;
         -webkit-background-clip: text;
         text-fill-color: transparent;
         -webkit-text-fill-color: transparent;
-        font-weight: 600;
+        font-weight: 800;
     }
 }
 
@@ -670,13 +670,17 @@ nz-pagination {
     .mob-d-flex, .filter-title {
         display: block !important;
     }
-    .mob-d-flex.gallery {
+    .mob-d-flex.gallery, .designer-categories-flex {
         display: flex !important;
     }
     .large-screen {
         display: none;
     }
     
+    .designer-flex {
+        display: flex !important;
+    }
+
     .medium-screen {
         display: block;
     }
