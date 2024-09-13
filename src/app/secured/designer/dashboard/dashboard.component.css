@@ -1,9 +1,12 @@
-.chart-col {
+.chart-col, .stat-card {
     padding: 16px;
     border-radius: 8px;
     border-color: rgb(218, 220, 224);
     border-width: 1px;
     border-style: solid;
+}
+.stat-card {
+    width: 200px;
 }
 .filter-btn {
     max-height: 32px;

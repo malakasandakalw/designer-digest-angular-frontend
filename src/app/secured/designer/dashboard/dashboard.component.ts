@@ -4,7 +4,11 @@ import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import { DesignerService } from 'src/services/api/designer.service';
 
 type EChartsOption = echarts.EChartsOption;
-
+interface StatType {
+  post_count: string,
+  followers_count: string,
+  upvotes_count: string,
+}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -51,6 +55,10 @@ export class DashboardComponent implements OnInit{
     console.log('handleEndOpenChange', open);
   }
 
+  post_count: string = '0'
+  followers_count: string = '0'
+  upvotes_count: string = '0'
+  
   following = []
   votes = []
   posts = []
@@ -65,6 +73,11 @@ export class DashboardComponent implements OnInit{
         this.following = response.body.data.followings
         this.votes = response.body.data.votes
         this.posts = response.body.data.posts
+        if(response.body.data.stats) {
+          this.followers_count = response.body.data.stats.followers_count
+          this.upvotes_count = response.body.data.stats.upvotes_count
+          this.post_count = response.body.data.stats.post_count
+        }
 
         this.createFollowingChart(response.body.data.followings)
         this.creatingVotesChart(response.body.data.votes)
