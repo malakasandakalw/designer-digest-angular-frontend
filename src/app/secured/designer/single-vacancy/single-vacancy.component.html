@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<nz-modal [nzVisible]="true" [nzClosable]="false" [nzMaskClosable]="false" [nzWidth]="1024">
+<nz-modal [nzVisible]="true" (nzOnCancel)="handleCancel()" [nzWidth]="1024">
     <div *nzModalTitle>
         <div *ngIf="retrivedVacancy && retrivedVacancy.created_by" class="mob-d-flex align-items-center gap-2">
             <div>

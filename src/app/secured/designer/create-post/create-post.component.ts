@@ -162,8 +162,6 @@ export class CreatePostComponent implements OnInit, OnDestroy {
 
   async submitForm(): Promise<void> {
 
-
-
     if (this.validate()) {
       try {
         const formData = {

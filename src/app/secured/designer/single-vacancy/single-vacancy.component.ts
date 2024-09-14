@@ -131,4 +131,9 @@ export class SingleVacancyComponent implements OnInit {
       }
     }
   }
+
+  handleCancel() {
+    window.history.back()
+  }
+
 }

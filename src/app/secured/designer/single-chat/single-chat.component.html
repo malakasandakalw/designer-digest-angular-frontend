@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<nz-modal [nzVisible]="true" [nzClosable]="false" [nzMaskClosable]="false" [nzTitle]="titleTemplate">
+<nz-modal [nzVisible]="true" (nzOnCancel)="handleCancel()" [nzTitle]="titleTemplate">
     <ng-template #titleTemplate>
         <div *ngIf="reciever" class="mob-d-flex align-items-center gap-2">
             <div >

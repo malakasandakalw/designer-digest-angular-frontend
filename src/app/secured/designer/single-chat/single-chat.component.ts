@@ -232,4 +232,8 @@ export class SingleChatComponent implements OnInit, OnDestroy{
     }
   }
 
+  handleCancel() {
+    window.history.back()
+  }
+
 }
