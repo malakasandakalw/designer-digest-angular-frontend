@@ -48,7 +48,7 @@
                                     <img nz-image [nzSrc]="'http://127.0.0.1:3000'+item.file_url" alt="" class="img-fluid">
                                     <div class="mob-d-flex align-items-center mt-1">
                                         <small class="date-very-small">{{item.created_at | date:'MMMM d, y' }}</small>
-                                        <a *ngIf="item.from_user !== currentUser.id" nz-button nzType="default" [href]="'http://127.0.0.1:3000'+item.file_url" class="msg-download ms-auto" download>
+                                        <a *ngIf="item.from_user !== currentUser.id && item.file_url" nz-button nzType="default" [href]="'http://127.0.0.1:3000/api/file-manager/download/'+ getEncodedFilePath(item.file_url)" class="msg-download ms-auto" download="{{item.file_url.split('/').pop()}}">
                                             <span nz-icon nzType="download" nzTheme="outline"></span>
                                         </a>
                                     </div>
@@ -63,7 +63,7 @@
                                     </video>
                                     <div class="mob-d-flex align-items-center mt-1">
                                         <small class="date-very-small">{{item.created_at | date:'MMMM d, y' }}</small>
-                                        <a *ngIf="item.from_user !== currentUser.id" nz-button nzType="default" [href]="'http://127.0.0.1:3000'+item.file_url" class="msg-download ms-auto" download>
+                                        <a *ngIf="item.from_user !== currentUser.id && item.file_url" nz-button nzType="default" [href]="'http://127.0.0.1:3000/api/file-manager/download/'+ getEncodedFilePath(item.file_url)" class="msg-download ms-auto" download="{{item.file_url.split('/').pop()}}">
                                             <span nz-icon nzType="download" nzTheme="outline"></span>
                                         </a>
                                     </div>
@@ -78,7 +78,7 @@
                                     </svg>
                                     <div class="mob-d-flex align-items-center mt-1">
                                         <small class="date-very-small">{{item.created_at | date:'MMMM d, y' }}</small>
-                                        <a *ngIf="item.from_user !== currentUser.id" nz-button nzType="default" [href]="'http://127.0.0.1:3000'+item.file_url" class="msg-download ms-2" download>
+                                        <a *ngIf="item.from_user !== currentUser.id && item.file_url" nz-button nzType="default" [href]="'http://127.0.0.1:3000/api/file-manager/download/'+ getEncodedFilePath(item.file_url)" class="msg-download ms-2" download="{{item.file_url.split('/').pop()}}">
                                             <span nz-icon nzType="download" nzTheme="outline"></span>
                                         </a>
                                     </div>

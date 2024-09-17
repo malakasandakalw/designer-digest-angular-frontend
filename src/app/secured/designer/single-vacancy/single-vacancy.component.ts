@@ -136,4 +136,8 @@ export class SingleVacancyComponent implements OnInit {
     window.history.back()
   }
 
+  getEncodedFilePath(filePath: string): string {
+    return encodeURIComponent(filePath.replace('/uploads/', ''));
+  }
+
 }

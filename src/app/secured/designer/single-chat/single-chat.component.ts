@@ -235,5 +235,8 @@ export class SingleChatComponent implements OnInit, OnDestroy{
   handleCancel() {
     window.history.back()
   }
-
+  
+  getEncodedFilePath(filePath: string): string {
+    return encodeURIComponent(filePath.replace('/uploads/', ''));
+  }
 }
