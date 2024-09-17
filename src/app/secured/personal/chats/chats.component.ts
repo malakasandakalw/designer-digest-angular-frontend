@@ -17,6 +17,8 @@ export class ChatsComponent implements OnInit{
   isVisible = false;
   chats: any[] = []
   designers: User[] = []
+  name: string | null = null
+  filteredDesigners: User[] = [];
 
   get currentUser() {
     return this.apiAuthService.getCurrentUser().user
@@ -44,6 +46,7 @@ export class ChatsComponent implements OnInit{
       const response = await this.designersService.getAllDesigners()
       if(response) {
         this.designers = response.body
+        this.filteredDesigners = this.designers
       }
       this.loadingUsers = false
     } catch (error) {
@@ -76,6 +79,17 @@ export class ChatsComponent implements OnInit{
   goToSingleChat(userId: string) {
     if(!userId) return
     this.router.navigate([`/designer-digest/personal/chats/${userId}`])
+  }
+
+  onSearchChange(name: string) {
+    this.filteredDesigners = this.designers.filter((user) => {
+      const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
+      return fullName.includes(name.toLowerCase());
+    });
+  }
+  
+  handleCancel() {
+    this.isVisible = false
   }
 
 }

@@ -17,6 +17,8 @@ export class ChatsComponent {
   isVisible = false;
   chats: Chat[] = []
   users: User[] = []
+  filteredUsers: User[] = [];
+  name: string | null = null
   // currentUser: User | null = null
 
   get currentUser() {
@@ -46,7 +48,8 @@ export class ChatsComponent {
       this.loadingUsers = true
       const response = await this.usersService.getAllUsers()
       if(response) {
-        this.users = response.body
+        this.users = response.body;
+        this.filteredUsers = this.users;
       }
       this.loadingUsers = false
     } catch (error) {
@@ -78,5 +81,12 @@ export class ChatsComponent {
 
   handleCancel() {
     this.isVisible = false
+  }
+
+  onSearchChange(name: string) {
+    this.filteredUsers = this.users.filter((user) => {
+      const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
+      return fullName.includes(name.toLowerCase());
+    });
   }
 }
