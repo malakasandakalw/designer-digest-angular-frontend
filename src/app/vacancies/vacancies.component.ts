@@ -223,4 +223,8 @@ export class VacanciesComponent {
     this.router.navigate(['/designer-digest/designer/applications/'+vacancyId])
   }
 
+  getEncodedFilePath(filePath: string): string {
+    return encodeURIComponent(filePath.replace('/uploads/', ''));
+  }
+
 }

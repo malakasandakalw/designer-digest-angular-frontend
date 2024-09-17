@@ -58,4 +58,8 @@ export class SingleVacancyCardComponent {
     }
   }
 
+  getEncodedFilePath(filePath: string): string {
+    return encodeURIComponent(filePath.replace('/uploads/', ''));
+  }
+
 }

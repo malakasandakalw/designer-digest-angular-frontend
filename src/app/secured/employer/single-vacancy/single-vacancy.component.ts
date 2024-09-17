@@ -45,4 +45,8 @@ export class SingleVacancyComponent implements OnInit{
     }
   }
 
+  getEncodedFilePath(filePath: string): string {
+    return encodeURIComponent(filePath.replace('/uploads/', ''));
+  }
+
 }
