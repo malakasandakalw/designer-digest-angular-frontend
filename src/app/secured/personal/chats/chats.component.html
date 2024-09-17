@@ -48,10 +48,11 @@
     </div>
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Select user to chat">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Select designer to chat" (nzOnCancel)="handleCancel()">
     <ng-container *nzModalContent>
+        <input nz-input placeholder="Search by name" type="text" [(ngModel)]="name" (ngModelChange)="onSearchChange($event)" [ngModelOptions]="{standalone: true}" class="mb-1"/>
         <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
-            <ng-container *ngFor="let item of designers">
+            <ng-container *ngFor="let item of filteredDesigners">
                 <nz-list-item *ngIf="currentUser && currentUser.id !== item.id" class="cursor-pointer"
                     (click)="goToSingleChat(item.id)">
                     <div class="mob-d-flex align-items-center gap-2">
@@ -73,10 +74,10 @@
         <ng-container *ngIf="loadingUsers">
             <app-loading-spinner></app-loading-spinner>
         </ng-container>
-        <div *ngIf="!designers.length" class="no-posts-found text-center my-4 py-4">
+        <div *ngIf="!filteredDesigners.length" class="no-posts-found text-center my-4 py-4">
             <h5 class="text-muted">No Chats Found</h5>
             <span nz-icon nzType="meh" nzTheme="outline"></span>
         </div>
-
     </ng-container>
+    <ng-container *nzModalFooter=""></ng-container>
 </nz-modal>
